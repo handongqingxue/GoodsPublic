@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodsPublic.dao.CategoryInfoMapper">
+	<select id="getCategoryList" resultType="goodsPublic.entity.CategoryInfo">
+		select * from
+		category_table where accountId=#{accountId}
+	</select>
+	<!-- <select id="getById" resultType="goodsPublic.entity.CategoryInfo">
+		select * from 
+		category_table where id=#{id}
+	</select> -->
+	<insert id="saveCategoryInfo" parameterType="goodsPublic.entity.CategoryInfo">
+		insert into category_table
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="categoryName!=null">
+				categoryName,
+			</if>
+			<if test="categoryId!=null">
+				categoryId,
+			</if>
+			<if test="accountId!=null">
+				accountId
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="categoryName!=null">
+				#{categoryName},
+			</if>
+			<if test="categoryId!=null">
+				#{categoryId},
+			</if>
+			<if test="accountId!=null">
+				#{accountId}
+			</if>
+		</trim>
+	</insert>
+	<update id="updateCategoryInfo" parameterType="goodsPublic.entity.CategoryInfo">
+		update category_table set 
+		<if test="accountId!=null">
+		accountId=#{accountId},
+		</if>
+		<if test="categoryId!=null">
+		categoryId=#{categoryId},
+		</if>
+		<if test="categoryName!=null">
+		categoryName=#{categoryName}
+		</if>
+		where id=#{id}
+	</update>
+	<delete id="deletCategoryInfo" parameterType="java.util.List">
+		delete from category_table where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach> 
+	</delete>
+	<select id="getByCategoryId" resultType="goodsPublic.entity.CategoryInfo">
+		select * from 
+		category_table where categoryId=#{categoryId} and accountId=#{accountId}
+	</select>
+</mapper>
