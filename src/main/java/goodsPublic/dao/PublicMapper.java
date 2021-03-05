@@ -566,4 +566,8 @@ public interface PublicMapper {
 
 	public int updateLVRLoginByUuid(@Param("openId") String openId, @Param("uuid") String uuid);
 
+	public Boolean getLVRLoginByUuid(@Param("uuid") String uuid);
+
+	public String getLVROpenIdByUuid(@Param("uuid") String uuid);
+
 }

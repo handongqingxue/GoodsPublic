@@ -558,5 +558,7 @@ public interface PublicService {
 
 	public int updateLVRLoginByUuid(String openId, String uuid);
 
+	public PlanResult phoneAlreadyLogin(String uuid);
+
 
 }

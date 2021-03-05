@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,7 +80,15 @@ public class GoodsController {
         int count=publicService.addLoginVisitRecord(lvr);
         if(count>0) {
         	request.setAttribute("qrcode", avaPath);
+        	request.setAttribute("uuid", uuid);
         }
+	}
+	
+	@RequestMapping(value="/synchronizeLogin",method=RequestMethod.POST,produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String synchronizeLogin(String uuid) {
+		PlanResult plan=publicService.phoneAlreadyLogin(uuid);
+		return JsonUtil.getJsonFromObject(plan);
 	}
 
 	/**

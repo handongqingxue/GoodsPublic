@@ -1241,4 +1241,21 @@ public class PublicServiceImpl implements PublicService {
 		// TODO Auto-generated method stub
 		return publicDao.updateLVRLoginByUuid(openId,uuid);
 	}
+
+	@Override
+	public PlanResult phoneAlreadyLogin(String uuid) {
+		// TODO Auto-generated method stub
+		PlanResult plan=new PlanResult();
+		Boolean login=publicDao.getLVRLoginByUuid(uuid);
+		if(login) {
+			String openId=publicDao.getLVROpenIdByUuid(uuid);
+			AccountMsg am = publicDao.getAccountByOpenId(openId);
+			plan.setStatus(1);
+			plan.setData(am);
+		}
+		else {
+			plan.setStatus(0);
+		}
+		return plan;
+	}
 }

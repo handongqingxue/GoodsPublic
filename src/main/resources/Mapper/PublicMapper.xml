@@ -4546,4 +4546,10 @@
 	<update id="updateLVRLoginByUuid">
 		update login_visit_record set openId=#{openId},login=1 where uuid=#{uuid}
 	</update>
+	<select id="getLVRLoginByUuid" resultType="java.lang.Boolean">
+		select login from login_visit_record where uuid=#{uuid}
+	</select>
+	<select id="getLVROpenIdByUuid" resultType="java.lang.String">
+		select openId from login_visit_record where uuid=#{uuid}
+	</select>
 </mapper>
