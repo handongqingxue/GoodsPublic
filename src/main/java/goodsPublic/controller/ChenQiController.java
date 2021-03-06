@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +24,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.goodsPublic.util.FileUploadUtils;
+import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.MethodUtil;
 import com.goodsPublic.util.qrcode.Qrcode;
 
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsText;
+import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
 import net.sf.json.JSONObject;
 
@@ -35,6 +42,42 @@ public class ChenQiController {
 	
 	@Autowired
 	private PublicService publicService;
+	@Autowired
+	private CategoryService categoryService;
+
+	@RequestMapping(value="/autoLogin")
+	@ResponseBody
+	public void autoLogin(HttpServletRequest request, HttpServletResponse response) {
+		
+		try {
+			String userName=request.getParameter("userName");
+			String password=request.getParameter("password");
+			HttpSession session=request.getSession();
+			String jsonpCallback = null;
+			try {
+				UsernamePasswordToken token = new UsernamePasswordToken(userName,password);  
+				Subject currentUser = SecurityUtils.getSubject();  
+				if (!currentUser.isAuthenticated()){
+					//使用shiro来验证  
+					token.setRememberMe(true);  
+					currentUser.login(token);//验证角色和权限  
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			    jsonpCallback="jsonpCallback(\"{\\\"status\\\":\\\"1\\\",\\\"msg\\\":\\\"登陆失败\\\"}\")";
+			}
+			AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+			List<CategoryInfo> catList = categoryService.getCategory(msg.getId());
+			session.setAttribute("categoryList", catList);
+			session.setAttribute("user", msg);
+
+			jsonpCallback="jsonpCallback(\"{\\\"status\\\":\\\"0\\\",\\\"msg\\\":\\\"验证通过\\\",\\\"url\\\":\\\"/merchant/main/goAccountInfo\\\"}\")";
+			response.getWriter().print(jsonpCallback);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	@RequestMapping(value="/createQrcodeByCQSCQ")
 	@ResponseBody
