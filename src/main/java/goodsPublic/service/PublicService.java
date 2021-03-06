@@ -560,5 +560,4 @@ public interface PublicService {
 
 	public PlanResult phoneAlreadyLogin(String uuid);
 
-
 }

@@ -1,12 +1,15 @@
 package goodsPublic.controller;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.goodsPublic.util.FileUploadUtils;
+import com.goodsPublic.util.MethodUtil;
 import com.goodsPublic.util.qrcode.Qrcode;
 
+import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.service.PublicService;
@@ -59,6 +64,30 @@ public class ChenQiController {
         try {
 			response.getWriter().print(jsonpCallback);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 验证后台是否已登录
+	 * @param response
+	 */
+	@RequestMapping(value="/checkBgIfLogin")
+	@ResponseBody
+	public void checkBgIfLogin(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			HttpSession session = request.getSession();
+			Object userObj = session.getAttribute("user");
+			String jsonpCallback=null;
+			if(userObj==null)
+				jsonpCallback="jsonpCallback(\"{\\\"ifLogin\\\":\\\"no\\\"}\")";
+			else {
+				AccountMsg user = (AccountMsg)userObj;
+				jsonpCallback="jsonpCallback(\"{\\\"ifLogin\\\":\\\"ok\\\",\\\"userName\\\":\\\""+user.getUserName()+"\\\",\\\"passWord\\\":\\\""+user.getPassWord()+"\\\"}\")";
+			}
+			response.getWriter().print(jsonpCallback);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

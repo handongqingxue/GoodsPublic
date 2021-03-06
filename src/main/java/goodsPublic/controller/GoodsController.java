@@ -1,9 +1,13 @@
 package goodsPublic.controller;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -24,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.goodsPublic.util.JsonUtil;
+import com.goodsPublic.util.MethodUtil;
 import com.goodsPublic.util.PlanResult;
 import com.goodsPublic.util.qrcode.Qrcode;
 
@@ -57,12 +62,17 @@ public class GoodsController {
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String login(HttpServletRequest request) {
 		
-		createLoginQrcode(request);
+		try {
+			createLoginQrcode(request);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return "/merchant/login";
 	}
-		
-	public void createLoginQrcode(HttpServletRequest request) {
+	
+	public void createLoginQrcode(HttpServletRequest request) throws Exception {
 		// TODO Auto-generated method stub
 		publicService.deleteLimitedLoginVisitRecord();
 		
@@ -319,7 +329,12 @@ public class GoodsController {
 		Subject currentUser = SecurityUtils.getSubject();       
 	    currentUser.logout();    
 
-		createLoginQrcode(request);
+		try {
+			createLoginQrcode(request);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "/merchant/login";
 	}
 }
