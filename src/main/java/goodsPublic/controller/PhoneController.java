@@ -252,8 +252,6 @@ public class PhoneController {
 					AccountMsg user=publicService.getAccountByOpenId(openId);
 					session.setAttribute("user", user);
 					
-					System.out.println("111111111111");
-					System.out.println("uuid==="+uuid);
 					publicService.updateLVRLoginByUuid(openId,uuid);
 					
 					jsonMap.put("status", "ok");
@@ -261,7 +259,6 @@ public class PhoneController {
 			}
 		}
 		else {
-			System.out.println("222222222222");
 			AccountMsg user=(AccountMsg)userObj;
 			String openId = user.getOpenId();
 			if(!StringUtils.isEmpty(openId))//这种情况是虽然用户登录了，但只是手机端账号登录的，openId未绑定电脑端账号，openId必须与用户绑定才允许电脑端同步登录

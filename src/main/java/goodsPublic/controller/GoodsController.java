@@ -173,6 +173,7 @@ public class GoodsController {
 	@ResponseBody
 	public void loginQL(HttpServletRequest request,HttpServletResponse response) {
 		String jsonpCallback=null;
+		AccountMsg msg=null;
 		try {
 			String userName = request.getParameter("userName");
 			String password = request.getParameter("password");
@@ -189,14 +190,14 @@ public class GoodsController {
 			}
 			
 			if("addModule".equals(action)) {
-				AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+				msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
 				List<CategoryInfo> catList = categoryService.getCategory(msg.getId());
 				HttpSession session=request.getSession();
 				session.setAttribute("categoryList", catList);
 				session.setAttribute("user", msg);
 			}
 			
-			jsonpCallback="jsonpCallback(\"{\\\"status\\\":0,\\\"msg\\\":\\\"验证通过\\\"}\")";
+			jsonpCallback="jsonpCallback(\"{\\\"status\\\":0,\\\"msg\\\":\\\"验证通过\\\",\\\"accountNumber\\\":\\\""+msg.getId()+"\\\"}\")";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

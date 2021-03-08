@@ -100,7 +100,7 @@ function login(){
 	  var password=MD5($("#password").val()).toUpperCase();
 	  $.ajax({
 		 url:"http://www.qrcodesy.com:8080/GoodsPublic/merchant/loginQL",
-		 //url:"http://localhost:8088/GoodsPublic/merchant/loginQL",
+		 //url:"http://localhost:8080/GoodsPublic/merchant/loginQL",
 		 dataType:'jsonp',
 		 data:"userName="+userName+"&password="+password+"&action=addModule",
 		 processData: false, 
@@ -111,6 +111,7 @@ function login(){
 		   var json=JSON.parse(data);
 		   console.log(json);
 		   if(json.status==0){
+			  $("#accountNumber_hid").val(json.accountNumber);
 			  var trade='${param.trade}';
 			  if(trade=="spzs")
 			  	addHtmlGoodsSPZS();
