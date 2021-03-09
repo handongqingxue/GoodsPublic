@@ -323,6 +323,52 @@ public class GoodsController {
 		
 		return JsonUtil.getJsonFromObject(plan);
 	}
+
+	@RequestMapping(value="/registQL",method=RequestMethod.POST,produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String registQL(AccountMsg msg, HttpServletRequest request,HttpServletResponse response) {
+		PlanResult plan=new PlanResult();
+		int status=userService.saveUser(msg);
+		if(status==2) {
+			plan.setStatus(status);
+			plan.setMsg("注册失败，用户已存在");
+			return JsonUtil.getJsonFromObject(plan);
+		}else if(status==0) {
+			plan.setStatus(status);
+			plan.setMsg("系统错误，请联系维护人员");
+			return JsonUtil.getJsonFromObject(plan);
+		}
+		plan.setStatus(0);
+		plan.setMsg("注册成功");
+
+		//这里是注册完成后添加50个自定义标签
+		AccountMsg resultUser=userService.checkUser(msg);
+		publicService.initGoodsLabelSet(resultUser.getId());
+		
+		//这里是注册完成后，自动开通7天免费试用，过期要继续使用就得付费
+		AccountPayRecord apr = new AccountPayRecord();
+		apr.setAccountNumber(resultUser.getId());
+		Date date = new Date();
+		apr.setPayTime(timeSDF.format(date));
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DAY_OF_MONTH, 7);
+		apr.setEndTime(timeSDF.format(calendar.getTime()));
+		apr.setVipType(AccountPayRecord.FREE_TRIAL);
+		apr.setMoney((float)0.00);
+		apr.setPhone(resultUser.getPhone());
+		publicService.addAccountPayRecord(apr);
+		
+		saveQLUser(resultUser.getUserName(),resultUser.getPassWord(),request);
+		//plan.setStatus(0);
+		//saveQLUser("202103080001","E10ADC3949BA59ABBE56E057F20F883E",request);
+		
+		HttpSession session = request.getSession();
+		AccountMsg user=(AccountMsg)session.getAttribute("user");
+		plan.setData(user.getId());
+		
+		return JsonUtil.getJsonFromObject(plan);
+	}
 	
 	@RequestMapping(value="/exit")
 	public String exit(HttpServletRequest request) {

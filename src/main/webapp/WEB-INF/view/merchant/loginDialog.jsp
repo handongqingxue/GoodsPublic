@@ -135,13 +135,21 @@ function login(){
 	 });
 }
 
-function closeLoginBgDiv(){
-	 $("#login_bg_div").css("display","none");
+function showLoginBgDiv(show){
+	if(show)
+		$("#login_bg_div").css("display","block");
+	else
+	 	$("#login_bg_div").css("display","none");
+}
+
+function doMfzc(){
+	showLoginBgDiv(false);
+	showRegisterBgDiv(true);
 }
 </script>
 <div class="login_bg_div" id="login_bg_div">
 	<div class="login_div">
-		<div class="closeBut_div" onclick="closeLoginBgDiv();">X</div>
+		<div class="closeBut_div" onclick="showLoginBgDiv(false);">X</div>
 		<div class="dlqlzh_div">登录辰麒账号</div>
 		<div class="main_div">
 			<div class="logLeft_div">
@@ -162,7 +170,7 @@ function closeLoginBgDiv(){
  					<div class="wxsys_div">微信扫一扫，快速登录</div>
 				</div>
 			</div>
- 			<div class="regist_div">还没有账号？<a class="regist_a" href="<%=basePath%>merchant/regist">立即免费注册</a></div>
+ 			<div class="regist_div">还没有账号？<a class="regist_a" onclick="doMfzc()">立即免费注册</a></div>
 		</div>
 		<input type="hidden" id="price_hid"/>
 	</div>

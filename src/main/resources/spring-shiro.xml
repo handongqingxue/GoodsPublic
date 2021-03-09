@@ -39,6 +39,7 @@
 				/merchant/loginQL=anon
 				/merchant/saveQLUser=anon
 				/merchant/regist=anon
+				/merchant/registQL=anon
 				/resource/**=anon
 				/**=authc
 			</value>

@@ -412,7 +412,7 @@ function checkIfLogined(){
 				bool=true;
 			}
 			else{
-				$("#login_bg_div").css("display","block");
+				showLoginBgDiv(true);
 				bool=false;
 			}
 		}
@@ -440,6 +440,7 @@ function checkIfPaid(){
 </script>
 </head>
 <body>
+<%@include file="../../registerDialog.jsp"%>
 <%@include file="../../loginDialog.jsp"%>
 <form id="form1" name="form1" method="post" action="addHtmlGoodsSPZS" onsubmit="return checkForm();" enctype="multipart/form-data">
 <div class="image1ModBg_div" id="image1ModBg_div">
