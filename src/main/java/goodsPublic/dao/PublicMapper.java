@@ -5,32 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import goodsPublic.entity.AccountMsg;
-import goodsPublic.entity.AccountPayRecord;
-import goodsPublic.entity.CreatePayCodeRecord;
-import goodsPublic.entity.Goods;
-import goodsPublic.entity.GoodsLabelSet;
-import goodsPublic.entity.HtmlGoodsDMTTS;
-import goodsPublic.entity.HtmlGoodsDMTZL;
-import goodsPublic.entity.HtmlGoodsGRMP;
-import goodsPublic.entity.HtmlGoodsHDQD;
-import goodsPublic.entity.HtmlGoodsJZSG;
-import goodsPublic.entity.HtmlGoodsSMYL;
-import goodsPublic.entity.HtmlGoodsSPZS;
-import goodsPublic.entity.HtmlGoodsText;
-import goodsPublic.entity.JFDHJPActivity;
-import goodsPublic.entity.JFDHJPCustomer;
-import goodsPublic.entity.LoginVisitRecord;
-import goodsPublic.entity.ModuleDMTTS;
-import goodsPublic.entity.ModuleDMTZL;
-import goodsPublic.entity.ModuleHDQD;
-import goodsPublic.entity.ModuleJZSG;
-import goodsPublic.entity.ModuleSMYL;
-import goodsPublic.entity.ModuleSPZS;
-import goodsPublic.entity.PrizeCode;
-import goodsPublic.entity.ScoreQrcode;
-import goodsPublic.entity.ScoreQrcodeHistory;
-import goodsPublic.entity.ScoreTakeRecord;
+import goodsPublic.entity.*;
 
 public interface PublicMapper {
 	//保存发布的产品信息
@@ -571,5 +546,15 @@ public interface PublicMapper {
 	public Boolean getLVRLoginByUuid(@Param("uuid") String uuid);
 
 	public String getLVROpenIdByUuid(@Param("uuid") String uuid);
+
+	public int addShortMsgQrcode(ShortMsgQrcode smq);
+
+	public ShortMsgQrcode getShortMsgQrcodeByUuid(@Param("uuid") String uuid);
+
+	public int getLimitedShortMsgQrcodeCount();
+
+	public List<ShortMsgQrcode> selectLimitedShortMsgQrcode();
+
+	public int deleteShortMsgQrcodeByUuid(@Param("uuid") String uuid);
 
 }

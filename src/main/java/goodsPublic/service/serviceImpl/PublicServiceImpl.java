@@ -20,33 +20,8 @@ import org.springframework.stereotype.Service;
 import com.goodsPublic.util.PlanResult;
 import com.goodsPublic.util.qrcode.Qrcode;
 
-import goodsPublic.dao.PublicMapper;
-import goodsPublic.dao.UserMapper;
-import goodsPublic.entity.AccountMsg;
-import goodsPublic.entity.AccountPayRecord;
-import goodsPublic.entity.CreatePayCodeRecord;
-import goodsPublic.entity.Goods;
-import goodsPublic.entity.GoodsLabelSet;
-import goodsPublic.entity.HtmlGoodsDMTTS;
-import goodsPublic.entity.HtmlGoodsDMTZL;
-import goodsPublic.entity.HtmlGoodsGRMP;
-import goodsPublic.entity.HtmlGoodsHDQD;
-import goodsPublic.entity.HtmlGoodsJZSG;
-import goodsPublic.entity.HtmlGoodsSMYL;
-import goodsPublic.entity.HtmlGoodsSPZS;
-import goodsPublic.entity.HtmlGoodsText;
-import goodsPublic.entity.JFDHJPActivity;
-import goodsPublic.entity.JFDHJPCustomer;
-import goodsPublic.entity.LoginVisitRecord;
-import goodsPublic.entity.ModuleDMTTS;
-import goodsPublic.entity.ModuleDMTZL;
-import goodsPublic.entity.ModuleHDQD;
-import goodsPublic.entity.ModuleJZSG;
-import goodsPublic.entity.ModuleSMYL;
-import goodsPublic.entity.PrizeCode;
-import goodsPublic.entity.ScoreQrcode;
-import goodsPublic.entity.ScoreQrcodeHistory;
-import goodsPublic.entity.ScoreTakeRecord;
+import goodsPublic.dao.*;
+import goodsPublic.entity.*;
 import goodsPublic.service.PublicService;
 /**
  * 这是用来处理商品的对应接口
@@ -1263,5 +1238,41 @@ public class PublicServiceImpl implements PublicService {
 			plan.setStatus(0);
 		}
 		return plan;
+	}
+
+	@Override
+	public int addShortMsgQrcode(ShortMsgQrcode smq) {
+		// TODO Auto-generated method stub
+		return publicDao.addShortMsgQrcode(smq);
+	}
+
+	@Override
+	public ShortMsgQrcode getShortMsgQrcodeByUuid(String uuid) {
+		// TODO Auto-generated method stub
+		return publicDao.getShortMsgQrcodeByUuid(uuid);
+	}
+
+	@Override
+	public int deleteLimitedShortMsgQrcode() {
+		// TODO Auto-generated method stub
+		int count=publicDao.getLimitedShortMsgQrcodeCount();
+		if(count>0) {
+			List<ShortMsgQrcode> limitedList=publicDao.selectLimitedShortMsgQrcode();
+			for (ShortMsgQrcode limitedSMQ : limitedList) {
+				String uuid=limitedSMQ.getUuid();
+				deleteShortMsgQrcodeByUuid(uuid);
+			}
+		}
+		return 0;
+	}
+	
+	public void deleteShortMsgQrcodeByUuid(String uuid) {
+		// TODO Auto-generated method stub
+		publicDao.deleteShortMsgQrcodeByUuid(uuid);
+		String filePath="D:/resource/GoodsPublic/ShortMsgQrcode/"+uuid+".jpg";
+		File file=new File(filePath);
+		if(file.exists()) {
+			file.delete();
+		}
 	}
 }

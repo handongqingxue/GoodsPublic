@@ -4555,4 +4555,44 @@
 	<select id="getLVROpenIdByUuid" resultType="java.lang.String">
 		select openId from login_visit_record where uuid=#{uuid}
 	</select>
+	<insert id="addShortMsgQrcode" parameterType="goodsPublic.entity.ShortMsgQrcode">
+		insert into short_msg_qrcode
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="uuid!=null">
+				uuid,
+			</if>
+			<if test="qrcode!=null">
+				qrcode,
+			</if>
+			<if test="url!=null">
+				url,
+			</if>
+				createTime
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid!=null">
+				#{uuid},
+			</if>
+			<if test="qrcode!=null">
+				#{qrcode},
+			</if>
+			<if test="url!=null">
+				#{url},
+			</if>
+				now()
+		</trim>
+	</insert>
+	<select id="getShortMsgQrcodeByUuid" resultType="goodsPublic.entity.ShortMsgQrcode">
+		select * from short_msg_qrcode where uuid=#{uuid}
+	</select>
+	<select id="getLimitedShortMsgQrcodeCount" resultType="java.lang.Integer">
+		select count(*) from short_msg_qrcode where date_add(createTime, interval 1 DAY)&lt;now()
+	</select>
+	<select id="selectLimitedShortMsgQrcode" resultType="goodsPublic.entity.ShortMsgQrcode">
+		select * from short_msg_qrcode where date_add(createTime, interval 1 DAY)&lt;now()
+	</select>
+	<delete id="deleteShortMsgQrcodeByUuid">
+		delete from short_msg_qrcode where uuid=#{uuid}
+	</delete>
 </mapper>

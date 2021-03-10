@@ -169,6 +169,11 @@ public class GoodsController {
 		*/
 	}
 	
+	/**
+	 * 登录接口，供添写完商品信息但未登录时调用，保证之前填写的商品信息不丢失（这个接口本来是辰麒端页面调用，后来辰麒端页面挪到后台里了，就在后台里调用）
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value="/loginQL",method=RequestMethod.GET,produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public void loginQL(HttpServletRequest request,HttpServletResponse response) {
@@ -324,6 +329,13 @@ public class GoodsController {
 		return JsonUtil.getJsonFromObject(plan);
 	}
 
+	/**
+	 * 注册接口，供添写完商品信息但未注册时调用，保证之前填写的商品信息不丢失
+	 * @param msg
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="/registQL",method=RequestMethod.POST,produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String registQL(AccountMsg msg, HttpServletRequest request,HttpServletResponse response) {

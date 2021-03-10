@@ -1,11 +1,9 @@
 package goodsPublic.controller;
 
-import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,29 +49,8 @@ import com.jpay.ext.kit.HttpKit;
 import com.jpay.ext.kit.PaymentKit;
 import com.jpay.weixin.api.WxPayApiConfigKit;
 
-import goodsPublic.entity.AccountMsg;
-import goodsPublic.entity.AccountPayRecord;
-import goodsPublic.entity.CategoryInfo;
-import goodsPublic.entity.CreatePayCodeRecord;
-import goodsPublic.entity.Goods;
-import goodsPublic.entity.GoodsLabelSet;
-import goodsPublic.entity.HtmlGoodsDMTTS;
-import goodsPublic.entity.HtmlGoodsDMTZL;
-import goodsPublic.entity.HtmlGoodsHDQD;
-import goodsPublic.entity.HtmlGoodsJZSG;
-import goodsPublic.entity.HtmlGoodsSMYL;
-import goodsPublic.entity.HtmlGoodsSPZS;
-import goodsPublic.entity.JFDHJPActivity;
-import goodsPublic.entity.JFDHJPCustomer;
-import goodsPublic.entity.ModuleDMTTS;
-import goodsPublic.entity.ModuleDMTZL;
-import goodsPublic.entity.ModuleHDQD;
-import goodsPublic.entity.ModuleJZSG;
-import goodsPublic.entity.ModuleSMYL;
-import goodsPublic.entity.ModuleSPZS;
-import goodsPublic.entity.ScoreQrcode;
-import goodsPublic.service.CategoryService;
-import goodsPublic.service.PublicService;
+import goodsPublic.entity.*;
+import goodsPublic.service.*;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 

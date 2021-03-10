@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,12 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.goodsPublic.util.MethodUtil;
+import com.goodsPublic.util.qrcode.Qrcode;
 
-import goodsPublic.entity.AccountMsg;
-import goodsPublic.entity.HtmlGoodsText;
-import goodsPublic.entity.PrizeCode;
-import goodsPublic.entity.ScoreQrcode;
-import goodsPublic.entity.ScoreTakeRecord;
+import goodsPublic.entity.*;
 import goodsPublic.service.PublicService;
 import goodsPublic.service.UserService;
 import net.sf.json.JSONObject;
@@ -252,7 +250,7 @@ public class PhoneController {
 					AccountMsg user=publicService.getAccountByOpenId(openId);
 					session.setAttribute("user", user);
 					
-					publicService.updateLVRLoginByUuid(openId,uuid);
+					publicService.updateLVRLoginByUuid(openId,uuid);//更新微信号的登录记录
 					
 					jsonMap.put("status", "ok");
 				}
@@ -367,5 +365,40 @@ public class PhoneController {
 			jsonMap.put("message", "暂无数据");
 		}
 		return jsonMap;
+	}
+
+	@RequestMapping(value="/goShortMsgQrcode")
+	public String goShortMsgQrcode(ShortMsgQrcode smq, HttpServletRequest request) {
+		String path = "D:/resource/GoodsPublic/ShortMsgQrcode";
+		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+		//String url = "http://www.qrcodesy.com/tyalHtml/redWine.html";
+		//smq.setUrl(url);
+		String fileName = uuid + ".jpg";
+		String avaPath="/GoodsPublic/resource/ShortMsgQrcode/"+fileName;
+        Qrcode.createQrCode(smq.getUrl(), path, fileName);
+		smq.setUuid(uuid);
+		smq.setQrcode(avaPath);
+		int count=publicService.addShortMsgQrcode(smq);
+		if(count>0) {
+			ShortMsgQrcode smq1=publicService.getShortMsgQrcodeByUuid(uuid);
+			request.setAttribute("status", "ok");
+			request.setAttribute("qrcode", smq1.getQrcode());
+		}
+		return "/merchant/shortMsgQrcode";
+	}
+
+	@RequestMapping(value="/goShortMsgQrcodeInfo")
+	public String goShortMsgQrcodeInfo(HttpServletRequest request) {
+		publicService.deleteLimitedShortMsgQrcode();
+		
+		String uuid=request.getParameter("uuid");
+		ShortMsgQrcode smq=publicService.getShortMsgQrcodeByUuid(uuid);
+		if(smq==null) {
+			request.setAttribute("status", "no");
+			request.setAttribute("message", "此码已过期，若想长期有效，请联系客服15712773653（微信同号）");
+			return "/merchant/shortMsgQrcode";
+		}
+		else
+			return "redirect:"+smq.getUrl();
 	}
 }

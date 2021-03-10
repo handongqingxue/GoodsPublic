@@ -5,8 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import goodsPublic.entity.AccountMsg;
-import goodsPublic.entity.AccountPayRecord;
+import goodsPublic.entity.*;
 import goodsPublic.service.UserService;
 import goodsPublic.dao.UserMapper;
 /**

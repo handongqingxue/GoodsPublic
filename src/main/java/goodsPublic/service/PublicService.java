@@ -6,27 +6,7 @@ import java.util.Map;
 
 import com.goodsPublic.util.PlanResult;
 
-import goodsPublic.entity.AccountMsg;
-import goodsPublic.entity.AccountPayRecord;
-import goodsPublic.entity.CreatePayCodeRecord;
-import goodsPublic.entity.Goods;
-import goodsPublic.entity.GoodsLabelSet;
-import goodsPublic.entity.HtmlGoodsDMTTS;
-import goodsPublic.entity.HtmlGoodsDMTZL;
-import goodsPublic.entity.HtmlGoodsGRMP;
-import goodsPublic.entity.HtmlGoodsHDQD;
-import goodsPublic.entity.HtmlGoodsJZSG;
-import goodsPublic.entity.HtmlGoodsSMYL;
-import goodsPublic.entity.HtmlGoodsSPZS;
-import goodsPublic.entity.HtmlGoodsText;
-import goodsPublic.entity.JFDHJPActivity;
-import goodsPublic.entity.JFDHJPCustomer;
-import goodsPublic.entity.LoginVisitRecord;
-import goodsPublic.entity.ModuleHDQD;
-import goodsPublic.entity.ModuleSMYL;
-import goodsPublic.entity.PrizeCode;
-import goodsPublic.entity.ScoreQrcode;
-import goodsPublic.entity.ScoreTakeRecord;
+import goodsPublic.entity.*;
 
 public interface PublicService {
 
@@ -559,5 +539,11 @@ public interface PublicService {
 	public int updateLVRLoginByUuid(String openId, String uuid);
 
 	public PlanResult phoneAlreadyLogin(String uuid);
+
+	public int addShortMsgQrcode(ShortMsgQrcode smq);
+
+	public ShortMsgQrcode getShortMsgQrcodeByUuid(String uuid);
+
+	public int deleteLimitedShortMsgQrcode();
 
 }
