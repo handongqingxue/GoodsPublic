@@ -369,12 +369,12 @@ public class PhoneController {
 
 	@RequestMapping(value="/goShortMsgQrcode")
 	public String goShortMsgQrcode(ShortMsgQrcode smq, HttpServletRequest request) {
-		String path = "D:/resource/GoodsPublic/ShortMsgQrcode";
+		String path = "D:/resource/ShortMsgQrcode";
 		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 		//String url = "http://www.qrcodesy.com/tyalHtml/redWine.html";
 		//smq.setUrl(url);
 		String fileName = uuid + ".jpg";
-		String avaPath="/GoodsPublic/resource/ShortMsgQrcode/"+fileName;
+		String avaPath="/GoodsPublic/upload/ShortMsgQrcode/"+fileName;
         Qrcode.createQrCode(smq.getUrl(), path, fileName);
 		smq.setUuid(uuid);
 		smq.setQrcode(avaPath);
