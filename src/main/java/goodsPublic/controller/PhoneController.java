@@ -369,7 +369,7 @@ public class PhoneController {
 
 	@RequestMapping(value="/goShortMsgQrcode")
 	public String goShortMsgQrcode(ShortMsgQrcode smq, HttpServletRequest request) {
-		String path = "D:/resource/ShortMsgQrcode";
+		String path = "D:/resource/GoodsPublic/ShortMsgQrcode";
 		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 		//String url = "http://www.qrcodesy.com/tyalHtml/redWine.html";
 		//smq.setUrl(url);

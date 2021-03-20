@@ -86,7 +86,7 @@ public class ChenQiController {
 		String accountNumber = htmlGoodsText.getAccountNumber();
 		String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
 		String avaPath="/GoodsPublic/upload/ChenQiQrcode/"+fileName;
-		String path = "D:/resource/ChenQiQrcode/";
+		String path = "D:/resource/GoodsPublic/ChenQiQrcode/";
 		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 		String url=null;
 		switch (htmlGoodsText.getTextType()) {
@@ -162,7 +162,7 @@ public class ChenQiController {
 			String url = serverName+"qrcodeCreate/showVCard.html?uuid="+uuid;
 			String fileName = userNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/ChenQiQrcode/"+fileName;
-			String path = "D:/resource/ChenQiQrcode/";
+			String path = "D:/resource/GoodsPublic/ChenQiQrcode/";
 			Qrcode.createQrCode(url, path, fileName);
 			
 			htmlGoodsGRMP.setUuid(uuid);

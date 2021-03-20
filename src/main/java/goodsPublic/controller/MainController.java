@@ -500,7 +500,7 @@ public class MainController {
 				
 				String fileName = goodsNumber + ".jpg";
 				String avaPath="/GoodsPublic/upload/"+fileName;
-				String path = "D:/resource";
+				String path = "D:/resource/GoodsPublic";
 		        Qrcode.createQrCode(url, path, fileName);
 				
 		        htmlGoodsSPZS.setQrCode(avaPath);
@@ -758,7 +758,7 @@ public class MainController {
 			
 			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
-			String path = "D:/resource";
+			String path = "D:/resource/GoodsPublic";
 	        Qrcode.createQrCode(url, path, fileName);
 			
 	        htmlGoodsSPZS.setQrCode(avaPath);
@@ -876,7 +876,7 @@ public class MainController {
 			
 			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
-			String path = "D:/resource";
+			String path = "D:/resource/GoodsPublic";
 			Qrcode.createQrCode(url, path, fileName);
 			
 			htmlGoodsDMTZL.setQrCode(avaPath);
@@ -956,7 +956,7 @@ public class MainController {
 			
 			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
-			String path = "D:/resource";
+			String path = "D:/resource/GoodsPublic";
 			Qrcode.createQrCode(url, path, fileName);
 			
 			htmlGoodsDMTTS.setQrCode(avaPath);
@@ -1161,7 +1161,7 @@ public class MainController {
 				
 				String fileName = userNumber + ".jpg";
 				String avaPath="/GoodsPublic/upload/"+fileName;
-				String path = "D:/resource";
+				String path = "D:/resource/GoodsPublic";
 				Qrcode.createQrCode(url, path, fileName);
 				
 				htmlGoodsJZSG.setQrCode(avaPath);
@@ -1484,7 +1484,7 @@ public class MainController {
 				
 				String fileName = smyl.getGoodsNumber() + ".jpg";
 				String avaPath="/GoodsPublic/upload/"+fileName;
-				String path = "D:/resource";
+				String path = "D:/resource/GoodsPublic";
 				Qrcode.createQrCode(url, path, fileName);
 				
 				smyl.setQrCode(avaPath);
@@ -1830,7 +1830,7 @@ public class MainController {
 			
 			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
-			String path = "D:/resource";
+			String path = "D:/resource/GoodsPublic";
 			Qrcode.createQrCode(url, path, fileName);
 			
 			htmlGoodsHDQD.setQrCode(avaPath);
@@ -1943,7 +1943,7 @@ public class MainController {
 			
 			String fileName = userNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
-			String path = "D:/resource";
+			String path = "D:/resource/GoodsPublic";
 			Qrcode.createQrCode(url, path, fileName);
 			
 			htmlGoodsJZSG.setQrCode(avaPath);
@@ -2027,7 +2027,7 @@ public class MainController {
 			
 			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
-			String path = "D:/resource";
+			String path = "D:/resource/GoodsPublic";
 			Qrcode.createQrCode(url, path, fileName);
 			
 			htmlGoodsHDQD.setQrCode(avaPath);
@@ -2114,7 +2114,7 @@ public class MainController {
 			
 			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
-			String path = "D:/resource";
+			String path = "D:/resource/GoodsPublic";
 			Qrcode.createQrCode(url, path, fileName);
 			
 			htmlGoodsSMYL.setQrCode(avaPath);
@@ -2186,7 +2186,7 @@ public class MainController {
 			
 			String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
 			String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
-			String path = "D:/resource/jfdhjp";
+			String path = "D:/resource/GoodsPublic/jfdhjp";
 			Qrcode.createQrCode(url, path, fileName);
 			
 			scoreQrcode.setQrcode(avaPath);
@@ -2242,7 +2242,7 @@ public class MainController {
 		String url="http://www.qrcodesy.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jfdhjp&accountId="+accountNumber+"&uuid="+uuid;
 		String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) +qrcodeIndex+ ".jpg";
 		String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
-		String path = "D:/resource/jfdhjp";
+		String path = "D:/resource/GoodsPublic/jfdhjp";
         Qrcode.createQrCode(url, path, fileName);
         
         jsonMap.put("uuid", uuid);
@@ -4514,7 +4514,7 @@ public class MainController {
 		AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
 
 		String accountId = msg.getId();
-		String path = "D:/resource";
+		String path = "D:/resource/GoodsPublic";
 		if(StringUtils.isEmpty(msg.getBwxQrcode())) {//初始化微信绑定码
 			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/phone/goBindWX?accountId="+accountId;
 			String fileName = "bwx"+accountId + ".jpg";

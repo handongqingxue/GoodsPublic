@@ -36,7 +36,7 @@ public class FileUploadUtils {
 				
 			String avaPath ="/GoodsPublic/upload/"+fileName;
 //			String writeTempPath = request.getSession().getServletContext().getRealPath("/");
-			String realPath="D:\\resource\\";
+			String realPath="D:\\resource\\GoodsPublic\\";
 			System.out.println(avaPath);
 				/**
 				 * @author 马鹏昊

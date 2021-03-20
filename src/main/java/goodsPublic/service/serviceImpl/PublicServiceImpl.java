@@ -178,7 +178,7 @@ public class PublicServiceImpl implements PublicService {
 		String avaPath="/GoodsPublic/upload/"+fileName;
 		if(publicDao.updateQrcode(avaPath,goodsNumber,accountNumber)>0) {
 			//String path = FileSystemView.getFileSystemView().getHomeDirectory() + File.separator + "testQrcode";
-			String path = "D:/resource";
+			String path = "D:/resource/GoodsPublic";
 	        Qrcode.createQrCode(url, path, fileName);
 		}
 	}

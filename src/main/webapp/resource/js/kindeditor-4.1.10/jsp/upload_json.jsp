@@ -17,7 +17,7 @@
 
 //文件保存目录路径
 //String savePath = pageContext.getServletContext().getRealPath("/") + "attached/";
-String savePath = "D:/resource/";
+String savePath = "D:/resource/GoodsPublic/";
 
 //文件保存目录URL
 //String saveUrl  = request.getContextPath() + "/attached/";

@@ -77,7 +77,7 @@ public class GoodsController {
 		publicService.deleteLimitedLoginVisitRecord();
 		
 		Date date = new Date();
-		String path = "D:/resource/LoginQrcode";
+		String path = "D:/resource/GoodsPublic/LoginQrcode";
 		String uuid=loginQrcodeSDF.format(date)+UUID.randomUUID().toString().replaceAll("-", "");
 		String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/phone/goAdminCreateQrcode?fromWebSite=cqCodePh&uuid="+uuid;
 		String fileName = uuid+".jpg";
