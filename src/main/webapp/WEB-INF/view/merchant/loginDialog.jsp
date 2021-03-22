@@ -68,7 +68,7 @@ function synchronizeLogin(){
 	$.post(baseUrl + "/merchant/synchronizeLogin",
 		{uuid:uuid},
 		function(result){
-			console.log(JSON.stringify(result));
+			//console.log(JSON.stringify(result));
 			if(result.status==1){
 				var account=result.data;
 				var userName=account.userName;
@@ -132,7 +132,7 @@ function login(userName,password){
 		 type:'get',
 		 success:function(data){
 		   var json=JSON.parse(data);
-		   console.log(json);
+		   //console.log(json);
 		   if(json.status==0){
 			  $("#accountNumber_hid").val(json.accountNumber);
 			  var trade='${param.trade}';

@@ -432,6 +432,10 @@ function checkIfPaid(){
 			else{
 				alert(data.message);
 				bool=false;
+				if(synLogin){
+					clearInterval(synLoginInter);
+					showLoginBgDiv(false);
+				}
 			}
 		}
 	,"json");
