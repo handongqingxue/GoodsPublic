@@ -95,7 +95,7 @@ public class PhoneController {
 	
 	@RequestMapping(value="/goAdminCreateQrcode")
 	public String goAdminCreateQrcode(HttpServletRequest request) {
-		
+
 		Map<String, Object> resultMap = checkAdminAccount("goAdminCreateQrcode",request);
 		String status = resultMap.get("status").toString();
 		if("noCode".equals(status)) {

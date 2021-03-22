@@ -58,35 +58,60 @@
 }
 </style>
 <script type="text/javascript">
-function checkInputData(){
-	if(checkUserName()){
-		if(checkPassword()){
-			login();
+var synLogin,synLoginInter;
+$(function(){
+	synLoginInter=setInterval("synchronizeLogin()","3000","3000");
+});
+
+function synchronizeLogin(){
+	var uuid=$("#login_div #uuid").val();
+	$.post(baseUrl + "/merchant/synchronizeLogin",
+		{uuid:uuid},
+		function(result){
+			console.log(JSON.stringify(result));
+			if(result.status==1){
+				var account=result.data;
+				var userName=account.userName;
+				var password=account.passWord;
+				var from='${param.from}';
+				synLogin=true;
+				login(userName,password);
+			}
+		}
+	,"json");
+}
+
+function checkLoginInputData(){
+	if(checkLoginUserName()){
+		if(checkLoginPassword()){
+			var userName=$("#login_div #userName").val();
+		    var password=MD5($("#login_div #password").val()).toUpperCase();
+			login(userName,password);
 		}
 	}
 }
 
-function focusUserName(){
-	var userName=$("#userName").val();
+function focusLoginUserName(){
+	var userName=$("#login_div #userName").val();
 	if(userName=="请填写用户名"){
-		$("#userName").val("");
-		$("#userName").css("color","#000");
+		$("#login_div #userName").val("");
+		$("#login_div #userName").css("color","#000");
 	}
 }
 
-function checkUserName(){
-	var userName=$("#userName").val();
+function checkLoginUserName(){
+	var userName=$("#login_div #userName").val();
 	if(userName==null||userName==""||userName=="请填写用户名"){
-		$("#userName").css("color","#f00");
-		$("#userName").val("请填写用户名");
+		$("#login_div #userName").css("color","#f00");
+		$("#login_div #userName").val("请填写用户名");
 		return false;
 	}
 	else
 		return true;
 }
 
-function checkPassword(){
-	var password=$("#password").val();
+function checkLoginPassword(){
+	var password=$("#login_div #password").val();
 	if(password==null||password==""||password=="请填写密码"){
 		alert("请填写密码");
 		return false;
@@ -95,9 +120,7 @@ function checkPassword(){
 		return true;
 }
 
-function login(){
-	  var userName=$("#userName").val();
-	  var password=MD5($("#password").val()).toUpperCase();
+function login(userName,password){
 	  $.ajax({
 		 url:"http://www.qrcodesy.com:8080/GoodsPublic/merchant/loginQL",
 		 //url:"http://localhost:8080/GoodsPublic/merchant/loginQL",
@@ -123,7 +146,7 @@ function login(){
 				  addHtmlGoodsSMYL();
 		   }
 		   else{
-			  alert(json.msg);
+			  	alert(json.msg);
 		   }
 		 },
 		 error:function(XMLHttpRequest, textStatus, errorThrown) {
@@ -148,25 +171,29 @@ function doMfzc(){
 }
 </script>
 <div class="login_bg_div" id="login_bg_div">
-	<div class="login_div">
+	<div class="login_div" id="login_div">
 		<div class="closeBut_div" onclick="showLoginBgDiv(false);">X</div>
 		<div class="dlqlzh_div">登录辰麒账号</div>
 		<div class="main_div">
 			<div class="logLeft_div">
 				<h2 class="sjhdl_h2">手机号登录</h2>
 				<div class="userName_div">
-					<input type="text" class="userName_inp" id="userName" onfocus="focusUserName();" onblur="checkUserName();"/>
+					<input type="text" class="userName_inp" id="userName" onfocus="focusLoginUserName();" onblur="checkLoginUserName();"/>
 				</div>
 				<div class="password_div">
-					<input type="password" class="password_inp" id="password" onblur="checkPassword();"/>
+					<input type="password" class="password_inp" id="password" onblur="checkLoginPassword();"/>
 				</div>
-				<div class="loginBut_div" onclick="checkInputData();">登 录</div>
+				<div class="loginBut_div" onclick="checkLoginInputData();">登 录</div>
 			</div>
 			<div class="cutLine_div"></div>
 			<div class="logRight_div">
 				<h2 class="wxkjdl_h2">微信快捷登录</h2>
 				<div class="wxkjdl_div">
+					<!-- 
 					<img class="qrcode_img" src="<%=basePath%>resource/images/009.png"/>
+					 -->
+	 				<img class="qrcode_img" alt="" src="${requestScope.qrcode}">
+	 				<input type="hidden" id="uuid" value="${requestScope.uuid}"/>
  					<div class="wxsys_div">微信扫一扫，快速登录</div>
 				</div>
 			</div>

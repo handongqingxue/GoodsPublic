@@ -64,6 +64,7 @@ public class MainController {
 	private CategoryService categoryService;
 	private SimpleDateFormat timeSDF=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private SimpleDateFormat orderIdSDF=new SimpleDateFormat("yyyyMMddHHmmss");
+	private SimpleDateFormat loginQrcodeSDF=new SimpleDateFormat("yyyyMMddHHmmss");
 	
 	/**
 	 * 跳转至商品发布页面
@@ -4957,7 +4958,42 @@ public class MainController {
 			url="/merchant/jfdhjp/ewmsc/addModule";
 			break;
 		}
+		
+		HttpSession session = request.getSession();
+		Map<String, Object> jsonMap = checkIfLogined(session);
+		if("no".equals(jsonMap.get("status").toString())) {
+			try {
+				createLoginQrcode(request);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		return url;
+	}
+	
+	public void createLoginQrcode(HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		publicService.deleteLimitedLoginVisitRecord();
+		
+		Date date = new Date();
+		String path = "D:/resource/GoodsPublic/LoginQrcode";
+		String uuid=loginQrcodeSDF.format(date)+UUID.randomUUID().toString().replaceAll("-", "");
+		String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/phone/goAdminCreateQrcode?fromWebSite=admin&uuid="+uuid+"&uuid1=1111111";
+		System.out.println("url==="+url);
+		String fileName = uuid+".jpg";
+		String avaPath="/GoodsPublic/upload/LoginQrcode/"+fileName;
+        Qrcode.createQrCode(url, path, fileName);
+        
+        LoginVisitRecord lvr=new LoginVisitRecord();
+        lvr.setUuid(uuid);
+        lvr.setQrcode(avaPath);
+        int count=publicService.addLoginVisitRecord(lvr);
+        if(count>0) {
+        	request.setAttribute("qrcode", avaPath);
+        	request.setAttribute("uuid", uuid);
+        }
 	}
 	
 	/**
