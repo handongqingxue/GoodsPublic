@@ -1,100 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<style>
-.register_bg_div{
-	width:100%;height:100%;background-color:rgba(0, 0, 0, 0.3);position:fixed;
-	display:none;
-	z-index:6;
-}
-.regist_div{
-	width: 830px;height:585px;background: #fafcfa;margin: 175px auto 0;padding: 1px;position: relative;
-}
-.regist_div .closeBut_div{
-	right:10px;top:10px;color:#bbb;position: absolute;cursor: pointer;
-}
-.regist_div .title1_div{
-	height: 34px;line-height: 34px;font-size: 24px;color: #4caf50;text-align: center;margin-top: 50px;
-}
-.regist_div .kssxgnr_div{
-	height: 22px;line-height: 22px;color: #999;font-size: 16px;font-weight: 400;text-align: center;
-}
-.regist_div .main_div{
-	width: 740px;height:420px;margin: 20px auto 0;background-color: #fff;padding:1px;
-}
-.regist_div .left_div{
-	width:365px;height:340px;margin-top: 50px;
-}
-.regist_div .sjhdl_h2{
-	height:20px;line-height:20px;color: #4a4a4a;font-size:16px;font-weight: 700;text-align: center;margin-bottom: 20px;
-}
-.regist_div .userName_div,.regist_div .password_div,.regist_div .password1_div{
-	width: 220px;height:50px;margin: auto;
-}
-.regist_div .userName_inp,.regist_div .password_inp,.regist_div .password1_inp{
-	width: 210px;height: 48px;line-height: 48px;padding: 0 5px;border-top:0px;border-right:0px;border-bottom: 1px solid rgb(230,230,230);border-left:0px;
-}
-.regist_div input::-webkit-input-placeholder{
-    color:#BEBEBE;
-}
-.regist_div nput::-moz-placeholder{   /* Mozilla Firefox 19+ */
-    color:#BEBEBE;
-}
-.regist_div input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
-    color:#BEBEBE;
-}
-.regist_div input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
-    color:#BEBEBE;
-}
-.regist_div .submitBut_div{
-	width: 220px;
-	height:38px;
-	line-height:38px;
-	margin:20px auto 0;
-	font-size: 16px;
-    color: #fff;
-    text-align: center;
-    background-color: #4caf50;
-    border-radius: 4px;
-    cursor: pointer;
-}
-.regist_div .resetBut_div{
-	width: 218px;
-	height:38px;
-	line-height:38px;
-	margin:20px auto 0;
-	font-size: 16px;
-    color: #999;
-    text-align: center;
-    background-color: #fff;
-    border:1px solid #999;
-    border-radius: 4px;
-    cursor: pointer;
-}
-.regist_div .cutLine_div{
-	width: 1px;height: 250px;left: 50%;margin-top: -295px;background-color: rgba(120,130,140,.13);position: absolute;
-}
-.regist_div .right_div{
-	width:365px;height:220px;margin-top:-340px;margin-left:385px;position: absolute;
-}
-.regist_div .wxkjdl_h2{
-	height:20px;line-height:20px;color: #4a4a4a;font-size:16px;font-weight: 700;text-align: center;margin-bottom: 20px;
-}
-.regist_div .wxkjdl_div{
-	width: 100%;height:210px;margin: 20px auto 0;text-align: center;
-}
-.regist_div .qrcode_img{
-	width: 180px;height:180px;
-}
-.regist_div .wxsys_div{
-	font-size: 12px;color: #9B9B9B;
-}
-.regist_div .zjdl_div{
-	font-size: 12px;color: #9b9b9b;text-align: center;
-}
-.regist_div .zjdl_a{
-	color: #357bb3;
-}
-</style>
+<link rel="stylesheet" href="<%=basePath %>/resource/css/registerDialog.css" />
 <script type="text/javascript">
 var baseUrl="${pageContext.request.contextPath}";
 function checkRegisterForm(){
@@ -220,8 +126,12 @@ function doZjdl(){
 			<div class="right_div">
 				<h2 class="wxkjdl_h2">微信快捷登录</h2>
 				<div class="wxkjdl_div">
+					<!-- 
 					<img class="qrcode_img" src="<%=basePath%>resource/images/009.png"/>
-						<div class="wxsys_div">无需验证码，快速登录</div>
+					 -->
+	 				<img class="qrcode_img" alt="" src="${requestScope.qrcode}">
+	 				<input type="hidden" id="uuid" value="${requestScope.uuid}"/>
+					<div class="wxsys_div">无需验证码，快速登录</div>
 				</div>
 			</div>
 		</div>

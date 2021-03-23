@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>商家信息</title>
 <%@include file="js.jsp"%>
+<link rel="stylesheet" href="<%=basePath %>/resource/css/accountInfo.css" />
 <script type="text/javascript" src="<%=basePath %>resource/js/MD5.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -294,164 +295,6 @@ function openRbwxQrcodeBgDiv(flag){
 	$("#rbwxQrcodeBg_div").css("display",flag==1?"block":"none");
 }
 </script>
-<style type="text/css">
-.editNickNameBg_div{
-	width: 100%;height:100%;
-	background: rgba(0,0,0,0.65);
-	position: fixed;
-	display: none;
-	z-index: 1001;
-}
-.editNickName_div{
-	width:500px;height:190px;margin:245px auto;background: #f8f8f8;border-radius: 6px;
-}
-.editNickName_div .title{
-	font-size: 22px;color: #4CAF50;text-align: center;padding-top: 20px;
-}
-.editNickName_div .nc_div{
-	width:255px;margin: auto;padding-top: 20px;
-}
-.editNickName_div input{
-	width: 200px;height:30px;margin-left: 20px;border: 1px solid #DDE0E2;
-}
-.editNickName_div .but_div{
-	width:168px;margin: auto;padding-top: 20px;
-}
-.editNickName_div .but{
-	width: 76px;padding: 5px 10px;font-size: 14px;border: 1px solid #d9d9d9;border-radius: 4px;cursor: pointer;
-}
-.editNickName_div .cancel_but{
-	color: #323232;background: #FFF;
-}
-.editNickName_div .submit_but{
-	color: #FFF;background: #4CAF52;margin-left: 12px;
-}
-
-.editPwdBg_div{
-	width: 100%;height:100%;
-	background: rgba(0,0,0,0.65);
-	position: fixed;
-	display: none;
-	z-index: 1001;
-}
-.editPwd_div{
-	width:400px;height:420px;margin:100px auto;background: #f8f8f8;border-radius: 6px;
-}
-.editPwd_div .close_span{
-	float: right;margin-top: 20px;margin-right: 20px;font-size: 25px;cursor: pointer;
-}
-.editPwd_div .title{
-	font-size: 22px;color: #4CAF50;text-align: center;padding-top: 50px;
-}
-.editPwd_div .ymm_div{
-	width:240px;margin: auto;padding-top: 20px;
-}
-.editPwd_div .xmm_div,.editPwd_div .qrmm_div{
-	width:240px;margin: auto;
-}
-.editPwd_div input{
-	width: 216px;
-    height: 46px;
-    padding: 0 15px;
-    font-size: 12px;
-	border: 1px solid #DDE0E2;
-    border-radius: 4px;
-}
-.editPwd_div .confirm_div{
-	width:240px;height:40px;line-height:40px;margin: 30px auto;text-align:center;font-size:17px;color:#fff;background-color:#4caf50;border-radius:3px;cursor: pointer;
-}
-.editPwd_div .warn_div{
-	width: 100%;margin-top: 20px;border-radius: 0 0 4px 4px;font-size: 12px;text-align: center;color: #9b9b9b;
-}
-
-.editCompanyBg_div{
-	width: 100%;height:100%;
-	background: rgba(0,0,0,0.65);
-	position: fixed;
-	display: none;
-	z-index: 1001;
-}
-.editCompany_div{
-	width:500px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;
-}
-.editCompany_div .title{
-	font-size: 22px;color: #4CAF50;text-align: center;padding-top: 20px;
-}
-.editCompany_div .gsmc_div,.editCompany_div .gsdz_div,.editCompany_div .lxdh_div,.editCompany_div .yx_div{
-	width:310px;margin: auto;padding-top: 20px;
-}
-.editCompany_div .dhjpgz_span{
-	margin-top: 36px;position: absolute;
-}
-.editCompany_div input{
-	width: 200px;height:30px;margin-left: 20px;border: 1px solid #DDE0E2;
-}
-.editCompany_div textarea{
-	width: 200px;height:100px;margin-left: 108px;border: 1px solid #DDE0E2;
-}
-.editCompany_div .but_div{
-	width:168px;margin: auto;padding-top: 20px;
-}
-.editCompany_div .but{
-	width: 76px;padding: 5px 10px;font-size: 14px;border: 1px solid #d9d9d9;border-radius: 4px;cursor: pointer;
-}
-.editCompany_div .cancel_but{
-	color: #323232;background: #FFF;
-}
-.editCompany_div .submit_but{
-	color: #FFF;background: #4CAF52;margin-left: 12px;
-}
-
-.bwxQrcodeBg_div{
-	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;display:none;z-index: 1001;
-}
-.bwxQrcode_div{
-	width:600px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;padding: 1px;
-}
-.bwxQrcode_div .close_span{
-	float: right;margin-top: 20px;margin-right: 20px;font-size: 25px;cursor: pointer;
-}
-.bwxQrcode_div .title_h3{
-	margin-top: 30px;text-align: center;font-size: 18px;font-weight: 700;color: #4caf50;
-}
-.bwxQrcode_div .title_div{
-	font-size: 14px;margin-top: 16px;text-align: center;
-}
-.bwxQrcode_div .qrcode_div{
-	width: 100%;height: 200px;text-align: center;margin-top: 20px;
-}
-.bwxQrcode_div .qrcode_img{
-	width: 200px;height:200px;
-}
-.bwxQrcode_div .yhzs_span{
-	float: right;margin-right: 25px;color: #4caf50;font-size: 12px;cursor: pointer;
-}
-
-.rbwxQrcodeBg_div{
-	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;display:none;z-index: 1001;
-}
-.rbwxQrcode_div{
-	width:600px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;padding: 1px;
-}
-.rbwxQrcode_div .close_span{
-	float: right;margin-top: 20px;margin-right: 20px;font-size: 25px;cursor: pointer;
-}
-.rbwxQrcode_div .title_h3{
-	margin-top: 30px;text-align: center;font-size: 18px;font-weight: 700;color: #4caf50;
-}
-.rbwxQrcode_div .title_div{
-	font-size: 14px;margin-top: 16px;text-align: center;
-}
-.rbwxQrcode_div .qrcode_div{
-	width: 100%;height: 200px;text-align: center;margin-top: 20px;
-}
-.rbwxQrcode_div .qrcode_img{
-	width: 200px;height:200px;
-}
-.rbwxQrcode_div .yhzs_span{
-	float: right;margin-right: 25px;color: #4caf50;font-size: 12px;cursor: pointer;
-}
-</style>
 </head>
 <body>
 <div class="editNickNameBg_div" id="editNickNameBg_div">
@@ -544,52 +387,52 @@ function openRbwxQrcodeBgDiv(flag){
 
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
-	<div id="zhxx_div" style="height:260px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
-		<div style="font-size: 20px;color: #373737;font-weight:700;">账户信息</div>
-		<div style="margin-top:40px;">
-			<span style="font-size: 15px;color: #373737;font-weight: 700;">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</span>
-			<span style="font-size: 15px;">${requestScope.accountMsg.nickName }</span>
-			<span style="font-size: 15px;color: #357bb3;margin-left: 15px;cursor: pointer;" onclick="openEditNickNameDialog(1)">修改昵称</span>
+	<div class="zhxx_div" id="zhxx_div">
+		<div class="title_div">账户信息</div>
+		<div class="attr_div">
+			<span class="nc_key_span">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</span>
+			<span class="nc_val_span">${requestScope.accountMsg.nickName }</span>
+			<span class="xgnc_span" onclick="openEditNickNameDialog(1)">修改昵称</span>
 		</div>
-		<div style="margin-top:40px;">
-			<span style="font-size: 15px;color: #373737;font-weight: 700;">用户账号：</span>
-			<span style="font-size: 15px;">${requestScope.accountMsg.userName }</span>
-			<span style="font-size: 15px;color: #373737;font-weight: 700;margin-left: 100px;">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
-			<span style="font-size: 15px;">已设置</span>
-			<span style="font-size: 15px;color: #357bb3;margin-left: 15px;cursor: pointer;" onclick="openEditPwdDialog(1)">修改密码</span>
+		<div class="attr_div">
+			<span class="yhzh_key_span">用户账号：</span>
+			<span class="yhzh_val_span">${requestScope.accountMsg.userName }</span>
+			<span class="mm_key_span">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
+			<span class="mm_ysz_span">已设置</span>
+			<span class="xgmm_span" onclick="openEditPwdDialog(1)">修改密码</span>
 		</div>
-		<div style="margin-top:40px;">
-			<span style="font-size: 15px;color: #373737;font-weight: 700;">绑定微信：</span>
+		<div class="attr_div">
+			<span class="bdwx_span">绑定微信：</span>
 			<c:choose>
 			<c:when test="${requestScope.accountMsg.openId eq null||requestScope.accountMsg.openId eq '' }">
-				<span style="font-size: 15px;cursor: pointer;" onclick="openBwxQrcodeBgDiv(1)">未绑定</span>
+				<span class="wbd_span" onclick="openBwxQrcodeBgDiv(1)">未绑定</span>
 			</c:when>
 			<c:otherwise>
-				<span style="font-size: 15px;cursor: pointer;" onclick="openRbwxQrcodeBgDiv(1)">解除绑定</span>
+				<span class="jcbd_span" onclick="openRbwxQrcodeBgDiv(1)">解除绑定</span>
 			</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
-	<div id="gsxx_div" style="height:370px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
-		<div style="font-size: 20px;color: #373737;font-weight:700;">公司信息</div>
-		<div style="margin-top:40px;">
-			<span style="font-size: 15px;color: #373737;font-weight: 700;">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;称：</span>
-			<span style="font-size: 15px;">${requestScope.accountMsg.companyName }</span>
+	<div class="gsxx_div" id="gsxx_div">
+		<div class="title_div">公司信息</div>
+		<div class="attr_div">
+			<span class="gsmc_key_span">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;称：</span>
+			<span class="gsmc_val_span">${requestScope.accountMsg.companyName }</span>
 		</div>
-		<div style="margin-top:40px;">
-			<span style="font-size: 15px;color: #373737;font-weight: 700;">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;地&nbsp;&nbsp;址：</span>
-			<span style="font-size: 15px;">${requestScope.accountMsg.companyAddress }</span>
+		<div class="attr_div">
+			<span class="gsdz_key_span">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;地&nbsp;&nbsp;址：</span>
+			<span class="gsdz_val_span">${requestScope.accountMsg.companyAddress }</span>
 		</div>
-		<div style="margin-top:40px;">
-			<span style="font-size: 15px;color: #373737;font-weight: 700;">联&nbsp;&nbsp;系&nbsp;&nbsp;&nbsp;电&nbsp;&nbsp;话：</span>
-			<span style="font-size: 15px;">${requestScope.accountMsg.phone }</span>
+		<div class="attr_div">
+			<span class="lxdh_key_span">联&nbsp;&nbsp;系&nbsp;&nbsp;&nbsp;电&nbsp;&nbsp;话：</span>
+			<span class="lxdh_val_span">${requestScope.accountMsg.phone }</span>
 		</div>
-		<div style="margin-top:40px;">
-			<span style="font-size: 15px;color: #373737;font-weight: 700;">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
-			<span style="font-size: 15px;">${requestScope.accountMsg.email }</span>
+		<div class="attr_div">
+			<span class="yx_key_span">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
+			<span class="yx_val_span">${requestScope.accountMsg.email }</span>
 		</div>
-		<div style="margin-top:40px;">
-			<span style="font-size: 15px;color: #357bb3;cursor: pointer;" onclick="openEditCompanyDialog(1)">修改公司信息</span>
+		<div class="attr_div">
+			<span class="xggsxx_span" onclick="openEditCompanyDialog(1)">修改公司信息</span>
 		</div>
 	</div>
 	<%@include file="foot.jsp"%>

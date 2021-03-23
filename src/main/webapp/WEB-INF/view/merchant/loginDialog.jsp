@@ -1,62 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<link rel="stylesheet" href="<%=basePath %>/resource/css/loginDialog.css" />
 <script charset="utf-8" src="<%=basePath %>/resource/js/MD5.js"></script>
-<style>
-.login_bg_div{
-	width:100%;height:100%;background-color:rgba(0, 0, 0, 0.3);position:fixed;display:none;z-index:6;
-}
-.login_div{
-	width: 795px;height: 540px;margin: 60px auto 0;background: #eff2f3;border: 1px solid #eee;padding:1px;border-radius: 6px;box-sizing: border-box;overflow: hidden;position: relative;
-}
-.login_div .closeBut_div{
-	right:10px;top:10px;color:#bbb;position: absolute;cursor: pointer;
-}
-.login_div .dlqlzh_div{
-	height: 34px;line-height: 34px;font-size: 24px;color: #4caf50;text-align: center;margin-top: 50px;
-}
-.login_div .main_div{
-	width: 735px;height:380px;margin: 45px auto 0;background-color: #fff;padding:1px;
-}
-.login_div .logLeft_div{
-	width:365px;height:220px;margin-top: 50px;
-}
-.login_div .sjhdl_h2{
-	height:20px;line-height:20px;color: #4a4a4a;font-size:16px;font-weight: 700;text-align: center;margin-bottom: 20px;
-}
-.login_div .userName_div,.login_div .password_div{
-	width: 220px;height:48px;margin: auto;border-bottom: 1px solid #eee;
-}
-.login_div .userName_inp,.login_div .password_inp{
-	width: 210px;height: 48px;line-height: 48px;padding: 0 5px;border-radius: 4px;border: 1px solid rgba(120,130,140,0.25);
-}
-.login_div .loginBut_div{
-	width: 220px;height: 38px;line-height: 38px;font-size: 16px;color:#fff;text-align:center;margin:40px auto 0;border-radius: 4px;background-color:rgb(76, 175, 80);cursor: pointer;
-}
-.login_div .cutLine_div{
-	width: 1px;height: 183px;left: 50%;margin-top: -183px;background-color: rgba(120,130,140,.13);position: absolute;
-}
-.login_div .logRight_div{
-	width:365px;height:220px;margin-top:-220px;margin-left:370px;
-}
-.login_div .wxkjdl_h2{
-	height:20px;line-height:20px;color: #4a4a4a;font-size:16px;font-weight: 700;text-align: center;margin-bottom: 20px;
-}
-.login_div .wxkjdl_div{
-	width: 100%;height:210px;margin: 20px auto 0;text-align: center;
-}
-.login_div .qrcode_img{
-	width: 180px;height:180px;
-}
-.login_div .wxsys_div{
-	font-size: 12px;color: #9B9B9B;
-}
-.login_div .regist_div{
-	font-size: 12px;color: #9b9b9b;text-align: center;margin-top: 75px;
-}
-.login_div .regist_a{
-	color: #357bb3;
-}
-</style>
 <script type="text/javascript">
 var synLogin,synLoginInter;
 $(function(){
