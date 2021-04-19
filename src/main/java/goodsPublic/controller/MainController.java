@@ -34,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
+import com.alipay.api.CertAlipayRequest;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
@@ -5147,7 +5148,18 @@ public class MainController {
 		
 		try {
 			//获得初始化的AlipayClient
-			AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
+			CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
+	        certAlipayRequest.setServerUrl(AlipayConfig.gatewayUrl);
+	        certAlipayRequest.setAppId(AlipayConfig.app_id);
+	        certAlipayRequest.setPrivateKey(AlipayConfig.merchant_private_key);
+	        certAlipayRequest.setFormat("json");
+	        certAlipayRequest.setCharset(AlipayConfig.charset);
+	        certAlipayRequest.setSignType(AlipayConfig.sign_type);
+	        certAlipayRequest.setCertPath(AlipayConfig.cert_path);//应用公钥证书绝对路径
+	        certAlipayRequest.setAlipayPublicCertPath(AlipayConfig.alipay_public_cert_path);//支付宝公钥证书绝对路径
+	        certAlipayRequest.setRootCertPath(AlipayConfig.root_cert_path);//支付宝根证书绝对路径
+	        DefaultAlipayClient alipayClient = new DefaultAlipayClient(certAlipayRequest);
+			//AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
 			
 			//设置请求参数
 			AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();

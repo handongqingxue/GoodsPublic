@@ -182,10 +182,18 @@
 			<artifactId>jxl</artifactId>
 			<version>2.6.12</version>
 		</dependency>
+		<!-- 
+		这个包是老版接口才用，现在支付宝接口升级了，暂时用不到它
 		<dependency>
 		    <groupId>com.alipay.sdk</groupId>
 		    <artifactId>alipay-sdk-java</artifactId>
 		    <version>4.10.29.ALL</version>
+		</dependency>
+		 -->
+		<dependency>
+			<groupId>com.alipay.sdk</groupId>
+			<artifactId>alipay-sdk-java</artifactId>
+			<version>4.11.0.ALL</version>
 		</dependency>
 	</dependencies>
 </project>
