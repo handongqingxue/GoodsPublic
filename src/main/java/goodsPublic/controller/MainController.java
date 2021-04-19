@@ -3995,7 +3995,7 @@ public class MainController {
 				params.put(name, valueStr);
 			}
 			
-			boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type); //调用SDK验证签名
+			boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.CHARSET, AlipayConfig.SIGN_TYPE); //调用SDK验证签名
 
 			//——请在这里编写您的程序（以下代码仅作参考）——
 			
@@ -5149,22 +5149,22 @@ public class MainController {
 		try {
 			//获得初始化的AlipayClient
 			CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
-	        certAlipayRequest.setServerUrl(AlipayConfig.gatewayUrl);
-	        certAlipayRequest.setAppId(AlipayConfig.app_id);
-	        certAlipayRequest.setPrivateKey(AlipayConfig.merchant_private_key);
-	        certAlipayRequest.setFormat("json");
-	        certAlipayRequest.setCharset(AlipayConfig.charset);
-	        certAlipayRequest.setSignType(AlipayConfig.sign_type);
-	        certAlipayRequest.setCertPath(AlipayConfig.cert_path);//应用公钥证书绝对路径
-	        certAlipayRequest.setAlipayPublicCertPath(AlipayConfig.alipay_public_cert_path);//支付宝公钥证书绝对路径
-	        certAlipayRequest.setRootCertPath(AlipayConfig.root_cert_path);//支付宝根证书绝对路径
+	        certAlipayRequest.setServerUrl(AlipayConfig.GATEWAY_URL);
+	        certAlipayRequest.setAppId(AlipayConfig.APP_ID);
+	        certAlipayRequest.setPrivateKey(AlipayConfig.MERCHANT_PRIVATE_KEY);
+	        certAlipayRequest.setFormat(AlipayConfig.FORMAT);
+	        certAlipayRequest.setCharset(AlipayConfig.CHARSET);
+	        certAlipayRequest.setSignType(AlipayConfig.SIGN_TYPE);
+	        certAlipayRequest.setCertPath(AlipayConfig.CERT_PATH);//应用公钥证书绝对路径
+	        certAlipayRequest.setAlipayPublicCertPath(AlipayConfig.ALIPAY_PUBLIC_CERT_PATH);//支付宝公钥证书绝对路径
+	        certAlipayRequest.setRootCertPath(AlipayConfig.ROOT_CERT_PATH);//支付宝根证书绝对路径
 	        DefaultAlipayClient alipayClient = new DefaultAlipayClient(certAlipayRequest);
-			//AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
+			//AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.GATEWAY_URL, AlipayConfig.APP_ID, AlipayConfig.MERCHANT_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGN_TYPE);
 			
 			//设置请求参数
 			AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
-			alipayRequest.setReturnUrl(AlipayConfig.return_url);
-			alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
+			alipayRequest.setReturnUrl(AlipayConfig.RETURN_URL);
+			alipayRequest.setNotifyUrl(AlipayConfig.NOTIFY_URL);
 			
 			//商户订单号，商户网站订单系统中唯一订单号，必填
 			String out_trade_no = orderIdSDF.format(new Date());
