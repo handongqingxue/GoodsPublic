@@ -70,10 +70,10 @@ $(function(){
             }},
             {field:"money",title:"支付金额",width:100},
             {field:"phone",title:"用户名",width:150},
-            {field:"id",title:"操作",width:150,formatter:function(value,row){
-            	var str="<a href=\"${pageContext.request.contextPath}/merchant/main/goBrowseHtmlGoodsSMYL?goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=smyl&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>"
-            	+"&nbsp;|&nbsp;<a onclick=\"deleteByIds("+value+")\">删除</a>";
+            {field:"id",title:"操作",width:80,formatter:function(value,row){
+            	var str="";
+            	if(row.payType==null)
+            		str+="<a>退款</a>";
             	return str;
             }}
 	    ]],

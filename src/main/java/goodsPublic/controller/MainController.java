@@ -4569,8 +4569,10 @@ public class MainController {
 	}
 
 	@RequestMapping(value="/goFeePayRecList")
-	public String goFeePayRecList() {
+	public String goFeePayRecList(String accountId) {
 
+		int count=publicService.updateAccountPayRecordList(accountId);
+		
 		return "/merchant/fee/payRecordList";
 	}
 	

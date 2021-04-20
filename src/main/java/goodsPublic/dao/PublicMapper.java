@@ -562,4 +562,10 @@ public interface PublicMapper {
 	public List<AccountPayRecord> queryAccountPayRecordList(String accountNumber, int start, int rows, String sort,
 			String order);
 
+	public List<AccountPayRecord> getUpdateAccountPayRecordStateList(@Param("accountNumber")String accountNumber);
+
+	public int updateAccountPayRecordStateById(@Param("state")Integer state, @Param("id")Integer id);
+
+	public int updateAccountPayRecordAllowRefund(@Param("accountNumber")String accountNumber);
+
 }

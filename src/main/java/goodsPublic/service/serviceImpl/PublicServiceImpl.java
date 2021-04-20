@@ -1288,35 +1288,45 @@ public class PublicServiceImpl implements PublicService {
 	public List<AccountPayRecord> queryAccountPayRecordList(String accountNumber, int page, int rows, String sort,
 			String order) {
 		// TODO Auto-generated method stub
-		List<AccountPayRecord> aprList=null;
+		return publicDao.queryAccountPayRecordList(accountNumber, (page-1)*rows, rows, sort, order);
+	}
+
+	@Override
+	public int updateAccountPayRecordList(String accountNumber) {
+		// TODO Auto-generated method stub
+		int count=0;
 		try {
-			aprList = publicDao.queryAccountPayRecordList(accountNumber, (page-1)*rows, rows, sort, order);
+			List<AccountPayRecord> aprList = null;
 			Date now = new Date();
-			Calendar calendar=new GregorianCalendar();
-			calendar.setTime(now);
-			calendar.add(calendar.DATE,7);
-			Date qthDate = calendar.getTime();
+			Calendar stateCalendar=new GregorianCalendar();
+			stateCalendar.setTime(now);
+			stateCalendar.add(stateCalendar.DATE,7);
+			Date qthDate = stateCalendar.getTime();//七天后
+			
+			aprList = publicDao.getUpdateAccountPayRecordStateList(accountNumber);
 			for (AccountPayRecord apr : aprList) {
+				Integer state;
 				Date endDate = timeSDF.parse(apr.getEndTime());
 				if(now.compareTo(endDate)==-1) {
-					//wei
 					if(qthDate.compareTo(endDate)==-1) {
-						apr.setState(AccountPayRecord.SHI_YONG_ZHONG);
+						state=AccountPayRecord.SHI_YONG_ZHONG;
 					}
 					else {
-						apr.setState(AccountPayRecord.JI_JIANG_DAO_QI);
+						state=AccountPayRecord.JI_JIANG_DAO_QI;
 					}
 				}
 				else {
-					apr.setState(AccountPayRecord.YI_DAO_QI);
+					state=AccountPayRecord.YI_DAO_QI;
 				}
+				count+=publicDao.updateAccountPayRecordStateById(state,apr.getId());
 			}
+			count+=publicDao.updateAccountPayRecordAllowRefund(accountNumber);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally {
-			return aprList;
+			return count;
 		}
 	}
 }

@@ -551,4 +551,6 @@ public interface PublicService {
 	public List<AccountPayRecord> queryAccountPayRecordList(String accountNumber, int page, int rows, String sort,
 			String order);
 
+	public int updateAccountPayRecordList(String accountNumber);
+
 }

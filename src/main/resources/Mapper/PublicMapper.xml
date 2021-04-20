@@ -4601,4 +4601,13 @@
 	<select id="queryAccountPayRecordList" resultType="goodsPublic.entity.AccountPayRecord">
 		select * from account_pay_record where accountNumber=#{param1} order by payTime desc limit ${param2},${param3}
 	</select>
+	<select id="getUpdateAccountPayRecordStateList" resultType="goodsPublic.entity.AccountPayRecord">
+		select * from account_pay_record where state is null and accountNumber=#{accountNumber}
+	</select>
+	<update id="updateAccountPayRecordStateById">
+		update account_pay_record set state=#{state} where id=#{id}
+	</update>
+	<update id="updateAccountPayRecordAllowRefund">
+		update account_pay_record set allowRefund=0 where date_add(now(), INTERVAL 1 day)&gt;=payTime and accountNumber=#{accountNumber}
+	</update>
 </mapper>

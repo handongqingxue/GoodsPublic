@@ -22,7 +22,7 @@ public class AccountPayRecord implements Serializable {
 	private String accountNumber;
 	private String payTime;
 	private String endTime;
-	private Integer state;//状态 1.使用中 2.即将到期 3.已到期
+	private Integer state;//状态 1.使用中 2.即将到期 3.已到期 4.已退款
 	private Integer vipType;//会员类型 1.免费版 2.基础版 3.高级版 4.行业版
 	private Integer payType;
 	private Float money;
