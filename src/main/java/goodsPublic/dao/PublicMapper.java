@@ -557,4 +557,9 @@ public interface PublicMapper {
 
 	public int deleteShortMsgQrcodeByUuid(@Param("uuid") String uuid);
 
+	public int queryAccountPayRecordForInt(@Param("accountNumber")String accountNumber);
+
+	public List<AccountPayRecord> queryAccountPayRecordList(String accountNumber, int start, int rows, String sort,
+			String order);
+
 }

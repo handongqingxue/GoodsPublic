@@ -293,6 +293,11 @@ function checkIfPaidInSide(){
 							付费
 						</a>
 					</li>
+					<li class="layui-nav-item">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goFeePayRecList?accountId=${sessionScope.user.id }">
+							付费记录
+						</a>
+					</li>
 				</div>
 				<!-- 
 				<div style="width: 100%; margin: 0 auto; margin-top: 20px;background-color: #F5FAFE;">

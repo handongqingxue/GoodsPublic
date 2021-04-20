@@ -546,4 +546,9 @@ public interface PublicService {
 
 	public int deleteLimitedShortMsgQrcode();
 
+	public int queryAccountPayRecordForInt(String accountNumber);
+
+	public List<AccountPayRecord> queryAccountPayRecordList(String accountNumber, int page, int rows, String sort,
+			String order);
+
 }

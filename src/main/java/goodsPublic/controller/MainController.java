@@ -4567,6 +4567,12 @@ public class MainController {
 		
 		return "/merchant/fee/tenpay";
 	}
+
+	@RequestMapping(value="/goFeePayRecList")
+	public String goFeePayRecList() {
+
+		return "/merchant/fee/payRecordList";
+	}
 	
 	/**
 	 * 跳转至行业模版快速生成页面
@@ -5146,6 +5152,19 @@ public class MainController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/queryAccountPayRecordList")
+	@ResponseBody
+	public Map<String, Object> queryAccountPayRecordList(String accountId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = publicService.queryAccountPayRecordForInt(accountId);
+		List<AccountPayRecord> aprList = publicService.queryAccountPayRecordList(accountId, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", aprList);
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/alipay")
 	public void alipay(HttpServletRequest request, HttpServletResponse response) {
 		
@@ -5225,7 +5244,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="/alipayFundTransUniTransfer")
 	@ResponseBody
-	public Map<String, Object> transfer() {
+	public Map<String, Object> alipayFundTransUniTransfer() {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
 			CertAlipayRequest certAlipayRequest = new CertAlipayRequest();

@@ -7,7 +7,9 @@ import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1273,6 +1275,48 @@ public class PublicServiceImpl implements PublicService {
 		File file=new File(filePath);
 		if(file.exists()) {
 			file.delete();
+		}
+	}
+
+	@Override
+	public int queryAccountPayRecordForInt(String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.queryAccountPayRecordForInt(accountNumber);
+	}
+
+	@Override
+	public List<AccountPayRecord> queryAccountPayRecordList(String accountNumber, int page, int rows, String sort,
+			String order) {
+		// TODO Auto-generated method stub
+		List<AccountPayRecord> aprList=null;
+		try {
+			aprList = publicDao.queryAccountPayRecordList(accountNumber, (page-1)*rows, rows, sort, order);
+			Date now = new Date();
+			Calendar calendar=new GregorianCalendar();
+			calendar.setTime(now);
+			calendar.add(calendar.DATE,7);
+			Date qthDate = calendar.getTime();
+			for (AccountPayRecord apr : aprList) {
+				Date endDate = timeSDF.parse(apr.getEndTime());
+				if(now.compareTo(endDate)==-1) {
+					//wei
+					if(qthDate.compareTo(endDate)==-1) {
+						apr.setState(AccountPayRecord.SHI_YONG_ZHONG);
+					}
+					else {
+						apr.setState(AccountPayRecord.JI_JIANG_DAO_QI);
+					}
+				}
+				else {
+					apr.setState(AccountPayRecord.YI_DAO_QI);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return aprList;
 		}
 	}
 }

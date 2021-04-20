@@ -4595,4 +4595,10 @@
 	<delete id="deleteShortMsgQrcodeByUuid">
 		delete from short_msg_qrcode where uuid=#{uuid}
 	</delete>
+	<select id="queryAccountPayRecordForInt" resultType="java.lang.Integer">
+		select count(*) from account_pay_record where accountNumber=#{accountNumber}
+	</select>
+	<select id="queryAccountPayRecordList" resultType="goodsPublic.entity.AccountPayRecord">
+		select * from account_pay_record where accountNumber=#{param1} order by payTime desc limit ${param2},${param3}
+	</select>
 </mapper>
