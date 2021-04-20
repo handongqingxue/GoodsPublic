@@ -32,12 +32,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.CertAlipayRequest;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
+import com.alipay.api.request.AlipayFundTransUniTransferRequest;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.api.response.AlipayFundTransUniTransferResponse;
 import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
@@ -5214,6 +5217,64 @@ public class MainController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 支付宝转账
+	 */
+	@RequestMapping(value="/alipayFundTransUniTransfer")
+	@ResponseBody
+	public Map<String, Object> transfer() {
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
+	        certAlipayRequest.setServerUrl(AlipayConfig.GATEWAY_URL);
+	        certAlipayRequest.setAppId(AlipayConfig.APP_ID);
+	        certAlipayRequest.setPrivateKey(AlipayConfig.MERCHANT_PRIVATE_KEY);
+	        certAlipayRequest.setFormat(AlipayConfig.FORMAT);
+	        certAlipayRequest.setCharset(AlipayConfig.CHARSET);
+	        certAlipayRequest.setSignType(AlipayConfig.SIGN_TYPE);
+	        certAlipayRequest.setCertPath(AlipayConfig.CERT_PATH);//应用公钥证书绝对路径
+	        certAlipayRequest.setAlipayPublicCertPath(AlipayConfig.ALIPAY_PUBLIC_CERT_PATH);//支付宝公钥证书绝对路径
+	        certAlipayRequest.setRootCertPath(AlipayConfig.ROOT_CERT_PATH);//支付宝根证书绝对路径
+	        DefaultAlipayClient alipayClient = new DefaultAlipayClient(certAlipayRequest);
+			//AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL,AlipayConfig.APPID,AlipayConfig.RSA_PRIVATE_KEY,AlipayConfig.FORMAT,AlipayConfig.CHARSET,AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.SIGNTYPE);
+			AlipayFundTransUniTransferRequest request = new AlipayFundTransUniTransferRequest();
+			//商户订单号，商户网站订单系统中唯一订单号，必填
+			String out_trade_no = orderIdSDF.format(new Date());
+			request.setBizContent("{" +
+			"\"out_biz_no\":\""+out_trade_no+"\"," +
+			"\"trans_amount\":0.01," +
+			"\"product_code\":\"TRANS_ACCOUNT_NO_PWD\"," +
+			"\"biz_scene\":\"DIRECT_TRANSFER\"," +
+			"\"order_title\":\"转账标题\"," +
+			"\"payee_info\":{" +
+			"\"identity\":\"18765943028\"," +
+			"\"identity_type\":\"ALIPAY_LOGON_ID\"," +
+			"\"name\":\"逄坤\"" +
+			"    }," +
+			"\"remark\":\"单笔转账\"," +
+			"\"business_params\":\"{\\\"sub_biz_scene\\\":\\\"REDPACKET\\\"}\"" +
+			"  }");
+			AlipayFundTransUniTransferResponse response = alipayClient.certificateExecute(request);
+			if(response.isSuccess()){
+				System.out.println("调用成功");
+			} 
+			else {
+				System.out.println("调用失败");
+			}
+			String body = response.getBody();
+			System.out.println("body==="+body);
+			HashMap bodyHM = JSON.parseObject(body, HashMap.class);
+			jsonMap=(Map<String, Object>) bodyHM.get("alipay_fund_trans_uni_transfer_response");
+			//{"alipay_fund_trans_uni_transfer_response":{"code":"10000","msg":"Success","order_id":"20210419110070000006810045951694","out_biz_no":"20210419103847","pay_fund_order_id":"20210419110070001506810061218762","status":"SUCCESS","trans_date":"2021-04-19 10:39:01"},"alipay_cert_sn":"9e7fbb1857d99dc507953866161303c5","sign":"dfR4O/s1Z4SoQAEzzR0uLvb2Wd/PLMhZH1mGAyd4GwHQnDp55M/nFvR6vFytWI5ed8vitnIry+R+5JkzBwqyiTp5rifMDfGvYYhWDmZST6qNQUAvpDgdIn20yHsSywnivg4GbjchWoIncDKW3UEPNr7DlKVeG5rjlZL1xur/rT7JZSqkVeM74gdJ+M519PVSc6bx5cjsM8/d83hPd4Ytkj/nRvXWc4y/nQZ2AobcORjyJcbj7jTnGZBNIWkql5X68rCIAahhc2tpHv7BlQj/oZu5ciY57wdHqlieKurqwo2uCt9RyZUE1C/yrYJa8VQkGaicXedx1M/rx3IDdTtwUA=="}
+		} catch (AlipayApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return jsonMap;
 		}
 	}
 	
