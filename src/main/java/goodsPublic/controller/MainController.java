@@ -5246,7 +5246,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="/alipayFundTransUniTransfer")
 	@ResponseBody
-	public Map<String, Object> alipayFundTransUniTransfer() {
+	public Map<String, Object> alipayFundTransUniTransfer(Float money,Integer aprId) {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
 			CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
@@ -5266,7 +5266,8 @@ public class MainController {
 			String out_trade_no = orderIdSDF.format(new Date());
 			request.setBizContent("{" +
 			"\"out_biz_no\":\""+out_trade_no+"\"," +
-			"\"trans_amount\":0.01," +
+			"\"trans_amount\":"+money+"," +
+			//"\"trans_amount\":0.01," +
 			"\"product_code\":\"TRANS_ACCOUNT_NO_PWD\"," +
 			"\"biz_scene\":\"DIRECT_TRANSFER\"," +
 			"\"order_title\":\"转账标题\"," +
@@ -5289,6 +5290,9 @@ public class MainController {
 			System.out.println("body==="+body);
 			HashMap bodyHM = JSON.parseObject(body, HashMap.class);
 			jsonMap=(Map<String, Object>) bodyHM.get("alipay_fund_trans_uni_transfer_response");
+			if("Success".equals(jsonMap.get("msg").toString())) {
+				int count=publicService.updateAccountPayRecordStateById(AccountPayRecord.YI_TUI_KUAN,aprId);
+			}
 			//{"alipay_fund_trans_uni_transfer_response":{"code":"10000","msg":"Success","order_id":"20210419110070000006810045951694","out_biz_no":"20210419103847","pay_fund_order_id":"20210419110070001506810061218762","status":"SUCCESS","trans_date":"2021-04-19 10:39:01"},"alipay_cert_sn":"9e7fbb1857d99dc507953866161303c5","sign":"dfR4O/s1Z4SoQAEzzR0uLvb2Wd/PLMhZH1mGAyd4GwHQnDp55M/nFvR6vFytWI5ed8vitnIry+R+5JkzBwqyiTp5rifMDfGvYYhWDmZST6qNQUAvpDgdIn20yHsSywnivg4GbjchWoIncDKW3UEPNr7DlKVeG5rjlZL1xur/rT7JZSqkVeM74gdJ+M519PVSc6bx5cjsM8/d83hPd4Ytkj/nRvXWc4y/nQZ2AobcORjyJcbj7jTnGZBNIWkql5X68rCIAahhc2tpHv7BlQj/oZu5ciY57wdHqlieKurqwo2uCt9RyZUE1C/yrYJa8VQkGaicXedx1M/rx3IDdTtwUA=="}
 		} catch (AlipayApiException e) {
 			// TODO Auto-generated catch block

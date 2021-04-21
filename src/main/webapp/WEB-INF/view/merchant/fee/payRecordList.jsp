@@ -32,6 +32,9 @@ $(function(){
 				case 3:
 					str="已到期";
 					break;
+				case 4:
+					str="已退款";
+					break;
 				}
             	return str;
             }},
@@ -72,8 +75,18 @@ $(function(){
             {field:"phone",title:"用户名",width:150},
             {field:"id",title:"操作",width:80,formatter:function(value,row){
             	var str="";
-            	if(row.payType==null)
-            		str+="<a>退款</a>";
+            	if(row.payType!=null&row.allowRefund&row.state!=4){
+            		var str;
+                	switch (row.payType) {
+    				case 1:
+    					str+="<a onclick=\"alipayTK('"+row.money+"','"+value+"')\">退款</a>";
+    					break;
+    				case 2:
+    					str+="<a onclick=\"alert('w')\">退款</a>";
+    					break;
+    				}
+            		
+            	}
             	return str;
             }}
 	    ]],
@@ -99,6 +112,23 @@ $(function(){
 		}
 	});
 });
+
+function alipayTK(money,aprId){
+	if(confirm("确认退款？")){
+		$.post("alipayFundTransUniTransfer",
+			{money:money,aprId:aprId},
+			function(result){
+				if(result.msg=="Success"){
+					alert("退款成功");
+					tab1.datagrid("load");
+				}
+				else{
+					alert(result.sub_msg);
+				}
+			}
+		,"json");
+	}
+}
 
 function setFitWidthInParent(o){
 	var width=$(o).css("width");

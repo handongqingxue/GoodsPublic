@@ -940,7 +940,10 @@ public class PublicServiceImpl implements PublicService {
 			case AccountPayRecord.HANG_YE:
 				endTime = timeSDF.parse(apr.getEndTime());
 				if(new Date().before(endTime)) {
-					ifPaid=true;
+					Integer state = apr.getState();
+					if(state==1||state==2) {
+						ifPaid=true;
+					}
 				}
 				break;
 		}
@@ -1320,7 +1323,8 @@ public class PublicServiceImpl implements PublicService {
 				}
 				count+=publicDao.updateAccountPayRecordStateById(state,apr.getId());
 			}
-			count+=publicDao.updateAccountPayRecordAllowRefund(accountNumber);
+			if(publicDao.getUpdateAPRAllowRefundCount(accountNumber)>0)
+				count+=publicDao.updateAccountPayRecordAllowRefund(accountNumber);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1328,5 +1332,11 @@ public class PublicServiceImpl implements PublicService {
 		finally {
 			return count;
 		}
+	}
+
+	@Override
+	public int updateAccountPayRecordStateById(Integer state, Integer id) {
+		// TODO Auto-generated method stub
+		return publicDao.updateAccountPayRecordStateById(state,id);
 	}
 }

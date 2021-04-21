@@ -553,4 +553,6 @@ public interface PublicService {
 
 	public int updateAccountPayRecordList(String accountNumber);
 
+	public int updateAccountPayRecordStateById(Integer state, Integer id);
+
 }

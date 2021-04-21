@@ -4607,7 +4607,10 @@
 	<update id="updateAccountPayRecordStateById">
 		update account_pay_record set state=#{state} where id=#{id}
 	</update>
+	<select id="getUpdateAPRAllowRefundCount" resultType="java.lang.Integer">
+		select count(*) from account_pay_record where now()&gt;=date_add(payTime, INTERVAL 1 day) and allowRefund=1 and accountNumber=#{accountNumber}
+	</select>
 	<update id="updateAccountPayRecordAllowRefund">
-		update account_pay_record set allowRefund=0 where date_add(now(), INTERVAL 1 day)&gt;=payTime and accountNumber=#{accountNumber}
+		update account_pay_record set allowRefund=0 where now()&gt;=date_add(payTime, INTERVAL 1 day) and accountNumber=#{accountNumber}
 	</update>
 </mapper>

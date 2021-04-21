@@ -33,7 +33,7 @@ function goPay(){
 	var vipType;
 	var price='${param.price}';
 	switch (price) {
-		case "0.01":
+		case "0.1":
 			vipType=1;
 			break;
 		case "600":

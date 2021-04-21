@@ -16,6 +16,7 @@ public class AccountPayRecord implements Serializable {
 	public static final int SHI_YONG_ZHONG=1;
 	public static final int JI_JIANG_DAO_QI=2;
 	public static final int YI_DAO_QI=3;
+	public static final int YI_TUI_KUAN=4;
 	
 	private Integer id;
 	private String outTradeNo;

@@ -566,6 +566,8 @@ public interface PublicMapper {
 
 	public int updateAccountPayRecordStateById(@Param("state")Integer state, @Param("id")Integer id);
 
+	public int getUpdateAPRAllowRefundCount(@Param("accountNumber")String accountNumber);
+
 	public int updateAccountPayRecordAllowRefund(@Param("accountNumber")String accountNumber);
 
 }
