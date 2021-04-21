@@ -5246,7 +5246,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="/alipayFundTransUniTransfer")
 	@ResponseBody
-	public Map<String, Object> alipayFundTransUniTransfer(Float money,Integer aprId) {
+	public Map<String, Object> alipayFundTransUniTransfer(String alipayNo,String realName,Float money,Integer aprId) {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		try {
 			CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
@@ -5272,9 +5272,9 @@ public class MainController {
 			"\"biz_scene\":\"DIRECT_TRANSFER\"," +
 			"\"order_title\":\"转账标题\"," +
 			"\"payee_info\":{" +
-			"\"identity\":\"18765943028\"," +
+			"\"identity\":\""+alipayNo+"\"," +
 			"\"identity_type\":\"ALIPAY_LOGON_ID\"," +
-			"\"name\":\"逄坤\"" +
+			"\"name\":\""+realName+"\"" +
 			"    }," +
 			"\"remark\":\"单笔转账\"," +
 			"\"business_params\":\"{\\\"sub_biz_scene\\\":\\\"REDPACKET\\\"}\"" +

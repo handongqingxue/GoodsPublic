@@ -74,6 +74,37 @@ function checkEditPwd(){
 	}
 }
 
+function checkEditAlipay(){
+	if(checkAlipayNo()){
+		if(checkRealName()){
+			var alipayNo=$("#alipayNo").val();
+			var realName=$("#realName").val();
+
+			$.post("editAccountInfo",
+				{alipayNo:alipayNo,realName:realName},
+				function(data){
+					if(data.status==1){
+						$.messager.defaults.ok = "是";
+					    $.messager.defaults.cancel = "否";
+					    $.messager.defaults.width = 350;//更改消息框宽度
+					    $.messager.confirm(
+					    	"提示",
+					    	"修改支付宝成功，重新登录生效！是否重新登录？"
+					        ,function(r){    
+					            if (r){    
+					                location.href="../exit";
+					            }
+					        }); 
+					}
+					else{
+						$.messager.alert("提示","修改支付宝失败","warning");
+					}
+				}
+			,"json");
+		}
+	}
+}
+
 function checkEditCompany(){
 	if(checkCompanyName()){
 		if(checkCompanyAddress()){
@@ -190,6 +221,46 @@ function checkNewPwd2(){
 		return true;
 }
 
+function focusAlipayNo(){
+	var alipayNo = $("#alipayNo").val();
+	if(alipayNo=="支付宝账号不能为空"){
+		$("#alipayNo").val("");
+		$("#alipayNo").css("color", "#555555");
+	}
+}
+
+//验证支付宝账号
+function checkAlipayNo(){
+	var alipayNo = $("#alipayNo").val();
+	if(alipayNo==null||alipayNo==""||alipayNo=="支付宝账号不能为空"){
+		$("#alipayNo").css("color","#E15748");
+    	$("#alipayNo").val("支付宝账号不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+function focusRealName(){
+	var realName = $("#realName").val();
+	if(realName=="真实姓名不能为空"){
+		$("#realName").val("");
+		$("#realName").css("color", "#555555");
+	}
+}
+
+//验证真实姓名
+function checkRealName(){
+	var realName = $("#realName").val();
+	if(realName==null||realName==""||realName=="真实姓名不能为空"){
+		$("#realName").css("color","#E15748");
+    	$("#realName").val("真实姓名不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
 function focusCompanyName(){
 	var companyName = $("#companyName").val();
 	if(companyName=="公司名称不能为空"){
@@ -283,6 +354,10 @@ function openEditPwdDialog(flag){
 	$("#editPwdBg_div").css("display",flag==1?"block":"none");
 }
 
+function openEditAlipayDialog(flag){
+	$("#editAlipayBg_div").css("display",flag==1?"block":"none");
+}
+
 function openEditCompanyDialog(flag){
 	$("#editCompanyBg_div").css("display",flag==1?"block":"none");
 }
@@ -331,6 +406,24 @@ function openRbwxQrcodeBgDiv(flag){
 	</div>
 </div>
 
+<div class="editAlipayBg_div" id="editAlipayBg_div">
+	<div class="editAlipay_div">
+		<h4 class="title">支付宝信息</h4>
+		<div class="zfbzh_div">
+			<span>支&nbsp;付&nbsp;宝&nbsp;账&nbsp;号</span>
+			<input type="text" id="alipayNo" value="${requestScope.accountMsg.alipayNo }" onfocus="focusAlipayNo()" onblur="checkAlipayNo()"/>
+		</div>
+		<div class="zsxm_div">
+			<span>真&nbsp;&nbsp;实&nbsp;&nbsp;&nbsp;姓&nbsp;&nbsp;名</span>
+			<input type="text" id="realName" value="${requestScope.accountMsg.realName }" onfocus="focusRealName()" onblur="checkRealName()"/>
+		</div>
+		<div class="but_div">
+			<button class="but cancel_but" onclick="openEditAlipayDialog(0)">取消</button>
+			<button class="but submit_but" onclick="checkEditAlipay()">提交</button>
+		</div>
+	</div>
+</div>
+
 <div class="editCompanyBg_div" id="editCompanyBg_div">
 	<div class="editCompany_div">
 		<h4 class="title">公司信息</h4>
@@ -351,7 +444,7 @@ function openRbwxQrcodeBgDiv(flag){
 			<input type="text" id="email" value="${requestScope.accountMsg.email }" onfocus="focusEmail()" onblur="checkEmail()"/>
 		</div>
 		<div class="but_div">
-			<button class="but cancel_but" onclick="openEditCompanyDialog(0)">取消</button>
+			<button class="but cancel_but" onclick="openEditAlipayDialog(0)">取消</button>
 			<button class="but submit_but" onclick="checkEditCompany()">提交</button>
 		</div>
 	</div>
@@ -411,6 +504,13 @@ function openRbwxQrcodeBgDiv(flag){
 				<span class="jcbd_span" onclick="openRbwxQrcodeBgDiv(1)">解除绑定</span>
 			</c:otherwise>
 			</c:choose>
+		</div>
+		<div class="attr_div">
+			<span class="zfbzh_key_span">支付宝账号：</span>
+			<span class="zfbzh_val_span">${requestScope.accountMsg.alipayNo }</span>
+			<span class="zsxm_key_span">真实姓名：</span>
+			<span class="zsxm_val_span">${requestScope.accountMsg.realName }</span>
+			<span class="xgzfb_span" onclick="openEditAlipayDialog(1)">修改支付宝</span>
 		</div>
 	</div>
 	<div class="gsxx_div" id="gsxx_div">

@@ -28,6 +28,8 @@ public class AccountMsg {
 	private String role;
 	private String bwxQrcode;
 	private String rbwxQrcode;
+	private String alipayNo;
+	private String realName;
 	private String openId;
 
 	public AccountMsg(String userName,String passWord) {
@@ -193,6 +195,22 @@ public class AccountMsg {
 
 	public String getRbwxQrcode() {
 		return rbwxQrcode;
+	}
+	
+	public String getAlipayNo() {
+		return alipayNo;
+	}
+
+	public void setAlipayNo(String alipayNo) {
+		this.alipayNo = alipayNo;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
 	public void setRbwxQrcode(String rbwxQrcode) {

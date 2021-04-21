@@ -2588,6 +2588,7 @@
 			<if test="endTime!=null">
 				endTime,
 			</if>
+				state,
 			<if test="vipType!=null">
 				vipType,
 			</if>
@@ -2615,6 +2616,7 @@
 			<if test="endTime!=null">
 				#{endTime},
 			</if>
+				1,
 			<if test="vipType!=null">
 				#{vipType},
 			</if>
@@ -4119,6 +4121,12 @@
 			</if>
 			<if test="nickName!=''&amp;nickName!=null">
 				nickName=#{nickName},
+			</if>
+			<if test="alipayNo!=''&amp;alipayNo!=null">
+				alipayNo=#{alipayNo},
+			</if>
+			<if test="realName!=''&amp;realName!=null">
+				realName=#{realName},
 			</if>
 		</trim>
 		where id=#{id}

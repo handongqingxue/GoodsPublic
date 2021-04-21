@@ -8,6 +8,8 @@
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
+var alipayNo='${sessionScope.user.alipayNo}';
+var realName='${sessionScope.user.realName}';
 $(function(){
 	tab1=$("#tab1").datagrid({
 		title:"付费记录查询",
@@ -114,19 +116,31 @@ $(function(){
 });
 
 function alipayTK(money,aprId){
-	if(confirm("确认退款？")){
-		$.post("alipayFundTransUniTransfer",
-			{money:money,aprId:aprId},
-			function(result){
-				if(result.msg=="Success"){
-					alert("退款成功");
-					tab1.datagrid("load");
+	if(checkAlipayInfo()){
+		if(confirm("确认退款？")){
+			$.post("alipayFundTransUniTransfer",
+				{alipayNo:alipayNo,realName:realName,money:money,aprId:aprId},
+				function(result){
+					if(result.msg=="Success"){
+						alert("退款成功");
+						tab1.datagrid("load");
+					}
+					else{
+						alert(result.sub_msg);
+					}
 				}
-				else{
-					alert(result.sub_msg);
-				}
-			}
-		,"json");
+			,"json");
+		}
+	}
+}
+
+function checkAlipayInfo(){
+	if(alipayNo==null||alipayNo==""||realName==null||realName==""){
+		alert("请先去系统管理-商家信息里完善支付宝信息");
+		return false;
+	}
+	else{
+		return true;
 	}
 }
 

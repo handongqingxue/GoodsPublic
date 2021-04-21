@@ -67,8 +67,42 @@
 	width: 100%;margin-top: 20px;border-radius: 0 0 4px 4px;font-size: 12px;text-align: center;color: #9b9b9b;
 }
 
+.editAlipayBg_div{
+	width: 100%;
+	height:100%;
+	background: rgba(0,0,0,0.65);
+	position: fixed;
+	display: none;
+	z-index: 1001;
+}
+.editAlipay_div{
+	width:500px;height:240px;margin:200px auto;background: #f8f8f8;border-radius: 6px;
+}
+.editAlipay_div .title{
+	font-size: 22px;color: #4CAF50;text-align: center;padding-top: 20px;
+}
+.editAlipay_div .zfbzh_div,.editAlipay_div .zsxm_div{
+	width:330px;margin: auto;padding-top: 20px;
+}
+.editAlipay_div input{
+	width: 200px;height:30px;margin-left: 20px;border: 1px solid #DDE0E2;
+}
+.editAlipay_div .but_div{
+	width:168px;margin: auto;padding-top: 20px;
+}
+.editAlipay_div .but{
+	width: 76px;padding: 5px 10px;font-size: 14px;border: 1px solid #d9d9d9;border-radius: 4px;cursor: pointer;
+}
+.editAlipay_div .cancel_but{
+	color: #323232;background: #FFF;
+}
+.editAlipay_div .submit_but{
+	color: #FFF;background: #4CAF52;margin-left: 12px;
+}
+
 .editCompanyBg_div{
-	width: 100%;height:100%;
+	width: 100%;
+	height:100%;
 	background: rgba(0,0,0,0.65);
 	position: fixed;
 	display: none;
@@ -156,7 +190,7 @@
 }
 
 .zhxx_div{
-	height:260px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;
+	height:320px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;
 }
 .zhxx_div .title_div,.gsxx_div .title_div{
 	font-size: 20px;color: #373737;font-weight:700;
@@ -164,18 +198,18 @@
 .zhxx_div .attr_div,.gsxx_div .attr_div{
 	margin-top:40px;
 }
-.zhxx_div .nc_key_span,.zhxx_div .yhzh_key_span,.zhxx_div .bdwx_span,
+.zhxx_div .nc_key_span,.zhxx_div .yhzh_key_span,.zhxx_div .bdwx_span,.zhxx_div .zfbzh_key_span,
 .gsxx_div .gsmc_key_span,.gsxx_div .gsdz_key_span,.gsxx_div .lxdh_key_span,.gsxx_div .yx_key_span{
 	font-size: 15px;color: #373737;font-weight: 700;
 }
-.zhxx_div .nc_val_span,.zhxx_div .yhzh_val_span,.zhxx_div .mm_ysz_span,
+.zhxx_div .nc_val_span,.zhxx_div .yhzh_val_span,.zhxx_div .mm_ysz_span,.zhxx_div .zfbzh_val_span,.zhxx_div .zsxm_val_span,
 .gsxx_div .gsmc_val_span,.gsxx_div .gsdz_val_span,.gsxx_div .lxdh_val_span,.gsxx_div .yx_val_span{
 	font-size: 15px;
 }
-.zhxx_div .mm_key_span{
+.zhxx_div .mm_key_span,.zhxx_div .zsxm_key_span{
 	font-size: 15px;color: #373737;font-weight: 700;margin-left: 100px;
 }
-.zhxx_div .xgnc_span,.zhxx_div .xgmm_span{
+.zhxx_div .xgnc_span,.zhxx_div .xgmm_span,.zhxx_div .xgzfb_span{
 	font-size: 15px;color: #357bb3;margin-left: 15px;cursor: pointer;
 }
 .zhxx_div .wbd_span,.zhxx_div .jcbd_span{
