@@ -10,6 +10,7 @@
 var path='<%=basePath %>';
 var alipayNo='${sessionScope.user.alipayNo}';
 var realName='${sessionScope.user.realName}';
+var openId='${sessionScope.user.openId}';
 $(function(){
 	tab1=$("#tab1").datagrid({
 		title:"付费记录查询",
@@ -84,7 +85,7 @@ $(function(){
     					str+="<a onclick=\"alipayTK('"+row.money+"','"+value+"')\">退款</a>";
     					break;
     				case 2:
-    					str+="<a onclick=\"alert('w')\">退款</a>";
+    					str+="<a onclick=\"wxTK('"+row.money+"','"+value+"')\">退款</a>";
     					break;
     				}
             		
@@ -134,9 +135,38 @@ function alipayTK(money,aprId){
 	}
 }
 
+function wxTK(money,aprId){
+	if(checkWxInfo()){
+		if(confirm("确认退款？")){
+			$.post("wxWithDraw",
+				{openId:openId,money:money,aprId:aprId},
+				function(result){
+					if(result.status=="ok"){
+						alert(result.message);
+						tab1.datagrid("load");
+					}
+					else{
+						alert(result.message);
+					}
+				}
+			,"json");
+		}
+	}
+}
+
 function checkAlipayInfo(){
 	if(alipayNo==null||alipayNo==""||realName==null||realName==""){
 		alert("请先去系统管理-商家信息里完善支付宝信息");
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+function checkWxInfo(){
+	if(openId==null||openId==""){
+		alert("请先去系统管理-商家信息里绑定微信");
 		return false;
 	}
 	else{

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -41,6 +42,9 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayFundTransUniTransferRequest;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.response.AlipayFundTransUniTransferResponse;
+import com.goodsPublic.util.wxwithdraw.WxWithDrawConfig;
+import com.goodsPublic.util.wxwithdraw.HttpRequestHandler;
+import com.goodsPublic.util.wxwithdraw.WechatpayUtil;
 import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
@@ -5300,6 +5304,69 @@ public class MainController {
 		}
 		finally {
 			return jsonMap;
+		}
+	}
+	
+	@RequestMapping(value="/wxWithDraw")
+	@ResponseBody
+	public Map<String,Object> wxWithDraw(HttpServletRequest request, HttpServletResponse response) {
+
+		Map<String,Object> resultMap = new HashMap<>();
+		WxWithDrawConfig wxwdc = new WxWithDrawConfig();
+		 try{
+            // 1.计算参数签名
+		 	//wxwdc.setOpenId("oNFEuwzkbP4OTTjBucFgBTWE5Bqg");
+		 	//wxwdc.setAmount(100);
+		 	//wxwdc.setDesc("企业付款到零钱");
+			
+			String openId = request.getParameter("openId");
+		 	wxwdc.setOpenId(openId);
+		 	wxwdc.setAmount((int)(Float.valueOf(request.getParameter("money"))*100));
+		 	wxwdc.setDesc("企业付款到零钱");
+		 	
+		 	//微信官方API文档 https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_2
+            String paramStr = WechatpayUtil.createLinkString(wxwdc);
+            String mysign = paramStr + "&key=" + wxwdc.getAppkey();
+            String sign = DigestUtils.md5Hex(mysign).toUpperCase();
+	
+            // 2.封装请求参数
+            StringBuilder reqXmlStr = new StringBuilder();
+            reqXmlStr.append("<xml>");
+            reqXmlStr.append("<mchid>" + wxwdc.getMchID() + "</mchid>");
+            reqXmlStr.append("<mch_appid>" + wxwdc.getMchAppID() + "</mch_appid>");
+            reqXmlStr.append("<nonce_str>" + wxwdc.getNonceStr() + "</nonce_str>");
+            reqXmlStr.append("<check_name>" + wxwdc.getCheckName() + "</check_name>");
+            reqXmlStr.append("<openid>" + wxwdc.getOpenId() + "</openid>");
+            reqXmlStr.append("<amount>" + wxwdc.getAmount() + "</amount>");
+            reqXmlStr.append("<desc>" + wxwdc.getDesc() + "</desc>");
+            reqXmlStr.append("<sign>" + sign + "</sign>");
+            reqXmlStr.append("<partner_trade_no>" + wxwdc.getPartnerTradeNo() + "</partner_trade_no>");
+            reqXmlStr.append("<spbill_create_ip>" + wxwdc.getSpbillCreateIp() + "</spbill_create_ip>");
+            reqXmlStr.append("</xml>");
+	
+            System.out.println("request xml = " + reqXmlStr);
+            // 3.加载证书请求接口
+            String result = HttpRequestHandler.httpsRequest(wxwdc.getTransfersUrl(), reqXmlStr.toString(),
+            		wxwdc, wxwdc.getCertPath());
+            System.out.println("response xml = " + result);
+            if(result.contains("CDATA[FAIL]")){
+	            resultMap.put("status", "no");
+	            resultMap.put("message", "调用微信接口失败, 具体信息请查看访问日志");
+            }
+            else {
+            	//vipService.updateWithDrawMoneyByOpenId(-Float.valueOf(wxwdc.getAmount()),openId);
+            	int count=publicService.updateAccountPayRecordStateById(AccountPayRecord.YI_TUI_KUAN,Integer.valueOf(request.getParameter("aprId")));
+                resultMap.put("status", "ok");
+                resultMap.put("message", "退款成功！");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            resultMap.put("status", "no");
+            resultMap.put("message", "退款失败！");
+        }
+		finally {
+			return resultMap;
 		}
 	}
 	
