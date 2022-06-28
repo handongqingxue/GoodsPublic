@@ -345,6 +345,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public int queryHtmlGoodsJYDGForInt(String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsJYDGForInt(accountId);
+	}
+
+	@Override
 	public List<Goods> queryGoodsList(String accountId, String categoryId, int page, int rows, String sort,
 			String order) {
 		// TODO Auto-generated method stub
@@ -395,6 +401,12 @@ public class PublicServiceImpl implements PublicService {
 	public List<HtmlGoodsHDQD> queryHtmlGoodsSMYLList(String accountId, int page, int rows, String sort, String order) {
 		// TODO Auto-generated method stub
 		return publicDao.queryHtmlGoodsSMYLList(accountId, (page-1)*rows, rows, sort, order);
+	}
+
+	@Override
+	public List<HtmlGoodsJYDG> queryHtmlGoodsJYDGList(String accountId, int page, int rows, String sort, String order) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsJYDGList(accountId, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override

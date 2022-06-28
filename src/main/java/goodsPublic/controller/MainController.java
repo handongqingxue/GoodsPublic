@@ -4441,6 +4441,19 @@ public class MainController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/queryHtmlGoodsJYDGList")
+	@ResponseBody
+	public Map<String, Object> queryHtmlGoodsJYDGList(String accountId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = publicService.queryHtmlGoodsJYDGForInt(accountId);
+		List<HtmlGoodsJYDG> htmlGoodsList = publicService.queryHtmlGoodsJYDGList(accountId, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", htmlGoodsList);
+		return jsonMap;
+	}
+	
 	/**
 	 * 跳转至编辑商品页面
 	 * @param request
@@ -4606,6 +4619,9 @@ public class MainController {
 			break;
 		case "smyl":
 			url="/merchant/smyl/htmlGoodsList";
+			break;
+		case "jydg":
+			url="/merchant/jydg/htmlGoodsList";
 			break;
 		case "jfdhjp":
 			String nav = request.getParameter("nav");

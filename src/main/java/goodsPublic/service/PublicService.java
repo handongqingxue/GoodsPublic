@@ -138,6 +138,8 @@ public interface PublicService {
 	public int queryHtmlGoodsHDQDForInt(String accountId);
 
 	public int queryHtmlGoodsSMYLForInt(String accountId);
+
+	public int queryHtmlGoodsJYDGForInt(String accountId);
 	
 	/**
 	 * 查询商品信息
@@ -214,6 +216,8 @@ public interface PublicService {
 	public List<HtmlGoodsHDQD> queryHtmlGoodsHDQDList(String accountId, int page, int rows, String sort, String order);
 
 	public List<HtmlGoodsHDQD> queryHtmlGoodsSMYLList(String accountId, int page, int rows, String sort, String order);
+
+	public List<HtmlGoodsJYDG> queryHtmlGoodsJYDGList(String accountId, int page, int rows, String sort, String order);
 
 	/**
 	 * 编辑商户信息

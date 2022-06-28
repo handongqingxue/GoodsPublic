@@ -140,6 +140,8 @@ public interface PublicMapper {
 	public List<HtmlGoodsHDQD> queryHtmlGoodsHDQDList(String accountId, int i, int rows, String sort, String order);
 
 	public List<HtmlGoodsHDQD> queryHtmlGoodsSMYLList(String accountId, int i, int rows, String sort, String order);
+
+	public List<HtmlGoodsJYDG> queryHtmlGoodsJYDGList(String accountId, int i, int rows, String sort, String order);
 	
 	/**
 	 * 根据类别id查询商品
@@ -212,6 +214,8 @@ public interface PublicMapper {
 	public int queryHtmlGoodsHDQDForInt(String accountId);
 
 	public int queryHtmlGoodsSMYLForInt(String accountId);
+
+	public int queryHtmlGoodsJYDGForInt(String accountId);
 	
 	/**
 	 * 编辑商户信息
