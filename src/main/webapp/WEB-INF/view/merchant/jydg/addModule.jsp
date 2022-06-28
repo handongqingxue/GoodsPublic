@@ -62,41 +62,51 @@ KindEditor.ready(function(K) {
 			</c:forEach>
 		</div>
 	</div>
-	<div class="spxq_div" id="spxq_div">
-		<div class="title_div" style="width: 600px;height: 40px;line-height: 40px;margin: 0 auto;background-color: red;">
-			<div>01</div>
+	<div class="jyyybl_div" id="jyyybl_div">
+		<div class="title_div">
+			<div class="num_div">01</div>
+			<div class="text_div">
+				<span class="text_span">建议应用比例</span>
+			</div>
 		</div>
-		<table class="spxq_tab" id="spxq_tab">
+		<table class="jyyybl_tab" id="jyyybl_tab">
 			<tr class="head_tr">
-				<td class="spxq_td">商品详情</td>
-				<td class="spxq_td">商品详情</td>
+				<td class="jyyybl_td">原料</td>
+				<td class="jyyybl_td">用量(g)</td>
+				<td class="jyyybl_td">备注</td>
 				<td class="cz_td">操作</td>
 			</tr>
-			<c:forEach items="${requestScope.spxqList }" var="spxq" varStatus="status">
+			<c:forEach items="${requestScope.jyyyblList }" var="jyyybl" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
 				<td class="name_td">
-					<input type="text" name="spxqName${status.index+1 }" value="${spxq.name }" size="10" maxlength="80" />
+					<input type="text" name="yjyyblName${status.index+1 }" value="${jyyybl.name }" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
-					<input type="text" name="spxqValue${status.index+1 }" value="${spxq.value }" maxlength="80" />
+					<input type="text" name="jyyyblValue${status.index+1 }" value="${jyyybl.value }" maxlength="80" />
+				</td>
+				<td class="memo_td">
+					<input type="text" name="jyyyblMemo${status.index+1 }" value="${jyyybl.memo }" maxlength="80" />
 				</td>
 				<td class="cz_td">
-					<input type="hidden" id="spxqIfShow${status.index+1 }" name="spxqIfShow${status.index+1 }" value="true" />
-					<input type="button" class="spxqIfShow_inp" value="显示" onclick="changeSPXQTrIfShow(${status.index+1 },this)"/>
+					<input type="hidden" id="yjyyblIfShow${status.index+1 }" name="yjyyblIfShow${status.index+1 }" value="true" />
+					<input type="button" class="yjyyblIfShow_inp" value="显示" onclick="changeSPXQTrIfShow(${status.index+1 },this)"/>
 				</td>
 			</tr>
 			</c:forEach>
-			<c:forEach begin="8" end="15" varStatus="status">
+			<c:forEach begin="5" end="10" varStatus="status">
 			<tr class="item_tr" id="tr${status.index }" height="50">
 				<td class="name_td">
-					<input type="text" name="spxqName${status.index }" size="10" maxlength="80" />
+					<input type="text" name="yjyyblName${status.index }" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
-					<input type="text" name="spxqValue${status.index }" maxlength="80" />
+					<input type="text" name="jyyyblValue${status.index }" maxlength="80" />
+				</td>
+				<td class="memo_td">
+					<input type="text" name="jyyyblMemo${status.index+1 }" maxlength="80" />
 				</td>
 				<td class="cz_td">
-					<input type="hidden" id="spxqIfShow${status.index }" name="spxqIfShow${status.index }" value="true" />
-					<input type="button" class="spxqIfShow_inp" value="显示" onclick="changeSPXQTrIfShow(${status.index },this)"/>
+					<input type="hidden" id="yjyyblIfShow${status.index }" name="yjyyblIfShow${status.index }" value="true" />
+					<input type="button" class="yjyyblIfShow_inp" value="显示" onclick="changeSPXQTrIfShow(${status.index },this)"/>
 				</td>
 			</tr>
 			</c:forEach>

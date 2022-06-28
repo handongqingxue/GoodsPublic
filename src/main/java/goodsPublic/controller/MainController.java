@@ -4991,6 +4991,9 @@ public class MainController {
 			List<ModuleJYDG> jydgEmbed1List = (List<ModuleJYDG>)publicService.getModuleJYDGByType("embed1");
 			request.setAttribute("embed1List", jydgEmbed1List);
 			
+			List<ModuleJYDG> jyyyblList = (List<ModuleJYDG>)publicService.getModuleJYDGByType("jyyybl");
+			request.setAttribute("jyyyblList", jyyyblList);
+			
 			url="/merchant/jydg/addModule";
 			break;
 		case "jfdhjp":
