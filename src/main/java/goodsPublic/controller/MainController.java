@@ -4985,6 +4985,14 @@ public class MainController {
 			
 			url="/merchant/smyl/addModule";
 			break;
+		case "jydg":
+			request.setAttribute("productName", ((List<ModuleJYDG>)publicService.getModuleJYDGByType("productName")).get(0).getValue());
+
+			List<ModuleJYDG> jydgEmbed1List = (List<ModuleJYDG>)publicService.getModuleJYDGByType("embed1");
+			request.setAttribute("embed1List", jydgEmbed1List);
+			
+			url="/merchant/jydg/addModule";
+			break;
 		case "jfdhjp":
 			
 			url="/merchant/jfdhjp/ewmsc/addModule";

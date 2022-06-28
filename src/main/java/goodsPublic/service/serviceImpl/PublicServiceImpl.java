@@ -770,6 +770,27 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public Object getModuleJYDGByType(String type) {
+		// TODO Auto-generated method stub
+
+		Object obj=null;
+		switch (type) {
+		case "productName":
+		case "jyyybl":
+		case "memo1":
+		case "memo2":
+		case "image1":
+		case "image2":
+		case "embed1":
+		case "embed2":
+			List<ModuleJYDG> jydgList = publicDao.getModuleJYDGByType(type);
+			obj=jydgList;
+			break;
+		}
+		return obj;
+	}
+
+	@Override
 	public HtmlGoodsSPZS getHtmlGoodsSPZS(String moduleType, String goodsNumber, String accountId) {
 		// TODO Auto-generated method stub
 		return publicDao.getHtmlGoodsSPZS(moduleType,goodsNumber,accountId);

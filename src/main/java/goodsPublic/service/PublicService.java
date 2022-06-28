@@ -324,6 +324,13 @@ public interface PublicService {
 	public Object getModuleSMYLByType(String type);
 
 	/**
+	 * 根据类型查询家用蛋糕模版
+	 * @param type
+	 * @return
+	 */
+	public Object getModuleJYDGByType(String type);
+
+	/**
 	 * 获得商品展示模版内容
 	 * @param goodsNumber
 	 * @param accountId

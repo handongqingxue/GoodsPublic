@@ -38,6 +38,30 @@ public class ModuleJYDG implements Serializable {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getSuffix() {
+		return suffix;
+	}
+	public void setSuffix(String suffix) {
+		this.suffix = suffix;
+	}
+	public Float getSize() {
+		return size;
+	}
+	public void setSize(Float size) {
+		this.size = size;
+	}
+	public String getUnit() {
+		return unit;
+	}
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
 	public String getType() {
 		return type;
 	}
@@ -53,6 +77,10 @@ public class ModuleJYDG implements Serializable {
 	private String name;
 	private String value;
 	private String memo;
+	private String url;
+	private String suffix;
+	private Float size;
+	private String unit;
 	private String type;
 	private int sort;
 

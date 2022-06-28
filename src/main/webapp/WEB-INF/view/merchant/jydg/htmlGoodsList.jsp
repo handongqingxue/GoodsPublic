@@ -52,7 +52,7 @@ $(function(){
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{productName:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=smyl\">点击生成家用蛋糕模版</a><div>"});
+				$(this).datagrid("appendRow",{productName:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=jydg\">点击生成家用蛋糕模版</a><div>"});
 				$(this).datagrid("mergeCells",{index:0,field:"productName",colspan:3});
 				data.total=0;
 			}

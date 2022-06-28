@@ -330,6 +330,13 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public List<ModuleSMYL> getModuleSMYLByType(String type);
+
+	/**
+	 * 根据类型，查询家用蛋糕模版列表
+	 * @param type
+	 * @return
+	 */
+	public List<ModuleJYDG> getModuleJYDGByType(String type);
 	
 	/**
 	 * 获得商品展示模版内容
