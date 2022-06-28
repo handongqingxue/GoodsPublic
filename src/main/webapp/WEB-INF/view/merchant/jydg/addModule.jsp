@@ -1,3 +1,4 @@
+<%@ page import="com.goodsPublic.util.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -112,7 +113,39 @@ KindEditor.ready(function(K) {
 			</c:forEach>
 		</table>
 	</div>
+	<div class="memo1_div" id="memo1_div">
+		<div class="title_div">
+			<div class="num_div">02</div>
+			<div class="text_div">
+				<span class="text_span">推荐操作步骤</span>
+			</div>
+		</div>
+		<div class="space_div"></div>
+		<textarea class="memo1_ta" id="memo1" name="memo1" cols="100" rows="8"><%=htmlspecialchars(memo1) %></textarea>
+	</div>
+	<div class="memo2_div" id="memo2_div">
+		<div class="title_div">
+			<div class="num_div">03</div>
+			<div class="text_div">
+				<span class="text_span">常见问题解答</span>
+			</div>
+		</div>
+		<div class="space_div"></div>
+		<textarea class="memo2_ta" id="memo2" name="memo2" cols="100" rows="8"><%=htmlspecialchars(memo2) %></textarea>
+	</div>
 </div>
 </form>
 </body>
 </html>
+<%!
+private String htmlspecialchars(String str) {
+	//System.out.println(str);
+	if(!StringUtils.isEmpty(str)){
+		str = str.replaceAll("&", "&amp;");
+		str = str.replaceAll("<", "&lt;");
+		str = str.replaceAll(">", "&gt;");
+		str = str.replaceAll("\"", "&quot;");
+	}
+	return str;
+}
+%>

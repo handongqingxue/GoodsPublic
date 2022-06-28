@@ -4993,6 +4993,10 @@ public class MainController {
 			
 			List<ModuleJYDG> jyyyblList = (List<ModuleJYDG>)publicService.getModuleJYDGByType("jyyybl");
 			request.setAttribute("jyyyblList", jyyyblList);
+
+			request.setAttribute("memo1", ((List<ModuleJYDG>)publicService.getModuleJYDGByType("memo1")).get(0).getValue());
+
+			request.setAttribute("memo2", ((List<ModuleJYDG>)publicService.getModuleJYDGByType("memo2")).get(0).getValue());
 			
 			url="/merchant/jydg/addModule";
 			break;

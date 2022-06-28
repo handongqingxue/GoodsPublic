@@ -80,24 +80,28 @@ body{
 	height: 300px;
 	margin: 5px 0 25px 0;
 }
-.jyyybl_div{
+.jyyybl_div,.memo1_div,.memo2_div{
 	margin-top: 20px;
 	padding: 1px;
 }
-.jyyybl_div .title_div{
+.jyyybl_div .title_div,.memo1_div .title_div,.memo2_div .title_div{
 	width: 600px;
 	height: 40px;
 	line-height: 40px;
 	margin: 0 auto;
 }
-.jyyybl_div .title_div .num_div{
+.jyyybl_div .title_div .num_div,
+.memo1_div .title_div .num_div,
+.memo2_div .title_div .num_div{
 	width:40px;
 	color: #AD2E1B;
 	font-size:20px;
 	text-align: center;
 	border-bottom: #AD2E1B solid 1px;
 }
-.jyyybl_div .title_div .text_div{
+.jyyybl_div .title_div .text_div,
+.memo1_div .title_div .text_div,
+.memo2_div .title_div .text_div{
 	width:540px;
 	margin-top:-40px;
 	margin-left:60px;
@@ -105,7 +109,9 @@ body{
 	font-size:20px;
 	border-bottom: #AD2E1B solid 1px;
 }
-.jyyybl_div .title_div .text_div .text_span{
+.jyyybl_div .title_div .text_div .text_span,
+.memo1_div .title_div .text_div .text_span,
+.memo2_div .title_div .text_div .text_span{
 	margin-left:15px;
 }
 .jyyybl_tab{
@@ -160,4 +166,13 @@ body{
 }
 .jyyybl_tab .item_tr .yjyyblIfShow_inp{
 	cursor: pointer;
+}
+.memo1_div .space_div,.memo2_div .space_div{
+	width: 100%;
+	height: 30px;
+}
+.memo1_ta,.memo2_ta{
+	width:650px;
+	height:150px;
+	visibility:hidden;
 }
