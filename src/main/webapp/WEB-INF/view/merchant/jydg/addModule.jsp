@@ -133,6 +133,52 @@ KindEditor.ready(function(K) {
 		<div class="space_div"></div>
 		<textarea class="memo2_ta" id="memo2" name="memo2" cols="100" rows="8"><%=htmlspecialchars(memo2) %></textarea>
 	</div>
+	<div class="image1_div" id="image1_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
+				<a onclick="openImage1ModBgDiv();">编辑</a>|
+				<a onclick="deleteImage1Div();">删除</a>
+			</div>
+		</div>
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<c:forEach items="${requestScope.image1List }" var="image1" varStatus="status">
+			<img class="item_img" id="img1_1" alt="" src="${image1.url }">
+			</c:forEach>
+		</div>
+	</div>
+	<div class="embed2_div" id="embed2_div">
+		<div class="title_div">
+			<div class="num_div">04</div>
+			<div class="text_div">
+				<span class="text_span">拓展应用</span>
+			</div>
+		</div>
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
+				<a onclick="openEmbed1ModBgDiv();">编辑</a>|
+				<a onclick="deleteEmbed1Div();">删除</a>
+			</div>
+		</div>
+		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<c:forEach items="${requestScope.embed2List }" var="embed2" varStatus="status">
+			<embed class="item_embed" id="embed2_1" src="${embed2.url }"/>
+			</c:forEach>
+		</div>
+	</div>
+	<div class="image2_div" id="image2_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
+				<a onclick="openImage2ModBgDiv();">编辑</a>|
+				<a onclick="deleteImage2Div();">删除</a>
+			</div>
+		</div>
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<c:forEach items="${requestScope.image2List }" var="image2" varStatus="status">
+			<img class="item_img" id="img2_1" alt="" src="${image2.url }">
+			</c:forEach>
+		</div>
+		<div class="space_div"></div>
+	</div>
 </div>
 </form>
 </body>

@@ -59,11 +59,11 @@ body{
 	text-align: center;
 	background-color: #AD2E1B;
 }
-.embed1_div .option_div{
+.embed1_div .option_div,.image1_div .option_div,.embed2_div .option_div,.image2_div .option_div{
 	width:650px;
 	position:absolute;
 }
-.embed1_div .but_div{
+.embed1_div .but_div,.image1_div .but_div,.embed2_div .but_div,.image2_div .but_div{
 	width:100px;
 	height:30px;
 	line-height:30px;
@@ -75,7 +75,7 @@ body{
 	border-radius:5px;
 	display:none;
 }
-.embed1_div .list_div .item_embed{
+.embed1_div .list_div .item_embed,.embed2_div .list_div .item_embed{
 	width: 600px;
 	height: 300px;
 	margin: 5px 0 25px 0;
@@ -84,7 +84,7 @@ body{
 	margin-top: 20px;
 	padding: 1px;
 }
-.jyyybl_div .title_div,.memo1_div .title_div,.memo2_div .title_div{
+.jyyybl_div .title_div,.memo1_div .title_div,.memo2_div .title_div,.embed2_div .title_div{
 	width: 600px;
 	height: 40px;
 	line-height: 40px;
@@ -92,7 +92,8 @@ body{
 }
 .jyyybl_div .title_div .num_div,
 .memo1_div .title_div .num_div,
-.memo2_div .title_div .num_div{
+.memo2_div .title_div .num_div,
+.embed2_div .title_div .num_div{
 	width:40px;
 	color: #AD2E1B;
 	font-size:20px;
@@ -101,7 +102,8 @@ body{
 }
 .jyyybl_div .title_div .text_div,
 .memo1_div .title_div .text_div,
-.memo2_div .title_div .text_div{
+.memo2_div .title_div .text_div,
+.embed2_div .title_div .text_div{
 	width:540px;
 	margin-top:-40px;
 	margin-left:60px;
@@ -111,7 +113,8 @@ body{
 }
 .jyyybl_div .title_div .text_div .text_span,
 .memo1_div .title_div .text_div .text_span,
-.memo2_div .title_div .text_div .text_span{
+.memo2_div .title_div .text_div .text_span,
+.embed2_div .title_div .text_div .text_span{
 	margin-left:15px;
 }
 .jyyybl_tab{
@@ -121,6 +124,7 @@ body{
 }
 .jyyybl_tab .head_tr{
 	height:60px;
+	font-weight: bold;
 }
 .jyyybl_tab .head_tr .jyyybl_td{
 	padding-left: 20px;
@@ -167,7 +171,7 @@ body{
 .jyyybl_tab .item_tr .yjyyblIfShow_inp{
 	cursor: pointer;
 }
-.memo1_div .space_div,.memo2_div .space_div{
+.memo1_div .space_div,.memo2_div .space_div,.image2_div .space_div{
 	width: 100%;
 	height: 30px;
 }
@@ -175,4 +179,16 @@ body{
 	width:650px;
 	height:150px;
 	visibility:hidden;
+}
+.image1_div,.image2_div{
+	width: 650px;
+	text-align: center;
+}
+.image1_div .list_div .item_img,.image2_div .list_div .item_img{
+	width: 600px;
+	margin-top: 25px;
+}
+.embed2_div{
+	width: 650px;
+	margin-top: 30px;
 }

@@ -4998,6 +4998,15 @@ public class MainController {
 
 			request.setAttribute("memo2", ((List<ModuleJYDG>)publicService.getModuleJYDGByType("memo2")).get(0).getValue());
 			
+			List<ModuleJYDG> jydgImage1List = (List<ModuleJYDG>)publicService.getModuleJYDGByType("image1");
+			request.setAttribute("image1List", jydgImage1List);
+
+			List<ModuleJYDG> jydgEmbed2List = (List<ModuleJYDG>)publicService.getModuleJYDGByType("embed2");
+			request.setAttribute("embed2List", jydgEmbed2List);
+
+			List<ModuleJYDG> jydgImage2List = (List<ModuleJYDG>)publicService.getModuleJYDGByType("image2");
+			request.setAttribute("image2List", jydgImage2List);
+			
 			url="/merchant/jydg/addModule";
 			break;
 		case "jfdhjp":
