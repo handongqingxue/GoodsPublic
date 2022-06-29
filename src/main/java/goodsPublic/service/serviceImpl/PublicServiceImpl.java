@@ -783,6 +783,7 @@ public class PublicServiceImpl implements PublicService {
 		case "image2":
 		case "embed1":
 		case "embed2":
+		case "pdf1":
 			List<ModuleJYDG> jydgList = publicDao.getModuleJYDGByType(type);
 			obj=jydgList;
 			break;

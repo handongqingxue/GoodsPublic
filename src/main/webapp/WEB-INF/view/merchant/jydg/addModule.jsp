@@ -684,6 +684,26 @@ function checkIfPaid(){
 		<div class="space_div"></div>
 		<textarea class="memo1_ta" id="memo1" name="memo1" cols="100" rows="8"><%=htmlspecialchars(memo1) %></textarea>
 	</div>
+	<div class="pdf1_div" id="pdf1_div">
+		<div class="title_div">
+			<span class="text_span">产品说明书下载</span>
+		</div>
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
+				<a onclick="openPdf1ModBgDiv();">编辑</a>|
+				<a onclick="deletePdf1Div();">删除</a>
+			</div>
+		</div>
+		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<c:forEach items="${requestScope.pdf1List }" var="pdf1" varStatus="status">
+			<div class="item_pdf" id="pdf1_1">
+				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
+				<span class="name_span">${pdf1.name }.${pdf1.suffix }</span>
+				<span class="size_span">${pdf1.size }${pdf1.unit }</span>
+			</div>
+			</c:forEach>
+		</div>
+	</div>
 	<div class="memo2_div" id="memo2_div">
 		<div class="title_div">
 			<div class="num_div">03</div>

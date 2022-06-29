@@ -258,11 +258,19 @@ body{
 	text-align: center;
 	background-color: #AD2E1B;
 }
-.embed1_div .option_div,.image1_div .option_div,.embed2_div .option_div,.image2_div .option_div{
+.embed1_div .option_div,
+.embed2_div .option_div,
+.image1_div .option_div,
+.image2_div .option_div,
+.pdf1_div .option_div{
 	width:650px;
 	position:absolute;
 }
-.embed1_div .but_div,.image1_div .but_div,.embed2_div .but_div,.image2_div .but_div{
+.embed1_div .but_div,
+.embed2_div .but_div,
+.image1_div .but_div,
+.image2_div .but_div,
+.pdf1_div .but_div{
 	width:100px;
 	height:30px;
 	line-height:30px;
@@ -379,6 +387,52 @@ body{
 	height:150px;
 	visibility:hidden;
 }
+
+.pdf1_div{
+	width: 650px;
+	margin-top: 25px;
+}
+.pdf1_div .title_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	background-color: #F0F2F5;	
+	border-left: #AD2E1B solid 10px;
+}
+.pdf1_div .title_div .text_span{
+	margin-left:15px;
+	font-size: 20px;
+}
+.pdf1_div .list_div{
+	margin-top: 10px;
+}
+.pdf1_div .list_div .item_pdf{
+	width: 100%;
+	height: 150px;
+	margin: 5px 0 25px 0;
+	border: #eee solid 1px;
+	border-radius:15px; 
+}
+.pdf1_div .list_div .item_pdf .file_img{
+	width: 90px;
+	height: 114px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+.pdf1_div .list_div .item_pdf .name_span{
+	margin-top: 35px;
+	margin-left: 20px;
+	font-size: 25px;
+	position: absolute;
+}
+.pdf1_div .list_div .item_pdf .size_span{
+	margin-top: 90px;
+	margin-left: 20px;
+	color:#9B9B9B;
+	font-size: 18px;
+	position: absolute;
+}
+
 .image1_div,.image2_div{
 	width: 650px;
 	text-align: center;

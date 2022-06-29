@@ -4996,6 +4996,9 @@ public class MainController {
 
 			request.setAttribute("memo1", ((List<ModuleJYDG>)publicService.getModuleJYDGByType("memo1")).get(0).getValue());
 
+			List<ModuleJYDG> jydgPdf1List = (List<ModuleJYDG>)publicService.getModuleJYDGByType("pdf1");
+			request.setAttribute("pdf1List", jydgPdf1List);
+			
 			request.setAttribute("memo2", ((List<ModuleJYDG>)publicService.getModuleJYDGByType("memo2")).get(0).getValue());
 			
 			List<ModuleJYDG> jydgImage1List = (List<ModuleJYDG>)publicService.getModuleJYDGByType("image1");
