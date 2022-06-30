@@ -2,6 +2,89 @@
 body{
 	background-color: #fbfbfb;
 }
+.image1ModBg_div,.image2ModBg_div{
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.5);
+	position: fixed;
+	display:none;
+	z-index: 1;
+}
+.image1Mod_div,.image2Mod_div{
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 100px;
+	background-color: #fff;
+}
+.image1Mod_div .title_div,.image2Mod_div .title_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: #999 solid 1px;
+}
+.image1Mod_div .title_span,.image2Mod_div .title_span{
+	margin-left: 20px;
+}
+.image1Mod_div .close_span,.image2Mod_div .close_span{
+	float: right;
+	margin-right: 20px;
+	cursor: pointer;
+}
+.image1Mod_div table,.image2Mod_div table{
+	width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;
+}
+.image1Mod_div table .file_td,.image2Mod_div table .file_td{
+	width: 25%;
+}
+.image1Mod_div table .delete_img,.image2Mod_div table .delete_img{
+	margin-top: 5px;
+	margin-left: 80px;
+	cursor:pointer;
+	position: absolute;
+}
+.image1Mod_div table .item_img,.image2Mod_div table .item_img{
+	width: 120px;
+	height: 120px;
+}
+.image1Mod_div .upload_img,.image2Mod_div .upload_img{
+	cursor:pointer;
+}
+.image1Mod_div .uploadFile1_div,.image2Mod_div .uploadFile2_div{
+	display: none;
+}
+.image1Mod_div .but_div,.image2Mod_div .but_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 20px;
+	border-top: #999 solid 1px;
+}
+.image1Mod_div .confirm_div,.image2Mod_div .confirm_div{
+	width:80px;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	color:#fff;
+	float:right;
+	margin-top: 7px;
+	margin-right:13px;
+	background-color: #4caf50;
+	cursor:pointer;
+	border-radius:5px;
+}
+.image1Mod_div .cancel_div,.image2Mod_div .cancel_div{
+	width:80px;
+	height:33px;
+	line-height:33px;
+	text-align:center;
+	color:#999;
+	float:right;
+	margin-top: 7px;
+	margin-right:13px;
+	border: #999 solid 1px;
+	cursor:pointer;
+	border-radius:5px;
+}
 
 .top_div{
 	width: 100%;
@@ -266,16 +349,41 @@ body{
 	width: 650px;
 	margin-top: 30px;
 }
+
 .right_div{
 	width: 150px;
 	height: 200px;
 	text-align: center;
 }
-.uncreate_img{
+.right_div .qrCode_img{
 	width: 120px;
 	height: 120px;
 }
-.createQrcode_div{
+.right_div .preview_div{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin:0 auto;
+	margin-top:15px;
+	border:1px solid #eee;
+	background-color:#fff;
+	cursor:pointer;
+	border-radius:3px;
+}
+.right_div .save_div{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin:0 auto;
+	margin-top:15px;
+	border:1px solid #eee;
+	background-color:#fff;
+	cursor:pointer;
+	border-radius:3px;
+}
+.right_div .finishEdit_div{
 	width: 100px;
 	height: 30px;
 	line-height: 30px;
@@ -286,4 +394,14 @@ body{
 	background-color:#4caf50;
 	cursor:pointer;
 	border-radius:3px;
+}
+.right_div .saveStatus_div{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin:0 auto;
+	margin-top:15px;
+	color:#4caf50;
+	display: none;
 }

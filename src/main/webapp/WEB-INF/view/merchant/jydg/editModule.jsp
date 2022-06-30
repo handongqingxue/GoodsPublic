@@ -35,9 +35,361 @@ KindEditor.ready(function(K) {
 	});
 	prettyPrint();
 });
+
+var bodyWidth;
+$(function(){
+	bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
+	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
+	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
+
+    //这里必须延迟1s，等图片加载完再重新设定右边div位置
+    setTimeout(function(){
+    	resetDivPosition();
+    },"1000")
+    
+	initDefaultHtmlVal();
+});
+
+function resetDivPosition(){
+	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
+	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight))+"px");
+}
+
+function showOptionDiv(o){
+	$(o).parent().find("#but_div").css("display","block");
+}
+
+function hideOptionDiv(o){
+	$(o).parent().find("#but_div").css("display","none");
+}
+
+function openImage1ModBgDiv(){
+	$("#image1ModBg_div").css("display","block");
+}
+
+function openImage2ModBgDiv(){
+	$("#image2ModBg_div").css("display","block");
+}
+
+function closeImage1ModBgDiv(){
+	$("#image1ModBg_div").css("display","none");
+}
+
+function closeImage2ModBgDiv(){
+	$("#image2ModBg_div").css("display","none");
+}
+
+function changeButStyle(o,flag){
+	if(flag==1){
+		$(o).css("color","#4caf50");
+		$(o).css("border-color","#4caf50");
+	}
+	else{
+		$(o).css("color","#999");
+		$(o).css("border-color","#999");
+	}
+}
+
+function uploadImage1(){
+	var uuid=createUUID();
+	$("#uuid_hid1").val(uuid);
+	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
+	$("#uploadFile1_div").append("<input type=\"text\" id=\"image"+uuid+"\" name=\"image"+uuid+"\" />");
+	document.getElementById("uploadFile1_inp").click();
+}
+
+function deleteImage1(o){
+	var td=$(o).parent();
+	var uuid=td.attr("id").substring(7);
+	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
+	td.remove();
+	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
+	$("#uploadFile1_div input[type='text'][name='image"+uuid+"']").remove();
+
+	var imageTab=$("#image1Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
+	resetDivPosition();
+}
+
+function showQrcodePic1(obj){
+	var uuid=$("#uuid_hid1").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage1(this);\">"
+				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
+				+fileHtml
+			+"</td>";
+	
+	var imageTab=$("#image1Mod_div table");
+	//var length=imageTab.find("td[id^='file_td']").length;
+    var tdLength=imageTab.find("td").length;
+    if(tdLength%4==0){
+    	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
+    	tr.append(tdHtml)
+    	imageTab.append("<tr>"+$("#image1Mod_div table #upload_td").prop("outerHTML")+"</tr>");
+    	tr.find("td[id^='upload_td']").remove();
+    }
+    else{
+		imageTab.find("#upload_td").before(tdHtml);
+    }
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#image1Mod_div table #img"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+
+        var listDiv=$("#image1_div #list_div");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function createUUID() {
+    var s = [];
+    var hexDigits = "0123456789abcdef";
+    for (var i = 0; i < 36; i++) {
+        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+    }
+    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+    s[8] = s[13] = s[18] = s[23] = "-";
+ 
+    var uuid = s.join("");
+    return uuid;
+}
+
+function changeJYYYBLTrIfShow(index,o){
+	var ifShow=$("#jyyyblIfShow"+index).val();
+	if(ifShow=="true"){
+		$("#jyyyblIfShow"+index).val(false);
+		$(o).val("隐藏");
+	}
+	else{
+		$("#jyyyblIfShow"+index).val(true);
+		$(o).val("显示");
+	}
+}
+
+function openPreviewBgDiv(flag){
+	$("#previewBg_div").css("display",flag==1?"block":"none");
+	
+	var preDivWidth=$("#preview_div").css("width").substring(0,$("#preview_div").css("width").length-2);
+	var preDivHeight=$("#preview_div").css("height").substring(0,$("#preview_div").css("height").length-2);
+	$("#smck_div").css("margin-left",(parseInt(bodyWidth)+parseInt(preDivWidth))/2+20+"px");
+	$("#smck_div").css("margin-top","-"+(parseInt(preDivHeight))+"px");
+	$("#previewBg_div").css("height",(parseInt(preDivHeight)+80)+"px");
+}
+
+function goBack(){
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=jydg";
+}
 </script>
 </head>
 <body>
+<form id="form1" name="form1" method="post" action="finishEditHtmlGoodsJYDG" onsubmit="return checkIfPaid();" enctype="multipart/form-data">
+<div class="image1ModBg_div" id="image1ModBg_div">
+	<div class="image1Mod_div" id="image1Mod_div">
+		<div class="title_div">
+			<span class="title_span">图片模块</span>
+			<span class="close_span" onclick="closeImage1ModBgDiv();">关闭</span>
+		</div>
+		<div id="tab_div">
+			<table>
+				<c:if test="${requestScope.htmlGoodsJYDG.image1_1 ne null||requestScope.htmlGoodsJYDG.image1_2 ne null||requestScope.htmlGoodsJYDG.image1_3 ne null||requestScope.htmlGoodsJYDG.image1_4 ne null }">
+				<tr>
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_1 ne null }">
+					<td class="file_td" id="file_td1_1">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_1" alt="" src="${requestScope.htmlGoodsJYDG.image1_1 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_2 ne null }">
+					<td class="file_td" id="file_td1_2">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_2"  alt="" src="${requestScope.htmlGoodsJYDG.image1_2 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_3 ne null }">
+					<td class="file_td" id="file_td1_3">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_3" alt="" src="${requestScope.htmlGoodsJYDG.image1_3 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_4 ne null }">
+					<td class="file_td" id="file_td1_4">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_4" alt="" src="${requestScope.htmlGoodsJYDG.image1_4 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_5 eq null }">
+					<td id="upload_td">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+					</td>
+					</c:if>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.image1_5 ne null}">
+				<tr>
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_5 ne null }">
+					<td class="file_td" id="file_td1_5">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_5" alt="" src="${requestScope.htmlGoodsJYDG.image1_5 }">
+					</td>
+					</c:if>
+					<td id="upload_td">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+					</td>
+				</tr>
+				</c:if>
+			</table>
+			<div class="uploadFile1_div" id="uploadFile1_div">
+				<c:if test="${requestScope.htmlGoodsSMYL.image1_1 ne null }">
+				<input type="file" id="file1_1" name="file1_1" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_1" name="image1_1" value="${requestScope.htmlGoodsSMYL.image1_1 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSMYL.image1_2 ne null }">
+				<input type="file" id="file1_2" name="file1_2" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_2" name="image1_2" value="${requestScope.htmlGoodsSMYL.image1_2 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSMYL.image1_3 ne null }">
+				<input type="file" id="file1_3" name="file1_3" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_3" name="image1_3" value="${requestScope.htmlGoodsSMYL.image1_3 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSMYL.image1_4 ne null }">
+				<input type="file" id="file1_4" name="file1_4" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_4" name="image1_4" value="${requestScope.htmlGoodsSMYL.image1_4 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSMYL.image1_5 ne null }">
+				<input type="file" id="file1_5" name="file1_5" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_5" name="image1_5" value="${requestScope.htmlGoodsSMYL.image1_5 }" />
+				</c:if>
+			</div>
+			<input type="hidden" id="uuid_hid1"/>
+		</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeImage1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
+		</div>
+	</div>
+</div>
+
+<div class="image2ModBg_div" id="image2ModBg_div">
+	<div class="image2Mod_div" id="image2Mod_div">
+		<div class="title_div">
+			<span class="title_span">图片模块</span>
+			<span class="close_span" onclick="closeImage2ModBgDiv();">关闭</span>
+		</div>
+		<div id="tab_div">
+			<table>
+				<c:if test="${requestScope.htmlGoodsJYDG.image2_1 ne null||requestScope.htmlGoodsJYDG.image2_2 ne null||requestScope.htmlGoodsJYDG.image2_3 ne null||requestScope.htmlGoodsJYDG.image2_4 ne null }">
+				<tr>
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_1 ne null }">
+					<td class="file_td" id="file_td2_1">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_1" alt="" src="${requestScope.htmlGoodsJYDG.image2_1 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_2 ne null }">
+					<td class="file_td" id="file_td2_2">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_2"  alt="" src="${requestScope.htmlGoodsJYDG.image2_2 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_3 ne null }">
+					<td class="file_td" id="file_td2_3">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_3" alt="" src="${requestScope.htmlGoodsJYDG.image2_3 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_4 ne null }">
+					<td class="file_td" id="file_td2_4">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_4" alt="" src="${requestScope.htmlGoodsJYDG.image2_4 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_5 eq null }">
+					<td id="upload_td">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
+					</td>
+					</c:if>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.image2_5 ne null}">
+				<tr>
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_5 ne null }">
+					<td class="file_td" id="file_td2_5">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_5" alt="" src="${requestScope.htmlGoodsJYDG.image2_5 }">
+					</td>
+					</c:if>
+					<td id="upload_td">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
+					</td>
+				</tr>
+				</c:if>
+			</table>
+			<div class="uploadFile2_div" id="uploadFile2_div">
+				<c:if test="${requestScope.htmlGoodsSMYL.image2_1 ne null }">
+				<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" />
+				<input type="text" id="image2_1" name="image2_1" value="${requestScope.htmlGoodsSMYL.image1_1 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSMYL.image2_2 ne null }">
+				<input type="file" id="file2_2" name="file2_2" onchange="showQrcodePic2(this)" />
+				<input type="text" id="image2_2" name="image2_2" value="${requestScope.htmlGoodsSMYL.image1_2 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSMYL.image2_3 ne null }">
+				<input type="file" id="file2_3" name="file2_3" onchange="showQrcodePic2(this)" />
+				<input type="text" id="image2_3" name="image2_3" value="${requestScope.htmlGoodsSMYL.image2_3 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSMYL.image2_4 ne null }">
+				<input type="file" id="file2_4" name="file2_4" onchange="showQrcodePic2(this)" />
+				<input type="text" id="image2_4" name="image2_4" value="${requestScope.htmlGoodsSMYL.image2_4 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSMYL.image2_5 ne null }">
+				<input type="file" id="file2_5" name="file2_5" onchange="showQrcodePic2(this)" />
+				<input type="text" id="image2_5" name="image2_5" value="${requestScope.htmlGoodsSMYL.image2_5 }" />
+				</c:if>
+			</div>
+			<input type="hidden" id="uuid_hid1"/>
+		</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeImage2ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
+		</div>
+	</div>
+</div>
 
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
@@ -351,6 +703,18 @@ KindEditor.ready(function(K) {
 		<div class="space_div"></div>
 	</div>
 </div>
+<div class="right_div" id="right_div">
+	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsJYDG.qrCode }">
+	<div class="preview_div" onclick="previewHtmlGoodsSMYL();">预览</div>
+	<div class="save_div" onclick="saveEditHtmlGoodsSMYL();">保存</div>
+	<div class="finishEdit_div" onclick="finishEditHtmlGoodsSMYL();">完成编辑</div>
+	<div class="saveStatus_div" id="saveStatus_div"></div>
+</div>
+<input type="hidden" id="id" name="id" value="${requestScope.htmlGoodsJYDG.id }" />
+<input type="hidden" id="goodsNumber" name="goodsNumber" value="${requestScope.htmlGoodsJYDG.goodsNumber }" />
+<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
+<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
+</form>
 </body>
 </html>
 <%!
