@@ -123,6 +123,14 @@ function renameFile(){
 		$(this).attr("name","file2_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
+	$("#uploadFile3_div input[type='file']").each(function(i){
+		$(this).attr("name","file3_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+	$("#uploadFile4_div input[type='file']").each(function(i){
+		$(this).attr("name","file4_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
 	$("#uploadFile5_div input[type='file']").each(function(i){
 		$(this).attr("name","file5_"+(i+1));
 		//console.log($(this).attr("name"));
@@ -488,7 +496,7 @@ function changeJYYYBLTrIfShow(index,o){
 }
 
 function goBack(){
-	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=smyl";
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=jydg";
 }
 
 function checkForm(){

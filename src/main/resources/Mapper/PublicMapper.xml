@@ -4865,6 +4865,9 @@
 	<select id="getHtmlGoodsSMYL" resultType="goodsPublic.entity.HtmlGoodsSMYL">
 		select * from html_goods_smyl where goodsNumber=#{param1} and accountNumber=#{param2}
 	</select>
+	<select id="getHtmlGoodsJYDG" resultType="goodsPublic.entity.HtmlGoodsJYDG">
+		select * from html_goods_jydg where goodsNumber=#{param1} and accountNumber=#{param2}
+	</select>
 	<select id="getHtmlGoodsText" resultType="goodsPublic.entity.HtmlGoodsText">
 		select * from html_goods_text where textType=#{textType} and uuid=#{uuid}
 		<if test="accountNumber!=null">

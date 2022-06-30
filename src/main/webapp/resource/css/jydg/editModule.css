@@ -1,0 +1,289 @@
+@charset "UTF-8";
+body{
+	background-color: #fbfbfb;
+}
+
+.top_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	background-color: #fff;
+}
+.top_div .return_div{
+	float:left;
+	width: 70px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin-top:10px;
+	margin-left:20px;
+	border:1px solid #eee;
+	cursor:pointer;
+	border-radius:3px;
+}
+.top_div .title_div{
+	width:200px;
+	margin:0 auto;
+	font-size:18px;
+	font-weight: bold;
+	text-align: center;
+}
+.top_div .myQrcode_div{
+	float:right;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin-top:-40px;
+	margin-right:20px;
+	border-radius:3px;
+}
+.middle_div{
+	width: 650px;
+	margin: 0 auto;
+	margin-top: 25px;
+	background-color: #fff;
+}
+.productName_input{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	border: 0;
+	color:#fff;
+	background-color: #AD2E1B;
+}
+.embed1_div{
+	width: 650px;
+	text-align: center;
+	background-color: #AD2E1B;
+}
+.embed1_div .option_div,
+.embed2_div .option_div,
+.image1_div .option_div,
+.image2_div .option_div,
+.pdf1_div .option_div{
+	width:650px;
+	position:absolute;
+}
+.embed1_div .but_div,
+.embed2_div .but_div,
+.image1_div .but_div,
+.image2_div .but_div{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin:0 auto;
+	margin-top: 50px;
+	text-align:center;
+	z-index: 1;
+	background-color: #fff;
+	border-radius:5px;
+	display:none;
+}
+.embed1_div .list_div .item_embed,.embed2_div .list_div .item_embed{
+	width: 600px;
+	height: 300px;
+	margin: 5px 0 25px 0;
+}
+.embed1_div .list_div .item_embed{
+	width: 600px;
+	height: 300px;
+	margin-top: 25px;
+}
+
+.jyyybl_div,.memo1_div,.memo2_div{
+	margin-top: 20px;
+	padding: 1px;
+}
+.jyyybl_div .title_div,.memo1_div .title_div,.memo2_div .title_div,.embed2_div .title_div{
+	width: 600px;
+	height: 40px;
+	line-height: 40px;
+	margin: 0 auto;
+}
+.jyyybl_div .title_div .num_div,
+.memo1_div .title_div .num_div,
+.memo2_div .title_div .num_div,
+.embed2_div .title_div .num_div{
+	width:40px;
+	color: #AD2E1B;
+	font-size:20px;
+	text-align: center;
+	border-bottom: #AD2E1B solid 1px;
+}
+.jyyybl_div .title_div .text_div,
+.memo1_div .title_div .text_div,
+.memo2_div .title_div .text_div,
+.embed2_div .title_div .text_div{
+	width:540px;
+	margin-top:-40px;
+	margin-left:60px;
+	color: #AD2E1B;
+	font-size:20px;
+	border-bottom: #AD2E1B solid 1px;
+}
+.jyyybl_div .title_div .text_div .text_span,
+.memo1_div .title_div .text_div .text_span,
+.memo2_div .title_div .text_div .text_span,
+.embed2_div .title_div .text_div .text_span{
+	margin-left:15px;
+}
+.jyyybl_tab{
+	width: 600px;
+	margin: 30px auto 0;
+	border: 0;
+}
+.jyyybl_tab .head_tr{
+	height:60px;
+	font-weight: bold;
+}
+.jyyybl_tab .head_tr .jyyybl_td{
+	padding-left: 20px;
+	background-color: #E7EAEE;
+	border: 0;
+}
+.jyyybl_tab .head_tr .cz_td{
+	text-align: center;
+	background-color: #E7EAEE;
+	border: 0;
+}
+.jyyybl_tab .item_tr .name_td{
+	width:30%;
+	border: #eee solid 1px;
+	padding-left: 20px;
+	background-color: #F0F2F5;
+	border: 0;
+}
+.jyyybl_tab .item_tr .value_td{
+	width:30%;
+	border: #eee solid 1px;
+	padding-left: 20px;
+	background-color: #F0F2F5;
+	border: 0;
+}
+.jyyybl_tab .item_tr .memo_td{
+	width:30%;
+	border: #eee solid 1px;
+	padding-left: 20px;
+	background-color: #F0F2F5;
+	border: 0;
+}
+.jyyybl_tab .item_tr .name_td input,.jyyybl_tab .item_tr .value_td input,.jyyybl_tab .item_tr .memo_td input{
+	background-color: #F0F2F5;
+	border: 0;
+}
+.jyyybl_tab .item_tr .cz_td{
+	width:10%;
+	border: #eee solid 1px;
+	text-align: center;
+	background-color: #F0F2F5;
+	border: 0;
+}
+.jyyybl_tab .item_tr .jyyyblIfShow_inp{
+	cursor: pointer;
+}
+.memo1_div .space_div,.memo2_div .space_div,.image2_div .space_div{
+	width: 100%;
+	height: 30px;
+}
+.memo1_ta,.memo2_ta{
+	width:650px;
+	height:150px;
+	visibility:hidden;
+}
+
+.pdf1_div{
+	width: 650px;
+	margin-top: 25px;
+}
+.pdf1_div .title_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	background-color: #F0F2F5;	
+	border-left: #AD2E1B solid 10px;
+}
+.pdf1_div .title_div .text_span{
+	margin-left:15px;
+	font-size: 20px;
+}
+.pdf1_div .but_div{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin:15px auto 0;
+	text-align:center;
+	z-index: 1;
+	background-color: #fff;
+	border-radius:5px;
+	display:none;
+}
+.pdf1_div .list_div{
+	margin-top: 10px;
+}
+.pdf1Mod_div .pdfList_div .item_pdf,
+.pdf1_div .list_div .item_pdf{
+	width: 100%;
+	height: 150px;
+	margin: 5px 0 25px 0;
+	border: #eee solid 1px;
+	border-radius:15px; 
+}
+.pdf1Mod_div .pdfList_div .item_pdf .file_img,
+.pdf1_div .list_div .item_pdf .file_img{
+	width: 90px;
+	height: 114px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+.pdf1Mod_div .pdfList_div .item_pdf .name_span,
+.pdf1_div .list_div .item_pdf .name_span{
+	margin-top: 35px;
+	margin-left: 20px;
+	font-size: 25px;
+	position: absolute;
+}
+.pdf1Mod_div .pdfList_div .item_pdf .size_span, 
+.pdf1_div .list_div .item_pdf .size_span{
+	margin-top: 90px;
+	margin-left: 20px;
+	color:#9B9B9B;
+	font-size: 18px;
+	position: absolute;
+}
+
+.image1_div,.image2_div{
+	width: 650px;
+	text-align: center;
+}
+.image1_div .list_div .item_img,.image2_div .list_div .item_img{
+	width: 600px;
+	margin-top: 25px;
+}
+.embed2_div{
+	width: 650px;
+	margin-top: 30px;
+}
+.right_div{
+	width: 150px;
+	height: 200px;
+	text-align: center;
+}
+.uncreate_img{
+	width: 120px;
+	height: 120px;
+}
+.createQrcode_div{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin:0 auto;
+	margin-top:15px;
+	color:#fff;
+	background-color:#4caf50;
+	cursor:pointer;
+	border-radius:3px;
+}

@@ -388,6 +388,14 @@ public interface PublicMapper {
 	 */
 	public HtmlGoodsSMYL getHtmlGoodsSMYL(String goodsNumber, String accountNumber);
 
+	/**
+	 * 获得家用蛋糕模版内容
+	 * @param goodsNumber
+	 * @param accountNumber
+	 * @return
+	 */
+	public HtmlGoodsJYDG getHtmlGoodsJYDG(String goodsNumber, String accountNumber);
+
 	public HtmlGoodsText getHtmlGoodsText(@Param("textType") String textType, @Param("uuid") String uuid, @Param("accountNumber") String accountNumber);
 
 	public ScoreQrcode getScoreQrcode(String uuid, String accountId);

@@ -834,6 +834,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public HtmlGoodsJYDG getHtmlGoodsJYDG(String goodsNumber, String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.getHtmlGoodsJYDG(goodsNumber,accountNumber);
+	}
+
+	@Override
 	public HtmlGoodsText getHtmlGoodsText(String textType, String uuid, String accountNumber) {
 		// TODO Auto-generated method stub
 		return publicDao.getHtmlGoodsText(textType, uuid, accountNumber);

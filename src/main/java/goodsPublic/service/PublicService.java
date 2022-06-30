@@ -380,6 +380,14 @@ public interface PublicService {
 	 */
 	public HtmlGoodsSMYL getHtmlGoodsSMYL(String goodsNumber, String accountNumber);
 
+	/**
+	 * 获得家用蛋糕模版内容
+	 * @param goodsNumber
+	 * @param accountNumber
+	 * @return
+	 */
+	public HtmlGoodsJYDG getHtmlGoodsJYDG(String goodsNumber, String accountNumber);
+
 	public HtmlGoodsText getHtmlGoodsText(String textType, String uuid, String accountNumber);
 
 	public ScoreQrcode getScoreQrcode(String uuid, String accountId);

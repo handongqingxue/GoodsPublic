@@ -13,7 +13,7 @@ $(function(){
 		iconCls:"icon-add",
 		onClick:function(){
 			if(checkIfPaid())
-				location.href=path+"merchant/main/goAddModule?trade=smyl";
+				location.href=path+"merchant/main/goAddModule?trade=jydg";
 		}
 	});
 	
@@ -45,7 +45,7 @@ $(function(){
             {field:"gmtCreate",title:"创建时间",width:200},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\"${pageContext.request.contextPath}/merchant/main/goBrowseHtmlGoodsSMYL?goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=smyl&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>"
+            	+"&nbsp;|&nbsp;<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=jydg&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>"
             	+"&nbsp;|&nbsp;<a onclick=\"deleteByIds("+value+")\">删除</a>";
             	return str;
             }}

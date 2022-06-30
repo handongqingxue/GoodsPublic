@@ -2266,12 +2266,22 @@ public class MainController {
 							htmlGoodsJYDG.setImage2_1("/GoodsPublic/upload/image/jydg/20220629103508.png");
 							break;
 						case 10:
-						case 11:
-						case 12:
-						case 13:
-						case 14:
-						case 15:
 							htmlGoodsJYDG.setEmbed1_1("/GoodsPublic/upload/embed/jydg/20220628152315.mp4");
+							break;
+						case 11:
+							htmlGoodsJYDG.setEmbed2_1("/GoodsPublic/upload/embed/jydg/20220628152315.mp4");
+							break;
+						case 12:
+							htmlGoodsJYDG.setEmbed2_2("/GoodsPublic/upload/embed/jydg/20220628152315.mp4");
+							break;
+						case 13:
+							htmlGoodsJYDG.setEmbed2_3("/GoodsPublic/upload/embed/jydg/20220628152315.mp4");
+							break;
+						case 14:
+							htmlGoodsJYDG.setEmbed2_4("/GoodsPublic/upload/embed/jydg/20220628152315.mp4");
+							break;
+						case 15:
+							htmlGoodsJYDG.setEmbed2_5("/GoodsPublic/upload/embed/jydg/20220628152315.mp4");
 							break;
 						case 16:
 							htmlGoodsJYDG.setPdfUrl1_1("/GoodsPublic/upload/pdf/jydg/202206291433.pdf");
@@ -5275,6 +5285,11 @@ public class MainController {
 			HtmlGoodsSMYL htmlGoodsSMYL = publicService.getHtmlGoodsSMYL(goodsNumber,accountNumber);
 			request.setAttribute("htmlGoodsSMYL", htmlGoodsSMYL);
 			url="/merchant/smyl/editModule";
+			break;
+		case "jydg":
+			HtmlGoodsJYDG htmlGoodsJYDG = publicService.getHtmlGoodsJYDG(goodsNumber,accountNumber);
+			request.setAttribute("htmlGoodsJYDG", htmlGoodsJYDG);
+			url="/merchant/jydg/editModule";
 			break;
 		}
 		return url;
