@@ -81,6 +81,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public int addHtmlGoodsJYDG(HtmlGoodsJYDG htmlGoodsJYDG) {
+		// TODO Auto-generated method stub
+		return publicDao.addHtmlGoodsJYDG(htmlGoodsJYDG);
+	}
+
+	@Override
 	public int addScoreQrcode(ScoreQrcode scoreQrcode) {
 		// TODO Auto-generated method stub
 		return publicDao.addScoreQrcode(scoreQrcode);

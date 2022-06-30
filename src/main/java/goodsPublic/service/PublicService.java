@@ -49,6 +49,8 @@ public interface PublicService {
 
 	public int addHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL);
 
+	public int addHtmlGoodsJYDG(HtmlGoodsJYDG htmlGoodsJYDG);
+
 	public int addScoreQrcode(ScoreQrcode scoreQrcode);
 
 	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);

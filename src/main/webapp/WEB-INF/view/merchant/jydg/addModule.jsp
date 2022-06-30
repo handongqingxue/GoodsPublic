@@ -72,6 +72,10 @@ function openEmbed2ModBgDiv(){
 	$("#embed2ModBg_div").css("display","block");
 }
 
+function openPdf1ModBgDiv(){
+	$("#pdf1ModBg_div").css("display","block");
+}
+
 function openImage1ModBgDiv(){
 	$("#image1ModBg_div").css("display","block");
 }
@@ -89,6 +93,12 @@ function deleteEmbed1Div(){
 function deleteEmbed2Div(){
 	$("#embed2_div").remove();
 	$("#uploadFile4_div input[type='file']").remove();
+	resetDivPosition();
+}
+
+function deletePdf1Div(){
+	$("#pdf1_div").remove();
+	$("#uploadFile5_div input[type='file']").remove();
 	resetDivPosition();
 }
 
@@ -113,6 +123,10 @@ function renameFile(){
 		$(this).attr("name","file2_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
+	$("#uploadFile5_div input[type='file']").each(function(i){
+		$(this).attr("name","file5_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
 }
 
 function closeEmbed1ModBgDiv(){
@@ -121,6 +135,10 @@ function closeEmbed1ModBgDiv(){
 
 function closeEmbed2ModBgDiv(){
 	$("#embed2ModBg_div").css("display","none");
+}
+
+function closePdf1ModBgDiv(){
+	$("#pdf1ModBg_div").css("display","none");
 }
 
 function closeImage1ModBgDiv(){
@@ -156,6 +174,13 @@ function uploadEmbed2(){
 	document.getElementById("uploadFile4_inp").click();
 }
 
+function uploadPdf1(){
+	var uuid=createUUID();
+	$("#uuid_hid1").val(uuid);
+	$("#uploadFile5_div").html("<input type=\"file\" id=\"uploadFile5_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePdf1(this)\"/>");
+	document.getElementById("uploadFile5_inp").click();
+}
+
 function uploadImage1(){
 	if($("#image1Mod_div table td[class='file_td']").length>=5){
 		alert("最多上传5张图片!");
@@ -176,6 +201,26 @@ function uploadImage2(){
 	$("#uuid_hid2").val(uuid);
 	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
 	document.getElementById("uploadFile2_inp").click();
+}
+
+function deletePdf1(o){
+	var td=$(o).parent();
+	var uuid=td.attr("id").substring(7);
+	$("#pdf1_div #list_div div[id='pdf"+uuid+"']").remove();
+	td.remove();
+	$("#uploadFile5_div input[type='file'][name='file"+uuid+"']").remove();
+	
+	var pdfTab=$("#pdf1Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
+	resetDivPosition();
 }
 
 function deleteImage1(o){
@@ -538,6 +583,33 @@ function checkIfPaid(){
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeEmbed2ModBgDiv();">确&nbsp;认</div>
 			<div class="cancel_div" onclick="closeEmbed2ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
+		</div>
+	</div>
+</div>
+
+<div class="pdf1ModBg_div" id="pdf1ModBg_div">
+	<div class="pdf1Mod_div" id="pdf1Mod_div">
+		<div class="title_div">
+			<span class="title_span">pdf模块</span>
+			<span class="close_span" onclick="closePdf1ModBgDiv();">关闭</span>
+		</div>
+		<div>
+			<div class="pdfList_div" id="pdfList_div">
+				<div class="item_pdf" id="pdf1_1">
+					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
+					<span class="name_span">D2105 免SP蒸蛋糕(电饭煲版).pdf</span>
+					<span class="size_span">186.00kb</span>
+				</div>
+			</div>
+			<div class="upload_div" onclick="uploadPdf1();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">上传</div>
+			<div class="uploadFile5_div" id="uploadFile5_div">
+				<input type="file" id="file5_1" name="file" onchange="showQrcodePdf1(this)" />
+			</div>
+			<input type="hidden" id="uuid_hid1"/>
+		</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closePdf1ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closePdf1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>

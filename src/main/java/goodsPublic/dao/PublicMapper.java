@@ -43,6 +43,8 @@ public interface PublicMapper {
 
 	public int addHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL);
 
+	public int addHtmlGoodsJYDG(HtmlGoodsJYDG htmlGoodsJYDG);
+
 	public int addScoreQrcode(ScoreQrcode scoreQrcode);
 
 	public int addScoreQrcodeHistory(ScoreQrcodeHistory sqh);

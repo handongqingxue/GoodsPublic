@@ -3,7 +3,8 @@ body{
 	background-color: #fbfbfb;
 }
 .embed1ModBg_div,
-.embed2ModBg_div{
+.embed2ModBg_div,
+.pdf1ModBg_div{
 	width:100%;
 	height:100%;
 	position: fixed;
@@ -12,31 +13,36 @@ body{
 	z-index: 1;
 }
 .embed1Mod_div,
-.embed2Mod_div{
+.embed2Mod_div,
+.pdf1Mod_div{
 	width: 600px;
 	margin: 0 auto;
 	margin-top: 100px;
 	background-color: #fff;
 }
 .embed1Mod_div .title_div,
-.embed2Mod_div .title_div{
+.embed2Mod_div .title_div,
+.pdf1Mod_div .title_div{
 	width: 100%;
 	height: 50px;
 	line-height: 50px;
 	border-bottom: #999 solid 1px;
 }
 .embed1Mod_div .title_span,
-.embed2Mod_div .title_span{
+.embed2Mod_div .title_span,
+.pdf1Mod_div .title_span{
 	margin-left: 20px;
 }
 .embed1Mod_div .close_span,
-.embed2Mod_div .close_span{
+.embed2Mod_div .close_span,
+.pdf1Mod_div .close_span{
 	float: right;
 	margin-right: 20px;
 	cursor: pointer;
 }
 .embed1Mod_div .embedShow_div,
-.embed2Mod_div .embedShow_div{
+.embed2Mod_div .embedShow_div,
+.pdf1Mod_div .pdfList_div{
 	width: 550px;
 	margin:0 auto;
 	margin-top: 20px;
@@ -48,7 +54,8 @@ body{
 	height: 300px;
 }
 .embed1Mod_div .reupload_div,
-.embed2Mod_div .reupload_div{
+.embed2Mod_div .reupload_div,
+.pdf1Mod_div .upload_div{
 	width:100px;
 	height:33px;
 	line-height:33px;
@@ -61,11 +68,13 @@ body{
 	cursor: pointer;
 }
 .embed1Mod_div .uploadFile3_div,
-.embed2Mod_div .uploadFile4_div{
+.embed2Mod_div .uploadFile4_div,
+.pdf1Mod_div .uploadFile5_div{
 	display: none;
 }
 .embed1Mod_div .but_div,
-.embed2Mod_div .but_div{
+.embed2Mod_div .but_div,
+.pdf1Mod_div .but_div{
 	width: 100%;
 	height: 50px;
 	line-height: 50px;
@@ -73,7 +82,8 @@ body{
 	border-top: #999 solid 1px;
 }
 .embed1Mod_div .confirm_div,
-.embed2Mod_div .confirm_div{
+.embed2Mod_div .confirm_div,
+.pdf1Mod_div .confirm_div{
 	width:80px;
 	height:35px;
 	line-height:35px;
@@ -87,7 +97,8 @@ body{
 	cursor: pointer;
 }
 .embed1Mod_div .cancel_div,
-.embed2Mod_div .cancel_div{
+.embed2Mod_div .cancel_div,
+.pdf1Mod_div .cancel_div{
 	width:80px;
 	height:33px;
 	line-height:33px;
@@ -269,8 +280,7 @@ body{
 .embed1_div .but_div,
 .embed2_div .but_div,
 .image1_div .but_div,
-.image2_div .but_div,
-.pdf1_div .but_div{
+.image2_div .but_div{
 	width:100px;
 	height:30px;
 	line-height:30px;
@@ -403,9 +413,21 @@ body{
 	margin-left:15px;
 	font-size: 20px;
 }
+.pdf1_div .but_div{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin:15px auto 0;
+	text-align:center;
+	z-index: 1;
+	background-color: #fff;
+	border-radius:5px;
+	display:none;
+}
 .pdf1_div .list_div{
 	margin-top: 10px;
 }
+.pdf1Mod_div .pdfList_div .item_pdf,
 .pdf1_div .list_div .item_pdf{
 	width: 100%;
 	height: 150px;
@@ -413,18 +435,21 @@ body{
 	border: #eee solid 1px;
 	border-radius:15px; 
 }
+.pdf1Mod_div .pdfList_div .item_pdf .file_img,
 .pdf1_div .list_div .item_pdf .file_img{
 	width: 90px;
 	height: 114px;
 	margin-top: 20px;
 	margin-left: 20px;
 }
+.pdf1Mod_div .pdfList_div .item_pdf .name_span,
 .pdf1_div .list_div .item_pdf .name_span{
 	margin-top: 35px;
 	margin-left: 20px;
 	font-size: 25px;
 	position: absolute;
 }
+.pdf1Mod_div .pdfList_div .item_pdf .size_span, 
 .pdf1_div .list_div .item_pdf .size_span{
 	margin-top: 90px;
 	margin-left: 20px;
