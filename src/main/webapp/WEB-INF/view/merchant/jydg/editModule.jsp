@@ -50,9 +50,103 @@ $(function(){
 	initDefaultHtmlVal();
 });
 
+var dpn;
+var disArr1=[];
+var disArr2=[];
+var dm1Html,dm2Html;
+function initDefaultHtmlVal(){
+	dpn=$("#middle_div #title").val();
+	for(var i=0;i<5;i++){
+		disArr1[i]="";
+		disArr1[i]=$("#image1_div #list_div img[id^='img']").eq(i).attr("src");
+	}
+	for(var i=0;i<5;i++){
+		disArr2[i]="";
+		disArr2[i]=$("#image2_div #list_div img[id^='img']").eq(i).attr("src");
+	}
+	setTimeout(function(){
+		dm1Html=editor1.html();
+		dm2Html=editor2.html();
+	},"1000");
+}
+
 function resetDivPosition(){
 	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
 	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight))+"px");
+}
+
+function deleteEmbed1Div(){
+	$("#embed1_div").remove();
+	$("#uploadFile3_div input[type='file']").remove();
+	$("#uploadFile3_div input[type='text']").remove();
+	resetDivPosition();
+}
+
+function deleteEmbed2Div(){
+	$("#embed1_div").remove();
+	$("#uploadFile4_div input[type='file']").remove();
+	$("#uploadFile4_div input[type='text']").remove();
+	resetDivPosition();
+}
+
+function deletePdf1Div(){
+	$("#pdf1_div").remove();
+	$("#uploadFile5_div input[type='file']").remove();
+	$("#uploadFile5_div input[type='text']").remove();
+	resetDivPosition();
+}
+
+function deleteImage1Div(){
+	$("#image1_div").remove();
+	$("#uploadFile1_div input[type='file']").remove();
+	$("#uploadFile1_div input[type='text']").remove();
+	resetDivPosition();
+}
+
+function deleteImage2Div(){
+	$("#image2_div").remove();
+	$("#uploadFile2_div input[type='file']").remove();
+	$("#uploadFile2_div input[type='text']").remove();
+	resetDivPosition();
+}
+
+function resetEditorHtml(){
+	$("#memo1").val(editor1.html());
+	$("#memo2").val(editor2.html());
+}
+
+function renameFile(){
+	$("#uploadFile1_div input[type='file']").each(function(i){
+		$(this).attr("name","file1_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+	$("#uploadFile2_div input[type='file']").each(function(i){
+		$(this).attr("name","file2_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+	$("#uploadFile3_div input[type='file']").each(function(i){
+		$(this).attr("name","file2_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+	$("#uploadFile4_div input[type='file']").each(function(i){
+		$(this).attr("name","file2_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+	$("#uploadFile5_div input[type='file']").each(function(i){
+		$(this).attr("name","file2_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+}
+
+function renameImage(){
+	$("#uploadFile1_div input[type='text']").each(function(i){
+		$(this).attr("name","image1_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+	$("#uploadFile2_div input[type='text']").each(function(i){
+		$(this).attr("name","image2_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
 }
 
 function showOptionDiv(o){
@@ -63,12 +157,254 @@ function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
 }
 
+function previewHtmlGoodsJYDG(){
+	if(!compareHtmlVal()){//这是已经编辑过内容的情况
+		saveEdithtmlGoodsDMTZL();
+		
+		var goodsNumber='${requestScope.htmlGoodsDMTZL.goodsNumber }';
+		var accountId='${sessionScope.user.id }';
+		$.post("getPreviewHtmlGoods",
+			{trade:"dmtzl",goodsNumber:goodsNumber,accountId:accountId},
+			function(data){
+				console.log("==="+JSON.stringify(data));
+				var previewDMTZL=data.previewDMTZL;
+				$("#preview_div #title_div").text(previewDMTZL.title);
+				
+				$("#preview_div #memo1_div").html(previewDMTZL.memo1);
+				
+				$("#preview_div #memo2_div").html(previewDMTZL.memo2);
+				
+				var image1_1=previewDMTZL.image1_1;
+				if(image1_1==null){
+					$("#preview_div #image1_1_img").css("display","none");
+					$("#preview_div #image1_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_1_img").css("display","block");
+					$("#preview_div #image1_1_img").attr("src",image1_1);
+				}
+				
+				var image1_2=previewDMTZL.image1_2;
+				if(image1_2==null){
+					$("#preview_div #image1_2_img").css("display","none");
+					$("#preview_div #image1_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_2_img").css("display","block");
+					$("#preview_div #image1_2_img").attr("src",image1_2);
+				}
+				
+				var image1_3=previewDMTZL.image1_3;
+				if(image1_3==null){
+					$("#preview_div #image1_3_img").css("display","none");
+					$("#preview_div #image1_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_3_img").css("display","block");
+					$("#preview_div #image1_3_img").attr("src",image1_3);
+				}
+				
+				var image1_4=previewDMTZL.image1_4;
+				if(image1_4==null){
+					$("#preview_div #image1_4_img").css("display","none");
+					$("#preview_div #image1_4_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_4_img").css("display","block");
+					$("#preview_div #image1_4_img").attr("src",image1_4);
+				}
+				
+				var image1_5=previewDMTZL.image1_5;
+				if(image1_5==null){
+					$("#preview_div #image1_5_img").css("display","none");
+					$("#preview_div #image1_5_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_5_img").css("display","block");
+					$("#preview_div #image1_5_img").attr("src",image1_5);
+				}
+				
+				initDefaultHtmlVal();
+			}
+		,"json");
+	}
+	else{
+		$("#preview_div #title_div").text(dpn);
+		
+		var image1_1_src=disArr1[0];
+		if(image1_1_src==undefined||image1_1_src==""){
+			$("#preview_div #image1_div #image1_1_img").css("display","none");
+			$("#preview_div #image1_div #image1_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_1_img").css("display","block");
+			$("#preview_div #image1_div #image1_1_img").attr("src",image1_1_src);
+		}
+		
+		var image1_2_src=disArr1[1];
+		if(image1_2_src==undefined||image1_2_src==""){
+			$("#preview_div #image1_div #image1_2_img").css("display","none");
+			$("#preview_div #image1_div #image1_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_2_img").css("display","block");
+			$("#preview_div #image1_div #image1_2_img").attr("src",image1_2_src);
+		}
+		
+		var image1_3_src=disArr1[2];
+		if(image1_3_src==undefined||image1_3_src==""){
+			$("#preview_div #image1_div #image1_3_img").css("display","none");
+			$("#preview_div #image1_div #image1_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_3_img").css("display","block");
+			$("#preview_div #image1_div #image1_3_img").attr("src",image1_3_src);
+		}
+		
+		var image1_4_src=disArr1[3];
+		if(image1_4_src==undefined||image1_4_src==""){
+			$("#preview_div #image1_div #image1_4_img").css("display","none");
+			$("#preview_div #image1_div #image1_4_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_4_img").css("display","block");
+			$("#preview_div #image1_div #image1_4_img").attr("src",image1_4_src);
+		}
+		
+		var image1_5_src=disArr1[4];
+		if(image1_5_src==undefined||image1_5_src==""){
+			$("#preview_div #image1_div #image1_5_img").css("display","none");
+			$("#preview_div #image1_div #image1_5_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_5_img").css("display","block");
+			$("#preview_div #image1_div #image1_5_img").attr("src",image1_5_src);
+		}
+	}
+	openPreviewBgDiv(1);
+}
+
+function compareHtmlVal(){
+	var flag=true;
+	var cpn=$("#middle_div #title").val();
+	if(dpn!=cpn){
+		flag=false;
+		return flag;
+	}
+	
+	var cm1Html=editor1.html();
+	if(dm1Html!=cm1Html){
+		flag=false;
+		return flag;
+	}
+
+	var cm2Html=editor2.html();
+	if(dm2Html!=cm2Html){
+		flag=false;
+		return flag;
+	}
+	
+	var cisArr1=[];
+	$("#uploadFile1_div input[id^='image']").each(function(i){
+		var imgSrc=$(this).val();
+		if(disArr1[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+	
+	return flag;
+}
+
+function saveEdithtmlGoodsJYDG(){
+	if(checkIfPaid()){
+		resetEditorHtml();
+		renameFile();
+		renameImage();
+		
+		var formData = new FormData($("#form1")[0]);
+		 
+		$.ajax({
+			type:"post",
+			url:"saveEditHtmlGoodsDMTZL",
+			dataType: "json",
+			data:formData,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function (data){
+				if(data.status==1){
+					$("#saveStatus_div").css("display","block");
+					setTimeout("hideSaveStatusDiv()",3000);
+				}
+				else{
+					$("#saveStatus_div").css("display","none");
+				}
+				$("#saveStatus_div").text(data.msg);
+			}
+		});
+	}
+}
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
+}
+
+function hideSaveStatusDiv(){
+	$("#saveStatus_div").text("");
+	$("#saveStatus_div").css("display","none");
+}
+
+function finishEdithtmlGoodsDMTZL(){
+	renameFile();
+	renameImage();
+	document.getElementById("sub_but").click();
+}
+
+function openEmbed1ModBgDiv(){
+	$("#embed1ModBg_div").css("display","block");
+}
+
+function openEmbed2ModBgDiv(){
+	$("#embed2ModBg_div").css("display","block");
+}
+
+function openPdf1ModBgDiv(){
+	$("#pdf1ModBg_div").css("display","block");
+}
+
 function openImage1ModBgDiv(){
 	$("#image1ModBg_div").css("display","block");
 }
 
 function openImage2ModBgDiv(){
 	$("#image2ModBg_div").css("display","block");
+}
+
+function closeEmbed1ModBgDiv(){
+	$("#embed1ModBg_div").css("display","none");
+}
+
+function closeEmbed2ModBgDiv(){
+	$("#embed2ModBg_div").css("display","none");
+}
+
+function closePdf1ModBgDiv(){
+	$("#pdf1ModBg_div").css("display","none");
 }
 
 function closeImage1ModBgDiv(){
@@ -90,12 +426,41 @@ function changeButStyle(o,flag){
 	}
 }
 
+function uploadEmbed1(){
+	var uuid=createUUID();
+	$("#uuid_hid3").val(uuid);
+	$("#uploadFile3_div").html("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>");
+	document.getElementById("uploadFile3_inp").click();
+}
+
+function uploadEmbed2(){
+	var uuid=createUUID();
+	$("#uuid_hid4").val(uuid);
+	$("#uploadFile4_div").html("<input type=\"file\" id=\"uploadFile4_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed2(this)\"/>");
+	document.getElementById("uploadFile4_inp").click();
+}
+
+function uploadPdf1(){
+	var uuid=createUUID();
+	$("#uuid_hid5").val(uuid);
+	$("#uploadFile5_div").html("<input type=\"file\" id=\"uploadFile5_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePdf1(this)\"/>");
+	document.getElementById("uploadFile5_inp").click();
+}
+
 function uploadImage1(){
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
 	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
 	$("#uploadFile1_div").append("<input type=\"text\" id=\"image"+uuid+"\" name=\"image"+uuid+"\" />");
 	document.getElementById("uploadFile1_inp").click();
+}
+
+function uploadImage2(){
+	var uuid=createUUID();
+	$("#uuid_hid2").val(uuid);
+	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
+	$("#uploadFile2_div").append("<input type=\"text\" id=\"image"+uuid+"\" name=\"image"+uuid+"\" />");
+	document.getElementById("uploadFile2_inp").click();
 }
 
 function deleteImage1(o){
@@ -117,6 +482,111 @@ function deleteImage1(o){
 	}
 	
 	resetDivPosition();
+}
+
+function deleteImage2(o){
+	var td=$(o).parent();
+	var uuid=td.attr("id").substring(7);
+	$("#image2_div #list_div img[id='img"+uuid+"']").remove();
+	td.remove();
+	$("#uploadFile2_div input[type='file'][name='file"+uuid+"']").remove();
+	$("#uploadFile2_div input[type='text'][name='image"+uuid+"']").remove();
+
+	var imageTab=$("#image2Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
+	resetDivPosition();
+}
+
+function showQrcodeEmbed1(obj){
+	var uuid=$("#uuid_hid3").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+	
+	var embedListDiv=$("#embed1Mod_div #embedList_div");
+	var embedTag;
+	if (!!window.ActiveXObject || "ActiveXObject" in window)
+		embedTag="embed";
+	else
+		embedTag="iframe";
+	embedListDiv.html("<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\">"
+			+fileHtml);
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $embed = $("#embed"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $embed.attr("src", dataURL);
+        
+        $("#embed1_div #embed1_1").replaceWith("<"+embedTag+" class=\"item_embed\" id=\"embed1_1\" src=\""+dataURL+"\"/>");
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function showQrcodeEmbed2(obj){
+	var uuid=$("#uuid_hid4").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+	
+	var embedListDiv=$("#embed2Mod_div #embedList_div");
+	var embedTag;
+	if (!!window.ActiveXObject || "ActiveXObject" in window)
+		embedTag="embed";
+	else
+		embedTag="iframe";
+	embedListDiv.html("<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\">"
+			+fileHtml);
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $embed = $("#embed"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $embed.attr("src", dataURL);
+        
+        $("#embed2_div #embed2_1").replaceWith("<"+embedTag+" class=\"item_embed\" id=\"embed2_1\" src=\""+dataURL+"\"/>");
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
 }
 
 function showQrcodePic1(obj){
@@ -158,6 +628,63 @@ function showQrcodePic1(obj){
         $img.attr("src", dataURL);
 
         var listDiv=$("#image1_div #list_div");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function showQrcodePic2(obj){
+	var uuid=$("#uuid_hid2").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage2(this);\">"
+				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
+				+fileHtml
+			+"</td>";
+	
+	var imageTab=$("#image2Mod_div table");
+	//var length=imageTab.find("td[id^='file_td']").length;
+    var tdLength=imageTab.find("td").length;
+    if(tdLength%4==0){
+    	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
+    	tr.append(tdHtml)
+    	imageTab.append("<tr>"+$("#image2Mod_div table #upload_td").prop("outerHTML")+"</tr>");
+    	tr.find("td[id^='upload_td']").remove();
+    }
+    else{
+		imageTab.find("#upload_td").before(tdHtml);
+    }
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#image2Mod_div table #img"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+
+        var listDiv=$("#image2_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
 
         //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
@@ -219,6 +746,98 @@ function goBack(){
 </head>
 <body>
 <form id="form1" name="form1" method="post" action="finishEditHtmlGoodsJYDG" onsubmit="return checkIfPaid();" enctype="multipart/form-data">
+<div class="embed1ModBg_div" id="embed1ModBg_div">
+	<div class="embed1Mod_div" id="embed1Mod_div">
+		<div class="title_div">
+			<span class="title_span">视频模块</span>
+			<span class="close_span" onclick="closeEmbed1ModBgDiv();">关闭</span>
+		</div>
+		<div>
+			<div class="embedList_div" id="embedList_div">
+				<embed class="item_embed" id="embed1_1" alt="" src="${requestScope.htmlGoodsJYDG.embed1_1 }">
+			</div>
+			<div class="reupload_div" onclick="uploadEmbed1();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">重新上传</div>
+			<div class="uploadFile3_div" id="uploadFile3_div">
+				<c:if test="${requestScope.htmlGoodsJYDG.embed1_1 ne null }">
+				<input type="file" id="file3_1" name="file3_1" onchange="showQrcodeEmbed1(this)" />
+				<input type="text" id="embed1_1" name="embed1_1" value="${requestScope.htmlGoodsJYDG.embed1_1 }" />
+				</c:if>
+			</div>
+			<input type="hidden" id="uuid_hid3"/>
+		</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeEmbed1ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeEmbed1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
+		</div>
+	</div>
+</div>
+
+<div class="embed2ModBg_div" id="embed2ModBg_div">
+	<div class="embed2Mod_div" id="embed2Mod_div">
+		<div class="title_div">
+			<span class="title_span">视频模块</span>
+			<span class="close_span" onclick="closeEmbed2ModBgDiv();">关闭</span>
+		</div>
+		<div>
+			<div class="embedList_div" id="embedList_div">
+				<embed class="item_embed" id="embed2_1" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }">
+			</div>
+			<div class="reupload_div" onclick="uploadEmbed2();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">重新上传</div>
+			<div class="uploadFile4_div" id="uploadFile4_div">
+				<c:if test="${requestScope.htmlGoodsJYDG.embed1_1 ne null }">
+				<input type="file" id="file4_1" name="file4_1" onchange="showQrcodeEmbed2(this)" />
+				<input type="text" id="embed2_1" name="embed2_1" value="${requestScope.htmlGoodsJYDG.embed2_1 }" />
+				</c:if>
+			</div>
+			<input type="hidden" id="uuid_hid4"/>
+		</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeEmbed2ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeEmbed2ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
+		</div>
+	</div>
+</div>
+
+<div class="pdf1ModBg_div" id="pdf1ModBg_div">
+	<div class="pdf1Mod_div" id="pdf1Mod_div">
+		<div class="title_div">
+			<span class="title_span">pdf模块</span>
+			<span class="close_span" onclick="closePdf1ModBgDiv();">关闭</span>
+		</div>
+		<div>
+			<div class="pdfList_div" id="pdfList_div">
+				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_1 ne null }">
+				<div class="item_pdf" id="pdf1_1">
+					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
+					<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_1 }.pdf</span>
+					<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_1 }kb</span>
+				</div>
+				</c:if>
+			</div>
+			<div class="upload_div" onclick="uploadPdf1();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">上传</div>
+			<div class="uploadFile5_div" id="uploadFile5_div">
+				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_1 ne null }">
+				<input type="file" id="file5_1" name="file5_1" onchange="showQrcodePdf1(this)" />
+				<input type="text" id="pdf1_1" name="pdf1_1" value="${requestScope.htmlGoodsJYDG.pdfUrl1_1 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_2 ne null }">
+				<input type="file" id="file5_2" name="file5_2" onchange="showQrcodePdf1(this)" />
+				<input type="text" id="pdf1_2" name="pdf1_2" value="${requestScope.htmlGoodsJYDG.pdfUrl1_2 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_3 ne null }">
+				<input type="file" id="file5_3" name="file5_3" onchange="showQrcodePdf1(this)" />
+				<input type="text" id="pdf1_3" name="pdf1_3" value="${requestScope.htmlGoodsJYDG.pdfUrl1_3 }" />
+				</c:if>
+			</div>
+			<input type="hidden" id="uuid_hid5"/>
+		</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closePdf1ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closePdf1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
+		</div>
+	</div>
+</div>
+
 <div class="image1ModBg_div" id="image1ModBg_div">
 	<div class="image1Mod_div" id="image1Mod_div">
 		<div class="title_div">
@@ -388,6 +1007,19 @@ function goBack(){
 			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
 			<div class="cancel_div" onclick="closeImage2ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
+	</div>
+</div>
+
+<div class="previewBg_div" id="previewBg_div">
+	<div class="preview_div" id="preview_div">
+		<div class="title_div" id="title_div"></div>
+	</div>
+	<div class="smck_div" id="smck_div">
+		<div class="tiShi_div">手机端实际效果可能存在差异，请扫码查看</div>
+		<div class="qrCode_div">
+			<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsDMTZL.qrCode }">
+		</div>
+		<div class="jxbjBut_div" onclick="openPreviewBgDiv(0)">继续编辑</div>
 	</div>
 </div>
 
@@ -705,7 +1337,7 @@ function goBack(){
 </div>
 <div class="right_div" id="right_div">
 	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsJYDG.qrCode }">
-	<div class="preview_div" onclick="previewHtmlGoodsSMYL();">预览</div>
+	<div class="preview_div" onclick="previewHtmlGoodsJYDG();">预览</div>
 	<div class="save_div" onclick="saveEditHtmlGoodsSMYL();">保存</div>
 	<div class="finishEdit_div" onclick="finishEditHtmlGoodsSMYL();">完成编辑</div>
 	<div class="saveStatus_div" id="saveStatus_div"></div>
