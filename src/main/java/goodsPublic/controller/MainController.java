@@ -3911,6 +3911,10 @@ public class MainController {
 			HtmlGoodsSMYL htmlGoodsSMYL = publicService.getHtmlGoodsSMYL(goodsNumber, accountId);
 			jsonMap.put("previewSMYL", htmlGoodsSMYL);
 			break;
+		case "jydg":
+			HtmlGoodsJYDG htmlGoodsJYDG = publicService.getHtmlGoodsJYDG(goodsNumber, accountId);
+			jsonMap.put("previewJYDG", htmlGoodsJYDG);
+			break;
 		}
 		return jsonMap;
 	}

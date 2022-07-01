@@ -55,7 +55,7 @@ var disArr1=[];
 var disArr2=[];
 var dm1Html,dm2Html;
 function initDefaultHtmlVal(){
-	dpn=$("#middle_div #title").val();
+	dpn=$("#middle_div #productName").val();
 	for(var i=0;i<5;i++){
 		disArr1[i]="";
 		disArr1[i]=$("#image1_div #list_div img[id^='img']").eq(i).attr("src");
@@ -159,22 +159,22 @@ function hideOptionDiv(o){
 
 function previewHtmlGoodsJYDG(){
 	if(!compareHtmlVal()){//这是已经编辑过内容的情况
-		saveEdithtmlGoodsDMTZL();
+		saveEdithtmlGoodsJYDG();
 		
-		var goodsNumber='${requestScope.htmlGoodsDMTZL.goodsNumber }';
+		var goodsNumber='${requestScope.htmlGoodsJYDG.goodsNumber }';
 		var accountId='${sessionScope.user.id }';
 		$.post("getPreviewHtmlGoods",
-			{trade:"dmtzl",goodsNumber:goodsNumber,accountId:accountId},
+			{trade:"jydg",goodsNumber:goodsNumber,accountId:accountId},
 			function(data){
 				console.log("==="+JSON.stringify(data));
-				var previewDMTZL=data.previewDMTZL;
-				$("#preview_div #title_div").text(previewDMTZL.title);
+				var previewJYDG=data.previewJYDG;
+				$("#preview_div #title_div").text(previewJYDG.title);
 				
-				$("#preview_div #memo1_div").html(previewDMTZL.memo1);
+				$("#preview_div #memo1_div").html(previewJYDG.memo1);
 				
-				$("#preview_div #memo2_div").html(previewDMTZL.memo2);
+				$("#preview_div #memo2_div").html(previewJYDG.memo2);
 				
-				var image1_1=previewDMTZL.image1_1;
+				var image1_1=previewJYDG.image1_1;
 				if(image1_1==null){
 					$("#preview_div #image1_1_img").css("display","none");
 					$("#preview_div #image1_1_img").attr("src","");
@@ -184,7 +184,7 @@ function previewHtmlGoodsJYDG(){
 					$("#preview_div #image1_1_img").attr("src",image1_1);
 				}
 				
-				var image1_2=previewDMTZL.image1_2;
+				var image1_2=previewJYDG.image1_2;
 				if(image1_2==null){
 					$("#preview_div #image1_2_img").css("display","none");
 					$("#preview_div #image1_2_img").attr("src","");
@@ -194,7 +194,7 @@ function previewHtmlGoodsJYDG(){
 					$("#preview_div #image1_2_img").attr("src",image1_2);
 				}
 				
-				var image1_3=previewDMTZL.image1_3;
+				var image1_3=previewJYDG.image1_3;
 				if(image1_3==null){
 					$("#preview_div #image1_3_img").css("display","none");
 					$("#preview_div #image1_3_img").attr("src","");
@@ -204,7 +204,7 @@ function previewHtmlGoodsJYDG(){
 					$("#preview_div #image1_3_img").attr("src",image1_3);
 				}
 				
-				var image1_4=previewDMTZL.image1_4;
+				var image1_4=previewJYDG.image1_4;
 				if(image1_4==null){
 					$("#preview_div #image1_4_img").css("display","none");
 					$("#preview_div #image1_4_img").attr("src","");
@@ -214,7 +214,7 @@ function previewHtmlGoodsJYDG(){
 					$("#preview_div #image1_4_img").attr("src",image1_4);
 				}
 				
-				var image1_5=previewDMTZL.image1_5;
+				var image1_5=previewJYDG.image1_5;
 				if(image1_5==null){
 					$("#preview_div #image1_5_img").css("display","none");
 					$("#preview_div #image1_5_img").attr("src","");
@@ -229,7 +229,7 @@ function previewHtmlGoodsJYDG(){
 		,"json");
 	}
 	else{
-		$("#preview_div #title_div").text(dpn);
+		$("#preview_div #productName_div").text(dpn);
 		
 		var image1_1_src=disArr1[0];
 		if(image1_1_src==undefined||image1_1_src==""){
@@ -286,7 +286,7 @@ function previewHtmlGoodsJYDG(){
 
 function compareHtmlVal(){
 	var flag=true;
-	var cpn=$("#middle_div #title").val();
+	var cpn=$("#middle_div #productName").val();
 	if(dpn!=cpn){
 		flag=false;
 		return flag;
@@ -326,7 +326,7 @@ function saveEdithtmlGoodsJYDG(){
 		 
 		$.ajax({
 			type:"post",
-			url:"saveEditHtmlGoodsDMTZL",
+			url:"saveEditHtmlGoodsJYDG",
 			dataType: "json",
 			data:formData,
 			cache: false,
@@ -1012,12 +1012,231 @@ function goBack(){
 
 <div class="previewBg_div" id="previewBg_div">
 	<div class="preview_div" id="preview_div">
-		<div class="title_div" id="title_div"></div>
+		<div class="productName_div" id="productName_div"></div>
+		<div class="embed1_div" id="embed1_div">
+			<embed class="embed1_1_embed" id="embed1_1_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed1_1 }"/>
+		</div>
+		<div class="jyyybl_div" id="jyyybl_div">
+			<div class="title_div">
+				<div class="num_div">01</div>
+				<div class="text_div">
+					<span class="text_span">建议应用比例</span>
+				</div>
+			</div>
+			<table class="jyyybl_tab" id="jyyybl_tab">
+				<tr class="head_tr">
+					<td class="jyyybl_td">原料</td>
+					<td class="jyyybl_td">用量(g)</td>
+					<td class="jyyybl_td">备注</td>
+				</tr>
+				<c:if test="${requestScope.htmlGoodsJYDG.jyyyblIfShow1 }">
+				<tr class="item_tr" id="tr1" height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJYDG.jyyyblName1 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJYDG.jyyyblValue1 }
+					</td>
+					<td class="memo_td">
+						${requestScope.htmlGoodsJYDG.jyyyblMemo1 }
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.jyyyblIfShow2 }">
+				<tr class="item_tr" id="tr2" height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJYDG.jyyyblName2 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJYDG.jyyyblValue2 }
+					</td>
+					<td class="memo_td">
+						${requestScope.htmlGoodsJYDG.jyyyblMemo2 }
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.jyyyblIfShow3 }">
+				<tr class="item_tr" id="tr3" height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJYDG.jyyyblName3 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJYDG.jyyyblValue3 }
+					</td>
+					<td class="memo_td">
+						${requestScope.htmlGoodsJYDG.jyyyblMemo3 }
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.jyyyblIfShow4 }">
+				<tr class="item_tr" id="tr4" height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJYDG.jyyyblName4 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJYDG.jyyyblValue4 }
+					</td>
+					<td class="memo_td">
+						${requestScope.htmlGoodsJYDG.jyyyblMemo4 }
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.jyyyblIfShow5 }">
+				<tr class="item_tr" id="tr5" height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJYDG.jyyyblName5 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJYDG.jyyyblValue5 }
+					</td>
+					<td class="memo_td">
+						${requestScope.htmlGoodsJYDG.jyyyblMemo5 }
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.jyyyblIfShow6 }">
+				<tr class="item_tr" id="tr6" height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJYDG.jyyyblName6 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJYDG.jyyyblValue6 }
+					</td>
+					<td class="memo_td">
+						${requestScope.htmlGoodsJYDG.jyyyblMemo6 }
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.jyyyblIfShow7 }">
+				<tr class="item_tr" id="tr7" height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJYDG.jyyyblName7 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJYDG.jyyyblValue7 }
+					</td>
+					<td class="memo_td">
+						${requestScope.htmlGoodsJYDG.jyyyblMemo7 }
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.jyyyblIfShow8 }">
+				<tr class="item_tr" id="tr8" height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJYDG.jyyyblName8 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJYDG.jyyyblValue8 }
+					</td>
+					<td class="memo_td">
+						${requestScope.htmlGoodsJYDG.jyyyblMemo8 }
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.jyyyblIfShow9 }">
+				<tr class="item_tr" id="tr9" height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJYDG.jyyyblName9 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJYDG.jyyyblValue9 }
+					</td>
+					<td class="memo_td">
+						${requestScope.htmlGoodsJYDG.jyyyblMemo9 }
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.jyyyblIfShow10 }">
+				<tr class="item_tr" id="tr10" height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJYDG.jyyyblName10 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJYDG.jyyyblValue10 }
+					</td>
+					<td class="memo_td">
+						${requestScope.htmlGoodsJYDG.jyyyblMemo10 }
+					</td>
+				</tr>
+				</c:if>
+			</table>
+		</div>
+		<div class="memo1_div">
+			<div class="title_div">
+				<div class="num_div">02</div>
+				<div class="text_div">
+					<span class="text_span">推荐操作步骤</span>
+				</div>
+			</div>
+			<div class="space_div"></div>
+			<div class="content_div">${requestScope.htmlGoodsJYDG.memo1 }</div>
+		</div>
+		<div class="pdf1_div" id="pdf1_div">
+			<div class="title_div">
+				<span class="text_span">产品说明书下载</span>
+			</div>
+			<div class="list_div">
+				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_1 ne null }">
+				<div class="item_pdf" id="pdf1_1">
+					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
+					<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_1 }.pdf</span>
+					<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_1 }kb</span>
+				</div>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_2 ne null }">
+				<div class="item_pdf" id="pdf1_2">
+					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
+					<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_2 }.pdf</span>
+					<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_2 }kb</span>
+				</div>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_3 ne null }">
+				<div class="item_pdf" id="pdf1_3">
+					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
+					<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_3 }.pdf</span>
+					<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_3 }kb</span>
+				</div>
+				</c:if>
+			</div>
+		</div>
+		<div class="memo2_div" id="memo2_div">
+			<div class="title_div">
+				<div class="num_div">03</div>
+				<div class="text_div">
+					<span class="text_span">常见问题解答</span>
+				</div>
+			</div>
+			<div class="space_div"></div>
+			<div class="content_div">${requestScope.htmlGoodsJYDG.memo2 }</div>
+		</div>
+		<div class="image1_div"  id="image1_div">
+			<img class="image1_1_img" id="image1_1_img" alt="" src="">
+			<img class="image1_2_img" id="image1_2_img" alt="" src="">
+			<img class="image1_3_img" id="image1_3_img" alt="" src="">
+			<img class="image1_4_img" id="image1_4_img" alt="" src="">
+			<img class="image1_5_img" id="image1_5_img" alt="" src="">
+		</div>
+		<div class="embed2_div" id="embed2_div">
+			<div class="title_div">
+				<div class="num_div">04</div>
+				<div class="text_div">
+					<span class="text_span">拓展应用</span>
+				</div>
+			</div>
+			<embed class="embed2_1_embed" id="embed2_1_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }"/>
+		</div>
+		<div class="image2_div"  id="image2_div">
+			<img class="image2_1_img" id="image2_1_img" alt="" src="">
+			<img class="image2_2_img" id="image2_2_img" alt="" src="">
+			<img class="image2_3_img" id="image2_3_img" alt="" src="">
+			<img class="image2_4_img" id="image2_4_img" alt="" src="">
+			<img class="image2_5_img" id="image2_5_img" alt="" src="">
+		</div>
 	</div>
 	<div class="smck_div" id="smck_div">
 		<div class="tiShi_div">手机端实际效果可能存在差异，请扫码查看</div>
 		<div class="qrCode_div">
-			<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsDMTZL.qrCode }">
+			<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsJYDG.qrCode }">
 		</div>
 		<div class="jxbjBut_div" onclick="openPreviewBgDiv(0)">继续编辑</div>
 	</div>
