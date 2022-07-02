@@ -159,7 +159,7 @@ function hideOptionDiv(o){
 
 function previewHtmlGoodsJYDG(){
 	if(!compareHtmlVal()){//这是已经编辑过内容的情况
-		saveEdithtmlGoodsJYDG();
+		saveEditHtmlGoodsJYDG();
 		
 		var goodsNumber='${requestScope.htmlGoodsJYDG.goodsNumber }';
 		var accountId='${sessionScope.user.id }';
@@ -280,6 +280,56 @@ function previewHtmlGoodsJYDG(){
 			$("#preview_div #image1_div #image1_5_img").css("display","block");
 			$("#preview_div #image1_div #image1_5_img").attr("src",image1_5_src);
 		}
+
+		var image2_1_src=disArr2[0];
+		if(image2_1_src==undefined||image2_1_src==""){
+			$("#preview_div #image2_div #image2_1_img").css("display","none");
+			$("#preview_div #image2_div #image2_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_1_img").css("display","block");
+			$("#preview_div #image2_div #image2_1_img").attr("src",image2_1_src);
+		}
+		
+		var image2_2_src=disArr2[1];
+		if(image2_2_src==undefined||image2_2_src==""){
+			$("#preview_div #image2_div #image2_2_img").css("display","none");
+			$("#preview_div #image2_div #image2_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_2_img").css("display","block");
+			$("#preview_div #image2_div #image2_2_img").attr("src",image2_2_src);
+		}
+		
+		var image2_3_src=disArr2[2];
+		if(image2_3_src==undefined||image2_3_src==""){
+			$("#preview_div #image2_div #image2_3_img").css("display","none");
+			$("#preview_div #image2_div #image2_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_3_img").css("display","block");
+			$("#preview_div #image2_div #image2_3_img").attr("src",image2_3_src);
+		}
+		
+		var image2_4_src=disArr2[3];
+		if(image2_4_src==undefined||image2_4_src==""){
+			$("#preview_div #image2_div #image2_4_img").css("display","none");
+			$("#preview_div #image2_div #image2_4_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_4_img").css("display","block");
+			$("#preview_div #image2_div #image2_4_img").attr("src",image2_4_src);
+		}
+		
+		var image2_5_src=disArr2[4];
+		if(image2_5_src==undefined||image2_5_src==""){
+			$("#preview_div #image2_div #image2_5_img").css("display","none");
+			$("#preview_div #image2_div #image2_5_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_5_img").css("display","block");
+			$("#preview_div #image2_div #image2_5_img").attr("src",image2_5_src);
+		}
 	}
 	openPreviewBgDiv(1);
 }
@@ -304,10 +354,16 @@ function compareHtmlVal(){
 		return flag;
 	}
 	
-	var cisArr1=[];
 	$("#uploadFile1_div input[id^='image']").each(function(i){
 		var imgSrc=$(this).val();
 		if(disArr1[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+	$("#uploadFile2_div input[id^='image']").each(function(i){
+		var imgSrc=$(this).val();
+		if(disArr2[i]!=imgSrc){
 			flag=false;
 			return flag;
 		}
@@ -316,7 +372,7 @@ function compareHtmlVal(){
 	return flag;
 }
 
-function saveEdithtmlGoodsJYDG(){
+function saveEditHtmlGoodsJYDG(){
 	if(checkIfPaid()){
 		resetEditorHtml();
 		renameFile();
@@ -369,7 +425,7 @@ function hideSaveStatusDiv(){
 	$("#saveStatus_div").css("display","none");
 }
 
-function finishEdithtmlGoodsDMTZL(){
+function finishEditHtmlGoodsJYDG(){
 	renameFile();
 	renameImage();
 	document.getElementById("sub_but").click();
@@ -1557,8 +1613,8 @@ function goBack(){
 <div class="right_div" id="right_div">
 	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsJYDG.qrCode }">
 	<div class="preview_div" onclick="previewHtmlGoodsJYDG();">预览</div>
-	<div class="save_div" onclick="saveEditHtmlGoodsSMYL();">保存</div>
-	<div class="finishEdit_div" onclick="finishEditHtmlGoodsSMYL();">完成编辑</div>
+	<div class="save_div" onclick="saveEditHtmlGoodsJYDG();">保存</div>
+	<div class="finishEdit_div" onclick="finishEditHtmlGoodsJYDG();">完成编辑</div>
 	<div class="saveStatus_div" id="saveStatus_div"></div>
 </div>
 <input type="hidden" id="id" name="id" value="${requestScope.htmlGoodsJYDG.id }" />

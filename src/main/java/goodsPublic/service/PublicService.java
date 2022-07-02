@@ -434,6 +434,13 @@ public interface PublicService {
 	 */
 	public int editHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL);
 
+	/**
+	 * 编辑家用蛋糕模版内容
+	 * @param htmlGoodsJYDG
+	 * @return
+	 */
+	public int editHtmlGoodsJYDG(HtmlGoodsJYDG htmlGoodsJYDG);
+
 	public int deleteScoreQrcodeByUuids(String uuids);
 
 	/**

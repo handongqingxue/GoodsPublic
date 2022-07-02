@@ -66,6 +66,8 @@ public interface PublicMapper {
 	public int editHtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD);
 
 	public int editHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL);
+
+	public int editHtmlGoodsJYDG(HtmlGoodsJYDG htmlGoodsJYDG);
 	
 	//修改发布的产品信息
 	public int updataGoodsPublic(Goods articleInfo);

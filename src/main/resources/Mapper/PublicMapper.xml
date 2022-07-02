@@ -4191,6 +4191,162 @@
 		gmtModified=now()
 		where id=#{id}
 	</update>
+	<update id="editHtmlGoodsJYDG" parameterType="goodsPublic.entity.HtmlGoodsJYDG">
+		update html_goods_jydg set
+		<if test="productName!=null">
+			productName=#{productName},
+		</if>		
+		<if test="jyyyblName1!=null">
+			jyyyblName1=#{jyyyblName1},
+		</if>
+		<if test="jyyyblValue1!=null">
+			jyyyblValue1=#{jyyyblValue1},
+		</if>
+		<if test="jyyyblMemo1!=null">
+			jyyyblMemo1=#{jyyyblMemo1},
+		</if>
+		<if test="jyyyblIfShow1!=null">
+			jyyyblIfShow1=#{jyyyblIfShow1},
+		</if>		
+		<if test="jyyyblName2!=null">
+			jyyyblName2=#{jyyyblName2},
+		</if>
+		<if test="jyyyblValue2!=null">
+			jyyyblValue2=#{jyyyblValue2},
+		</if>
+		<if test="jyyyblMemo2!=null">
+			jyyyblMemo2=#{jyyyblMemo2},
+		</if>
+		<if test="jyyyblIfShow2!=null">
+			jyyyblIfShow2=#{jyyyblIfShow2},
+		</if>		
+		<if test="jyyyblName3!=null">
+			jyyyblName3=#{jyyyblName3},
+		</if>
+		<if test="jyyyblValue3!=null">
+			jyyyblValue3=#{jyyyblValue3},
+		</if>
+		<if test="jyyyblMemo3!=null">
+			jyyyblMemo3=#{jyyyblMemo3},
+		</if>
+		<if test="jyyyblIfShow3!=null">
+			jyyyblIfShow3=#{jyyyblIfShow3},
+		</if>		
+		<if test="jyyyblName4!=null">
+			jyyyblName4=#{jyyyblName4},
+		</if>
+		<if test="jyyyblValue4!=null">
+			jyyyblValue4=#{jyyyblValue4},
+		</if>
+		<if test="jyyyblMemo4!=null">
+			jyyyblMemo4=#{jyyyblMemo4},
+		</if>
+		<if test="jyyyblIfShow4!=null">
+			jyyyblIfShow4=#{jyyyblIfShow4},
+		</if>		
+		<if test="jyyyblName5!=null">
+			jyyyblName5=#{jyyyblName5},
+		</if>
+		<if test="jyyyblValue5!=null">
+			jyyyblValue5=#{jyyyblValue5},
+		</if>
+		<if test="jyyyblMemo5!=null">
+			jyyyblMemo5=#{jyyyblMemo5},
+		</if>
+		<if test="jyyyblIfShow5!=null">
+			jyyyblIfShow5=#{jyyyblIfShow5},
+		</if>		
+		<if test="jyyyblName6!=null">
+			jyyyblName6=#{jyyyblName6},
+		</if>
+		<if test="jyyyblValue6!=null">
+			jyyyblValue6=#{jyyyblValue6},
+		</if>
+		<if test="jyyyblMemo6!=null">
+			jyyyblMemo6=#{jyyyblMemo6},
+		</if>
+		<if test="jyyyblIfShow6!=null">
+			jyyyblIfShow6=#{jyyyblIfShow6},
+		</if>		
+		<if test="jyyyblName7!=null">
+			jyyyblName7=#{jyyyblName7},
+		</if>
+		<if test="jyyyblValue7!=null">
+			jyyyblValue7=#{jyyyblValue7},
+		</if>
+		<if test="jyyyblMemo7!=null">
+			jyyyblMemo7=#{jyyyblMemo7},
+		</if>
+		<if test="jyyyblIfShow7!=null">
+			jyyyblIfShow7=#{jyyyblIfShow7},
+		</if>		
+		<if test="jyyyblName8!=null">
+			jyyyblName8=#{jyyyblName8},
+		</if>
+		<if test="jyyyblValue8!=null">
+			jyyyblValue8=#{jyyyblValue8},
+		</if>
+		<if test="jyyyblMemo8!=null">
+			jyyyblMemo8=#{jyyyblMemo8},
+		</if>
+		<if test="jyyyblIfShow8!=null">
+			jyyyblIfShow8=#{jyyyblIfShow8},
+		</if>		
+		<if test="jyyyblName9!=null">
+			jyyyblName9=#{jyyyblName9},
+		</if>
+		<if test="jyyyblValue9!=null">
+			jyyyblValue9=#{jyyyblValue9},
+		</if>
+		<if test="jyyyblMemo9!=null">
+			jyyyblMemo9=#{jyyyblMemo9},
+		</if>
+		<if test="jyyyblIfShow9!=null">
+			jyyyblIfShow9=#{jyyyblIfShow9},
+		</if>		
+		<if test="jyyyblName10!=null">
+			jyyyblName10=#{jyyyblName10},
+		</if>
+		<if test="jyyyblValue10!=null">
+			jyyyblValue10=#{jyyyblValue10},
+		</if>
+		<if test="jyyyblMemo10!=null">
+			jyyyblMemo10=#{jyyyblMemo10},
+		</if>
+		<if test="jyyyblIfShow10!=null">
+			jyyyblIfShow10=#{jyyyblIfShow10},
+		</if>
+			image1_1=#{image1_1},
+			image1_2=#{image1_2},
+			image1_3=#{image1_3},
+			image1_4=#{image1_4},
+			image1_5=#{image1_5},
+			image2_1=#{image2_1},
+			image2_2=#{image2_2},
+			image2_3=#{image2_3},
+			image2_4=#{image2_4},
+			image2_5=#{image2_5},
+		<if test="memo1!=null">
+			memo1=#{memo1},
+		</if>
+		<if test="memo2!=null">
+			memo2=#{memo2},
+		</if>
+			embed1_1=#{embed1_1},
+			embed2_1=#{embed2_1},
+			embed2_2=#{embed2_2},
+			embed2_3=#{embed2_3},
+			embed2_4=#{embed2_4},
+			embed2_5=#{embed2_5},
+			pdfUrl1_1=#{pdfUrl1_1},
+			pdfName1_1=#{pdfName1_1},
+			pdfSize1_1=#{pdfSize1_1},
+			pdfUrl1_2=#{pdfUrl1_2},
+			pdfName1_2=#{pdfName1_2},
+			pdfSize1_2=#{pdfSize1_2},
+		gmtModified=now()
+		where id=#{id}
+	</update>
 	<update id="updateQrcode" parameterType="java.lang.String">
 		update public_goods set qrCode=#{param1} where goodsNumber=#{param2} and accountNumber=#{param3}
 	</update>

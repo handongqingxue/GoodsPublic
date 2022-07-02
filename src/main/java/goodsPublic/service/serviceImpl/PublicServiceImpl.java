@@ -145,6 +145,12 @@ public class PublicServiceImpl implements PublicService {
 		// TODO Auto-generated method stub
 		return publicDao.editHtmlGoodsSMYL(htmlGoodsSMYL);
 	}
+
+	@Override
+	public int editHtmlGoodsJYDG(HtmlGoodsJYDG htmlGoodsJYDG) {
+		// TODO Auto-generated method stub
+		return publicDao.editHtmlGoodsJYDG(htmlGoodsJYDG);
+	}
 	
 	//展示商品接口，将商品从数据库中读取出来展示到对应的页面当中
 	
