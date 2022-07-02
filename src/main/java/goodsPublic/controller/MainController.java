@@ -4190,6 +4190,11 @@ public class MainController {
 				request.setAttribute("htmlGoodsSMYL", htmlGoodsSMYL);
 				url = "/merchant/smyl/showHtmlGoods";
 				break;
+			case "jydg":
+				HtmlGoodsJYDG htmlGoodsJYDG = publicService.getHtmlGoodsJYDG(goodsNumber,accountId);
+				request.setAttribute("htmlGoodsJYDG", htmlGoodsJYDG);
+				url = "/merchant/jydg/showHtmlGoods";
+				break;
 				/*
 			case "text":
 				uuid = request.getParameter("uuid");
