@@ -84,7 +84,7 @@ body{
 	font-size: 20px;
 	font-weight: bold;
 }
-.embed1_div,.embed2_div{
+.embed1_div{
 	width: 95%;
 	text-align: center;
 	margin: 20px auto 0;
@@ -221,17 +221,23 @@ body{
 	position: absolute;
 }
 
-.image1_div{
+.image1_div,
+.image2_div{
 	width: 95%;
 	margin: auto;
 	text-align: center;
 }
-.image1_1_img,.image1_2_img,.image1_3_img,.image1_4_img,.image1_5_img{
+.image1_1_img,.image1_2_img,.image1_3_img,.image1_4_img,.image1_5_img,
+.image2_1_img,.image2_2_img,.image2_3_img,.image2_4_img,.image2_5_img{
 	width: 95%;
 	margin-top: 25px;
 },
 
-.embed2_div .content_div{
+.embed2_div{
 	width: 95%;
+	margin: 20px auto 0;
+}
+.embed2_div .content_div{
+	width: 100%;
 	margin: 30px auto 0;
 }

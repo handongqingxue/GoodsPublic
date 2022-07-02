@@ -293,6 +293,23 @@ function downloadQrocdeImg(){
 			</div>
 			</c:if>
 		</div>
+		<div class="image2_div" id="image2_div">
+			<c:if test="${requestScope.htmlGoodsJYDG.image2_1 ne null }">
+				<img class="image2_1_img" alt="" src="${requestScope.htmlGoodsJYDG.image2_1 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image2_2 ne null }">
+				<img class="image2_2_img" alt="" src="${requestScope.htmlGoodsJYDG.image2_2 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image2_3 ne null }">
+				<img class="image2_3_img" alt="" src="${requestScope.htmlGoodsJYDG.image2_3 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image2_4 ne null }">
+				<img class="image2_4_img" alt="" src="${requestScope.htmlGoodsJYDG.image2_4 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image2_5 ne null }">
+				<img class="image2_5_img" alt="" src="${requestScope.htmlGoodsJYDG.image2_5 }">
+			</c:if>
+		</div>
 	</div>
 </div>
 </body>
