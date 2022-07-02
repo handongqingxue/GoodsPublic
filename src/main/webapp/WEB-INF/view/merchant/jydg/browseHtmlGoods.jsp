@@ -24,7 +24,7 @@ function downloadQrocdeImg(){
        var imgUri = canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"); // 获取生成的图片的url 　
        var saveLink = document.createElement('a');
        saveLink.href = imgUri;
-       saveLink.download = '${requestScope.htmlGoodsSMYL.productName }'+'.png';
+       saveLink.download = '${requestScope.htmlGoodsJYDG.productName }'+'.png';
        saveLink.click();
     });
 }
@@ -37,7 +37,7 @@ function downloadQrocdeImg(){
 			<span class="close_span" onclick="openXzewmBgDiv(0)">关闭</span>
 		</div>
 		<div class="qrcodeImg_div" id="qrcodeImg_div">
-			<img class="qrcode_img" alt="" src="${requestScope.htmlGoodsSMYL.qrCode }" />
+			<img class="qrcode_img" alt="" src="${requestScope.htmlGoodsJYDG.qrCode }" />
 		</div>
 		<div class="xzBut_div" onclick="downloadQrocdeImg()">
 			<div>
@@ -54,8 +54,8 @@ function downloadQrocdeImg(){
 	<div class="top_div">
 		<img class="createSuccess_img" alt="" src="/GoodsPublic/resource/images/006.png">
 		<span class="createSuccess_span">生码成功！</span>
-		<a class="createQrcode_a" href="${pageContext.request.contextPath}/merchant/main/goAddModule?trade=smyl">新建二维码</a>
-		<a class="return_a" href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=smyl">返回列表页</a>
+		<a class="createQrcode_a" href="${pageContext.request.contextPath}/merchant/main/goAddModule?trade=jydg">新建二维码</a>
+		<a class="return_a" href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=jydg">返回列表页</a>
 	</div>
 	<div class="left_div" id="left_div">
 		<div class="productName_div">
@@ -310,6 +310,23 @@ function downloadQrocdeImg(){
 				<img class="image2_5_img" alt="" src="${requestScope.htmlGoodsJYDG.image2_5 }">
 			</c:if>
 		</div>
+	</div>
+	<div class="right_div">
+		<div class="qrcode_div">
+			<div class="downloadQrcode1_div">
+				<img class="qrcode_img" alt="" src="${requestScope.htmlGoodsJYDG.qrCode }" />
+				<div class="downloadQrcode2_div" onclick="openXzewmBgDiv(1)">下载二维码</div>
+			</div>
+		</div>
+		<div class="line1_div"></div>
+		<div class="option2_div">
+			<div class="editContent_div" onclick="editContent(${requestScope.htmlGoodsJYDG.goodsNumber },${requestScope.htmlGoodsJYDG.accountNumber });">编辑内容</div>
+			<div class="option3_div">
+				<a class="createCopy_a">创建副本</a>
+				<a class="delete_a">删除</a>
+			</div>
+		</div>
+		<div class="line2_div"></div>
 	</div>
 </div>
 </body>
