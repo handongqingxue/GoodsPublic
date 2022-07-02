@@ -3885,6 +3885,30 @@ public class MainController {
 		return json;
 	}
 	
+	@RequestMapping(value="/deleteHtmlGoodsJYDGByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteHtmlGoodsJYDGByIds(String ids, String accountNumber) {
+		
+		int count=publicService.deleteHtmlGoodsJYDGByIds(ids);
+		if(count>0) {
+			int qrcodeCount=-ids.split(",").length;
+			publicService.updateAccountQCById(qrcodeCount, accountNumber);
+		}
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除家用蛋糕信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除家用蛋糕信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
 	/**
 	 * 根据id删除多媒体资料模版内容
 	 * @param ids

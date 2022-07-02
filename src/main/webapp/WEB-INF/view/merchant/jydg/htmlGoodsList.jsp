@@ -28,7 +28,7 @@ $(function(){
 	$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){
-			deleteHtmlGoodsSMYL();
+			deleteHtmlGoodsJYDG();
 		}
 	});
 	
@@ -87,7 +87,7 @@ function reSizeCol(){
 	cols.css("width",width/colCount+"px");
 }
 
-function deleteHtmlGoodsSMYL() {
+function deleteHtmlGoodsJYDG() {
 	var rows=tab1.datagrid("getSelections");
 	if (rows.length == 0) {
 		$.messager.alert("提示","请选择要删除的信息！","warning");
@@ -106,7 +106,7 @@ function deleteByIds(ids){
 	if(checkIfPaid()){
 		$.messager.confirm("提示","确定要删除吗？",function(r){
 			if(r){
-				$.post("deleteHtmlGoodsSMYLByIds",
+				$.post("deleteHtmlGoodsJYDGByIds",
 					{ids:ids,accountNumber:'${sessionScope.user.id}'},
 					function(result){
 						if(result.status==1){

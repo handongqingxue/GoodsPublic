@@ -443,6 +443,13 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int deleteHtmlGoodsSMYLByIds(List<String> idList);
+
+	/**
+	 * 根据id删除家用蛋糕模版内容
+	 * @param idList
+	 * @return
+	 */
+	public int deleteHtmlGoodsJYDGByIds(List<String> idList);
 	
 	/**
 	 * 根据id删除多媒体资料模版内容
