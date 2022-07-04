@@ -170,21 +170,25 @@ function changeButStyle(o,flag){
 
 function uploadEmbed1(){
 	var uuid=createUUID();
-	$("#uuid_hid1").val(uuid);
+	$("#uuid_hid3").val(uuid);
 	$("#uploadFile3_div").html("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>");
 	document.getElementById("uploadFile3_inp").click();
 }
 
 function uploadEmbed2(){
+	if($("#embed2Mod_div embedShow_div embed[class='item_embed']").length>=5){
+		alert("最多上传5段视频!");
+		return false;
+	}
 	var uuid=createUUID();
-	$("#uuid_hid1").val(uuid);
-	$("#uploadFile4_div").html("<input type=\"file\" id=\"uploadFile4_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed2(this)\"/>");
+	$("#uuid_hid4").val(uuid);
+	$("#uploadFile4_div").append("<input type=\"file\" id=\"uploadFile4_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed2(this)\"/>");
 	document.getElementById("uploadFile4_inp").click();
 }
 
 function uploadPdf1(){
 	var uuid=createUUID();
-	$("#uuid_hid1").val(uuid);
+	$("#uuid_hid5").val(uuid);
 	$("#uploadFile5_div").html("<input type=\"file\" id=\"uploadFile5_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePdf1(this)\"/>");
 	document.getElementById("uploadFile5_inp").click();
 }
@@ -209,6 +213,23 @@ function uploadImage2(){
 	$("#uuid_hid2").val(uuid);
 	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
 	document.getElementById("uploadFile2_inp").click();
+}
+
+function deleteEmbed2(o){
+	var curItem=$(o).parent();
+	var uuid=curItem.attr("id").substring(7);
+	$("#embed2_div #list_div embed[id='embed"+uuid+"']").remove();
+	curItem.remove();
+	$("#uploadFile4_div input[type='file'][name='file"+uuid+"']").remove();
+	
+	var embedListDiv=$("#embed2Mod_div #embedList_div");
+	var itemArr1=embedListDiv.find(".item_div");
+	embedListDiv.empty();
+	for(var i=0;i<itemArr1.length;i++){
+		embedListDiv.append(itemArr1[i]);
+	}
+	
+	resetDivPosition();
 }
 
 function deletePdf1(o){
@@ -272,7 +293,7 @@ function deleteImage2(o){
 }
 
 function showQrcodeEmbed1(obj){
-	var uuid=$("#uuid_hid1").val();
+	var uuid=$("#uuid_hid3").val();
 	var file=$(obj);
 	file.attr("id","file"+uuid);
 	file.attr("name","file"+uuid);
@@ -314,7 +335,7 @@ function showQrcodeEmbed1(obj){
 }
 
 function showQrcodeEmbed2(obj){
-	var uuid=$("#uuid_hid1").val();
+	var uuid=$("#uuid_hid4").val();
 	var file=$(obj);
 	file.attr("id","file"+uuid);
 	file.attr("name","file"+uuid);
@@ -322,14 +343,17 @@ function showQrcodeEmbed2(obj){
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
 	
-	var embedShowDiv=$("#embed2Mod_div #embedShow_div");
+	var embedListDiv=$("#embed2Mod_div #embedList_div");
 	var embedTag;
 	if (!!window.ActiveXObject || "ActiveXObject" in window)
 		embedTag="embed";
 	else
 		embedTag="iframe";
-	embedShowDiv.html("<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\">"
-			+fileHtml);
+	embedListDiv.append("<div class=\"item_div\" id=\"item_div"+uuid+"\">"
+				+"<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteEmbed2(this);\">"
+			+"</div>"+fileHtml);
+	
 
 	var $file = $(obj);
     var fileObj = $file[0];
@@ -341,8 +365,14 @@ function showQrcodeEmbed2(obj){
     if (fileObj && fileObj.files && fileObj.files[0]) {
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
         $embed.attr("src", dataURL);
-        
-        $("#embed2_div #embed2_1").replaceWith("<"+embedTag+" class=\"item_embed\" id=\"embed2_1\" src=\""+dataURL+"\"/>");
+
+        var listDiv=$("#embed2_div #list_div");
+        listDiv.append("<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" src=\""+dataURL+"\"/>");
+
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -563,7 +593,7 @@ function checkIfPaid(){
 			<div class="uploadFile3_div" id="uploadFile3_div">
 				<input type="file" id="file3_1" name="file" onchange="showQrcodeEmbed1(this)" />
 			</div>
-			<input type="hidden" id="uuid_hid1"/>
+			<input type="hidden" id="uuid_hid3"/>
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeEmbed1ModBgDiv();">确&nbsp;认</div>
@@ -579,14 +609,17 @@ function checkIfPaid(){
 			<span class="close_span" onclick="closeEmbed2ModBgDiv();">关闭</span>
 		</div>
 		<div>
-			<div class="embedShow_div" id="embedShow_div">
-				<embed class="item_embed" id="embed2_1" alt="" src="/GoodsPublic/upload/embed/jydg/20220628152315.mp4">
+			<div class="embedList_div" id="embedList_div">
+				<div class="item_div" id="item_div2_1">
+					<embed class="item_embed" id="embed2_1" alt="" src="/GoodsPublic/upload/embed/jydg/20220628152315.mp4">
+					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+				</div>
 			</div>
-			<div class="reupload_div" onclick="uploadEmbed2();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">重新上传</div>
+			<div class="upload_div" onclick="uploadEmbed2();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">上传</div>
 			<div class="uploadFile4_div" id="uploadFile4_div">
 				<input type="file" id="file4_1" name="file" onchange="showQrcodeEmbed2(this)" />
 			</div>
-			<input type="hidden" id="uuid_hid1"/>
+			<input type="hidden" id="uuid_hid4"/>
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeEmbed2ModBgDiv();">确&nbsp;认</div>
@@ -613,7 +646,7 @@ function checkIfPaid(){
 			<div class="uploadFile5_div" id="uploadFile5_div">
 				<input type="file" id="file5_1" name="file" onchange="showQrcodePdf1(this)" />
 			</div>
-			<input type="hidden" id="uuid_hid1"/>
+			<input type="hidden" id="uuid_hid5"/>
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closePdf1ModBgDiv();">确&nbsp;认</div>
