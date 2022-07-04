@@ -292,6 +292,26 @@ function downloadQrocdeImg(){
 				<embed class="embed2_1_embed" id="embed2_1_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }"/>
 			</div>
 			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.embed2_2 ne null }">
+			<div class="content_div">
+				<embed class="embed2_2_embed" id="embed2_2_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_2 }"/>
+			</div>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.embed2_3 ne null }">
+			<div class="content_div">
+				<embed class="embed2_3_embed" id="embed2_3_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_3 }"/>
+			</div>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.embed2_4 ne null }">
+			<div class="content_div">
+				<embed class="embed2_4_embed" id="embed2_4_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_4 }"/>
+			</div>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.embed2_5 ne null }">
+			<div class="content_div">
+				<embed class="embed2_5_embed" id="embed2_5_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_5 }"/>
+			</div>
+			</c:if>
 		</div>
 		<div class="image2_div" id="image2_div">
 			<c:if test="${requestScope.htmlGoodsJYDG.image2_1 ne null }">

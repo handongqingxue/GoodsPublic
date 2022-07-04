@@ -218,7 +218,7 @@ function uploadImage2(){
 
 function deleteEmbed2(o){
 	var curItem=$(o).parent();
-	var uuid=curItem.attr("id").substring(7);
+	var uuid=curItem.attr("id").substring(8);
 	$("#embed2_div #list_div embed[id='embed"+uuid+"']").remove();
 	curItem.remove();
 	$("#uploadFile4_div input[type='file'][name='file"+uuid+"']").remove();
@@ -873,9 +873,9 @@ function checkIfPaid(){
 				<a onclick="deleteEmbed2Div();">删除</a>
 			</div>
 		</div>
-		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:forEach items="${requestScope.embed2List }" var="embed2" varStatus="status">
-			<embed class="item_embed" id="embed2_1" src="${embed2.url }"/>
+			<embed class="item_embed" id="embed2_${status.index+1 }" src="${embed2.url }"/>
 			</c:forEach>
 		</div>
 	</div>
