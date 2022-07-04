@@ -2247,12 +2247,18 @@ public class MainController {
 								break;
 							case 16:
 								htmlGoodsJYDG.setPdfUrl1_1(dataJO.get("src").toString());
+								htmlGoodsJYDG.setPdfName1_1(fileArr[i].getName());
+								htmlGoodsJYDG.setPdfSize1_1((float)fileArr[i].getSize()/1024);
 								break;
 							case 17:
 								htmlGoodsJYDG.setPdfUrl1_2(dataJO.get("src").toString());
+								htmlGoodsJYDG.setPdfName1_2(fileArr[i].getName());
+								htmlGoodsJYDG.setPdfSize1_2((float)fileArr[i].getSize()/1024);
 								break;
 							case 18:
 								htmlGoodsJYDG.setPdfUrl1_3(dataJO.get("src").toString());
+								htmlGoodsJYDG.setPdfName1_3(fileArr[i].getName());
+								htmlGoodsJYDG.setPdfSize1_3((float)fileArr[i].getSize()/1024);
 								break;
 							}
 						}

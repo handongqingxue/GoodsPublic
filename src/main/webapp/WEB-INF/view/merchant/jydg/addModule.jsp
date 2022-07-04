@@ -191,7 +191,7 @@ function uploadEmbed2(){
 function uploadPdf1(){
 	var uuid=createUUID();
 	$("#uuid_hid5").val(uuid);
-	$("#uploadFile5_div").append("<input type=\"file\" id=\"uploadFile5_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePdf1(this)\"/>");
+	$("#uploadFile5_div").html("<input type=\"file\" id=\"uploadFile5_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePdf1(this)\"/>");
 	document.getElementById("uploadFile5_inp").click();
 }
 
