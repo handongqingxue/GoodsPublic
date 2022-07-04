@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>树木园林模版列表</title>
+<title>家用蛋糕模版列表</title>
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
@@ -14,14 +14,6 @@ $(function(){
 		onClick:function(){
 			if(checkIfPaid())
 				location.href=path+"merchant/main/goAddModule?trade=jydg";
-		}
-	});
-	
-	$("#batchAdd_but").linkbutton({
-		iconCls:"icon-add",
-		onClick:function(){
-			if(checkIfPaid())
-				location.href=path+"merchant/main/goBatchAddModule?trade=smyl";
 		}
 	});
 	
@@ -150,7 +142,6 @@ function setFitWidthInParent(o){
 	<div id="tab1_div" style="margin-top:20px;margin-left: 238px;">
 		<div id="toolbar" style="height:32px;line-height:32px;">
 			<a id="add_but" style="margin-left: 13px;">添加</a>
-			<a id="batchAdd_but">Excel批量生成</a>
 			<a id="remove_but">删除</a>
 		</div>
 		<table id="tab1">

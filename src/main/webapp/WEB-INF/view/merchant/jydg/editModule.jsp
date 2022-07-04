@@ -863,7 +863,7 @@ function goBack(){
 		<div>
 			<div class="pdfList_div" id="pdfList_div">
 				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_1 ne null }">
-				<div class="item_pdf" id="pdf1_1">
+				<div class="item_pdf" id="pdfUrl1_1">
 					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
 					<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_1 }.pdf</span>
 					<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_1 }kb</span>
@@ -874,15 +874,21 @@ function goBack(){
 			<div class="uploadFile5_div" id="uploadFile5_div">
 				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_1 ne null }">
 				<input type="file" id="file5_1" name="file5_1" onchange="showQrcodePdf1(this)" />
-				<input type="text" id="pdf1_1" name="pdf1_1" value="${requestScope.htmlGoodsJYDG.pdfUrl1_1 }" />
+				<input type="text" id="pdfUrl1_1" name="pdfUrl1_1" value="${requestScope.htmlGoodsJYDG.pdfUrl1_1 }" />
+				<input type="text" id="pdfName1_1" name="pdfName1_1" value="${requestScope.htmlGoodsJYDG.pdfName1_1 }" />
+				<input type="text" id="pdfSize1_1" name="pdfSize1_1" value="${requestScope.htmlGoodsJYDG.pdfSize1_1 }" />
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_2 ne null }">
 				<input type="file" id="file5_2" name="file5_2" onchange="showQrcodePdf1(this)" />
-				<input type="text" id="pdf1_2" name="pdf1_2" value="${requestScope.htmlGoodsJYDG.pdfUrl1_2 }" />
+				<input type="text" id="pdfUrl1_2" name="pdfUrl1_2" value="${requestScope.htmlGoodsJYDG.pdfUrl1_2 }" />
+				<input type="text" id="pdfName1_2" name="pdfName1_2" value="${requestScope.htmlGoodsJYDG.pdfName1_2 }" />
+				<input type="text" id="pdfSize1_2" name="pdfSize1_2" value="${requestScope.htmlGoodsJYDG.pdfSize1_2 }" />
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_3 ne null }">
 				<input type="file" id="file5_3" name="file5_3" onchange="showQrcodePdf1(this)" />
-				<input type="text" id="pdf1_3" name="pdf1_3" value="${requestScope.htmlGoodsJYDG.pdfUrl1_3 }" />
+				<input type="text" id="pdfUrl1_3" name="pdfUrl1_3" value="${requestScope.htmlGoodsJYDG.pdfUrl1_3 }" />
+				<input type="text" id="pdfName1_3" name="pdfName1_3" value="${requestScope.htmlGoodsJYDG.pdfName1_3 }" />
+				<input type="text" id="pdfSize1_3" name="pdfSize1_3" value="${requestScope.htmlGoodsJYDG.pdfSize1_3 }" />
 				</c:if>
 			</div>
 			<input type="hidden" id="uuid_hid5"/>
@@ -1057,7 +1063,7 @@ function goBack(){
 				<input type="text" id="image2_5" name="image2_5" value="${requestScope.htmlGoodsSMYL.image2_5 }" />
 				</c:if>
 			</div>
-			<input type="hidden" id="uuid_hid1"/>
+			<input type="hidden" id="uuid_hid2"/>
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
@@ -1233,21 +1239,21 @@ function goBack(){
 			</div>
 			<div class="list_div">
 				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_1 ne null }">
-				<div class="item_pdf" id="pdf1_1">
+				<div class="item_pdf" id="pdfUrl1_1">
 					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
 					<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_1 }.pdf</span>
 					<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_1 }kb</span>
 				</div>
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_2 ne null }">
-				<div class="item_pdf" id="pdf1_2">
+				<div class="item_pdf" id="pdfUrl1_2">
 					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
 					<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_2 }.pdf</span>
 					<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_2 }kb</span>
 				</div>
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_3 ne null }">
-				<div class="item_pdf" id="pdf1_3">
+				<div class="item_pdf" id="pdfUrl1_3">
 					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
 					<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_3 }.pdf</span>
 					<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_3 }kb</span>
@@ -1519,21 +1525,21 @@ function goBack(){
 		</div>
 		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_1 ne null }">
-			<div class="item_pdf" id="pdf1_1">
+			<div class="item_pdf" id="pdfUrl1_1" onclick="window.open('${requestScope.htmlGoodsJYDG.pdfUrl1_1 }');">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
 				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_1 }.pdf</span>
 				<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_1 }kb</span>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_2 ne null }">
-			<div class="item_pdf" id="pdf1_2">
+			<div class="item_pdf" id="pdfUrl1_2">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
 				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_2 }.pdf</span>
 				<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_2 }kb</span>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_3 ne null }">
-			<div class="item_pdf" id="pdf1_3">
+			<div class="item_pdf" id="pdfUrl1_3">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
 				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_3 }.pdf</span>
 				<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_3 }kb</span>

@@ -19,6 +19,7 @@
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+var path='<%=basePath %>';
 var addDelImgTimeout2;
 KindEditor.ready(function(K) {
 	var editor1 = K.create('textarea[name="memo1"]', {
@@ -41,10 +42,10 @@ $(function(){
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 
-    //这里必须延迟0.5s，等图片加载完再重新设定右边div位置
+    //这里必须延迟1s，等图片加载完再重新设定右边div位置
     setTimeout(function(){
     	resetDivPosition();
-    },"500")
+    },"1000")
 });
 
 function resetDivPosition(){
@@ -190,7 +191,7 @@ function uploadEmbed2(){
 function uploadPdf1(){
 	var uuid=createUUID();
 	$("#uuid_hid5").val(uuid);
-	$("#uploadFile5_div").html("<input type=\"file\" id=\"uploadFile5_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePdf1(this)\"/>");
+	$("#uploadFile5_div").append("<input type=\"file\" id=\"uploadFile5_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePdf1(this)\"/>");
 	document.getElementById("uploadFile5_inp").click();
 }
 
@@ -377,6 +378,71 @@ function showQrcodeEmbed2(obj){
         setTimeout(function(){
         	resetDivPosition();
         },"100")
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function showQrcodePdf1(obj){
+	var uuid=$("#uuid_hid5").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+
+	var appendStr="<div class=\"item_pdf\" id=\"pdf"+uuid+"\">";
+		appendStr+="<input type=\"hidden\" id=\"url_hid"+uuid+"\"/>";
+		appendStr+="<img class=\"file_img\" alt=\"\" src=\""+path+"/resource/images/011.png\">";
+		appendStr+="<span class=\"name_span\" id=\"name_span"+uuid+"\"></span>";
+		appendStr+="<span class=\"size_span\" id=\"size_span"+uuid+"\"></span>";
+		appendStr+="</div>";
+	var pdfModListDiv=$("#pdf1Mod_div #pdfList_div");
+	pdfModListDiv.html(appendStr);
+	
+	var pdfListDiv=$("#pdf1_div #list_div");
+	pdfListDiv.html(appendStr);
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var fileName;
+    var fileSize;
+    
+    var modPdfDiv = pdfModListDiv.find("#pdf"+uuid);
+    var modUrlHid = pdfModListDiv.find("#url_hid"+uuid);
+    var modNameSpan = pdfModListDiv.find("#name_span"+uuid);
+    var modSizeSpan = pdfModListDiv.find("#size_span"+uuid);
+
+    var pdfDiv = pdfListDiv.find("#pdf"+uuid);
+    var urlHid = pdfListDiv.find("#url_hid"+uuid);
+    var nameSpan = pdfListDiv.find("#name_span"+uuid);
+    var sizeSpan = pdfListDiv.find("#size_span"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        fileName=fileObj.files[0].name;
+        fileSize=(fileObj.files[0].size/1024).toFixed(2)+"kb";
+
+        modPdfDiv.attr("onclick","window.open('"+dataURL+"')")
+        modUrlHid.val(dataURL);
+        modNameSpan.text(fileName);
+        modSizeSpan.text(fileSize);
+        
+        pdfDiv.attr("onclick","window.open('"+dataURL+"')")
+        urlHid.val(dataURL);
+        nameSpan.text(fileName);
+        sizeSpan.text(fileSize);
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -664,7 +730,7 @@ function checkIfPaid(){
 			</div>
 			<div class="upload_div" onclick="uploadPdf1();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">上传</div>
 			<div class="uploadFile5_div" id="uploadFile5_div">
-				<input type="file" id="file5_1" name="file" onchange="showQrcodePdf1(this)" />
+				<input type="file" id="file5_1" name="file5_1" onchange="showQrcodePdf1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid5"/>
 		</div>
@@ -827,7 +893,7 @@ function checkIfPaid(){
 				<a onclick="deletePdf1Div();">删除</a>
 			</div>
 		</div>
-		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:forEach items="${requestScope.pdf1List }" var="pdf1" varStatus="status">
 			<div class="item_pdf" id="pdf1_1" onclick="window.open('${pdf1.url }');">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
