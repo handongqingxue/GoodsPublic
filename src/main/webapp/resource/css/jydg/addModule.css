@@ -450,6 +450,7 @@ body{
 	height: 150px;
 	margin: 5px 0 25px 0;
 	border: #eee solid 1px;
+	cursor:pointer;
 	border-radius:15px; 
 }
 .pdf1Mod_div .pdfList_div .item_pdf .file_img,

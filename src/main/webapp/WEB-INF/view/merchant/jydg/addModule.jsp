@@ -19,6 +19,7 @@
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+var addDelImgTimeout2;
 KindEditor.ready(function(K) {
 	var editor1 = K.create('textarea[name="memo1"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
@@ -40,10 +41,10 @@ $(function(){
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 
-    //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+    //这里必须延迟0.5s，等图片加载完再重新设定右边div位置
     setTimeout(function(){
     	resetDivPosition();
-    },"100")
+    },"500")
 });
 
 function resetDivPosition(){
@@ -176,7 +177,7 @@ function uploadEmbed1(){
 }
 
 function uploadEmbed2(){
-	if($("#embed2Mod_div embedShow_div embed[class='item_embed']").length>=5){
+	if($("#embed2Mod_div .embedList_div div[class='item_div']").length>=5){
 		alert("最多上传5段视频!");
 		return false;
 	}
@@ -350,10 +351,13 @@ function showQrcodeEmbed2(obj){
 	else
 		embedTag="iframe";
 	embedListDiv.append("<div class=\"item_div\" id=\"item_div"+uuid+"\">"
-				+"<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\">"
-				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteEmbed2(this);\">"
+				+"<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\"\>"
 			+"</div>"+fileHtml);
 	
+	addDelImgTimeout2=setTimeout(function(){
+		embedListDiv.find("#item_div"+uuid).append("<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteEmbed2(this);\">");
+		clearTimeout(addDelImgTimeout2);
+	},"1000");
 
 	var $file = $(obj);
     var fileObj = $file[0];
@@ -614,6 +618,22 @@ function checkIfPaid(){
 					<embed class="item_embed" id="embed2_1" alt="" src="/GoodsPublic/upload/embed/jydg/20220628152315.mp4">
 					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
 				</div>
+				<div class="item_div" id="item_div2_2">
+					<embed class="item_embed" id="embed2_2" alt="" src="/GoodsPublic/upload/embed/jydg/20220628152315.mp4">
+					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+				</div>
+				<div class="item_div" id="item_div2_3">
+					<embed class="item_embed" id="embed2_3" alt="" src="/GoodsPublic/upload/embed/jydg/20220628152315.mp4">
+					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+				</div>
+				<div class="item_div" id="item_div2_4">
+					<embed class="item_embed" id="embed2_4" alt="" src="/GoodsPublic/upload/embed/jydg/20220628152315.mp4">
+					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+				</div>
+				<div class="item_div" id="item_div2_5">
+					<embed class="item_embed" id="embed2_5" alt="" src="/GoodsPublic/upload/embed/jydg/20220628152315.mp4">
+					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+				</div>
 			</div>
 			<div class="upload_div" onclick="uploadEmbed2();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">上传</div>
 			<div class="uploadFile4_div" id="uploadFile4_div">
@@ -809,7 +829,7 @@ function checkIfPaid(){
 		</div>
 		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:forEach items="${requestScope.pdf1List }" var="pdf1" varStatus="status">
-			<div class="item_pdf" id="pdf1_1">
+			<div class="item_pdf" id="pdf1_1" onclick="window.open('${pdf1.url }');">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
 				<span class="name_span">${pdf1.name }.${pdf1.suffix }</span>
 				<span class="size_span">${pdf1.size }${pdf1.unit }</span>
