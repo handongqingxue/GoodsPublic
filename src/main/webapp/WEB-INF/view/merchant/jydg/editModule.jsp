@@ -19,7 +19,9 @@
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+var path='<%=basePath %>';
 var editor1,editor2;
+var addDelImgTimeout2;
 KindEditor.ready(function(K) {
 	editor1 = K.create('textarea[name="memo1"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
@@ -125,15 +127,15 @@ function renameFile(){
 		//console.log($(this).attr("name"));
 	});
 	$("#uploadFile3_div input[type='file']").each(function(i){
-		$(this).attr("name","file2_"+(i+1));
+		$(this).attr("name","file3_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
 	$("#uploadFile4_div input[type='file']").each(function(i){
-		$(this).attr("name","file2_"+(i+1));
+		$(this).attr("name","file4_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
 	$("#uploadFile5_div input[type='file']").each(function(i){
-		$(this).attr("name","file2_"+(i+1));
+		$(this).attr("name","file5_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
 }
@@ -504,6 +506,10 @@ function uploadPdf1(){
 }
 
 function uploadImage1(){
+	if($("#image1Mod_div table td[class='file_td']").length>=5){
+		alert("最多上传5张图片!");
+		return false;
+	}
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
 	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
@@ -512,6 +518,10 @@ function uploadImage1(){
 }
 
 function uploadImage2(){
+	if($("#image2Mod_div table td[class='file_td']").length>=5){
+		alert("最多上传5张图片!");
+		return false;
+	}
 	var uuid=createUUID();
 	$("#uuid_hid2").val(uuid);
 	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
@@ -618,8 +628,14 @@ function showQrcodeEmbed2(obj){
 		embedTag="embed";
 	else
 		embedTag="iframe";
-	embedListDiv.html("<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\">"
-			+fileHtml);
+	embedListDiv.append("<div class=\"item_div\" id=\"item_div"+uuid+"\">"
+			+"<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\"\>"
+		+"</div>"+fileHtml);
+	
+	addDelImgTimeout2=setTimeout(function(){
+		embedListDiv.find("#item_div"+uuid).append("<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteEmbed2(this);\">");
+		clearTimeout(addDelImgTimeout2);
+	},"1000");
 
 	var $file = $(obj);
     var fileObj = $file[0];
@@ -632,7 +648,78 @@ function showQrcodeEmbed2(obj){
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
         $embed.attr("src", dataURL);
         
-        $("#embed2_div #embed2_1").replaceWith("<"+embedTag+" class=\"item_embed\" id=\"embed2_1\" src=\""+dataURL+"\"/>");
+        var listDiv=$("#embed2_div #list_div");
+        listDiv.append("<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" src=\""+dataURL+"\"/>");
+
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function showQrcodePdf1(obj){
+	var uuid=$("#uuid_hid5").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+
+	var appendStr="<div class=\"item_pdf\" id=\"pdf"+uuid+"\">";
+		appendStr+="<input type=\"hidden\" id=\"url_hid"+uuid+"\"/>";
+		appendStr+="<img class=\"file_img\" alt=\"\" src=\""+path+"/resource/images/011.png\">";
+		appendStr+="<span class=\"name_span\" id=\"name_span"+uuid+"\"></span>";
+		appendStr+="<span class=\"size_span\" id=\"size_span"+uuid+"\"></span>";
+		appendStr+="</div>";
+	var pdfModListDiv=$("#pdf1Mod_div #pdfList_div");
+	pdfModListDiv.html(appendStr);
+	
+	var pdfListDiv=$("#pdf1_div #list_div");
+	pdfListDiv.html(appendStr);
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var fileName;
+    var fileSize;
+    
+    var modPdfDiv = pdfModListDiv.find("#pdf"+uuid);
+    var modUrlHid = pdfModListDiv.find("#url_hid"+uuid);
+    var modNameSpan = pdfModListDiv.find("#name_span"+uuid);
+    var modSizeSpan = pdfModListDiv.find("#size_span"+uuid);
+
+    var pdfDiv = pdfListDiv.find("#pdf"+uuid);
+    var urlHid = pdfListDiv.find("#url_hid"+uuid);
+    var nameSpan = pdfListDiv.find("#name_span"+uuid);
+    var sizeSpan = pdfListDiv.find("#size_span"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        fileName=fileObj.files[0].name;
+        fileSize=(fileObj.files[0].size/1024).toFixed(2)+"kb";
+
+        modPdfDiv.attr("onclick","window.open('"+dataURL+"')")
+        modUrlHid.val(dataURL);
+        modNameSpan.text(fileName);
+        modSizeSpan.text(fileSize);
+        
+        pdfDiv.attr("onclick","window.open('"+dataURL+"')")
+        urlHid.val(dataURL);
+        nameSpan.text(fileName);
+        sizeSpan.text(fileSize);
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -910,40 +997,40 @@ function goBack(){
 			<table>
 				<c:if test="${requestScope.htmlGoodsJYDG.image1_1 ne null||requestScope.htmlGoodsJYDG.image1_2 ne null||requestScope.htmlGoodsJYDG.image1_3 ne null||requestScope.htmlGoodsJYDG.image1_4 ne null }">
 				<tr>
-					<c:if test="${requestScope.htmlGoodsJYDG.image1_1 ne null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_1 ne null&&requestScope.htmlGoodsJYDG.image1_1 ne '' }">
 					<td class="file_td" id="file_td1_1">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
 						<img class="item_img" id="img1_1" alt="" src="${requestScope.htmlGoodsJYDG.image1_1 }">
 					</td>
 					</c:if>
-					<c:if test="${requestScope.htmlGoodsJYDG.image1_2 ne null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_2 ne null&&requestScope.htmlGoodsJYDG.image1_2 ne '' }">
 					<td class="file_td" id="file_td1_2">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
 						<img class="item_img" id="img1_2"  alt="" src="${requestScope.htmlGoodsJYDG.image1_2 }">
 					</td>
 					</c:if>
-					<c:if test="${requestScope.htmlGoodsJYDG.image1_3 ne null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_3 ne null&&requestScope.htmlGoodsJYDG.image1_3 ne '' }">
 					<td class="file_td" id="file_td1_3">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
 						<img class="item_img" id="img1_3" alt="" src="${requestScope.htmlGoodsJYDG.image1_3 }">
 					</td>
 					</c:if>
-					<c:if test="${requestScope.htmlGoodsJYDG.image1_4 ne null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_4 ne null&&requestScope.htmlGoodsJYDG.image1_4 ne '' }">
 					<td class="file_td" id="file_td1_4">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
 						<img class="item_img" id="img1_4" alt="" src="${requestScope.htmlGoodsJYDG.image1_4 }">
 					</td>
 					</c:if>
-					<c:if test="${requestScope.htmlGoodsJYDG.image1_5 eq null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_5 eq null&&requestScope.htmlGoodsJYDG.image1_5 ne '' }">
 					<td id="upload_td">
 						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 					</c:if>
 				</tr>
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsJYDG.image1_5 ne null}">
+				<c:if test="${requestScope.htmlGoodsJYDG.image1_5 ne null&&requestScope.htmlGoodsJYDG.image1_5 ne ''}">
 				<tr>
-					<c:if test="${requestScope.htmlGoodsJYDG.image1_5 ne null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image1_5 ne null&&requestScope.htmlGoodsJYDG.image1_5 ne '' }">
 					<td class="file_td" id="file_td1_5">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
 						<img class="item_img" id="img1_5" alt="" src="${requestScope.htmlGoodsJYDG.image1_5 }">
@@ -956,25 +1043,25 @@ function goBack(){
 				</c:if>
 			</table>
 			<div class="uploadFile1_div" id="uploadFile1_div">
-				<c:if test="${requestScope.htmlGoodsSMYL.image1_1 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.image1_1 ne null&&requestScope.htmlGoodsJYDG.image1_1 ne '' }">
 				<input type="file" id="file1_1" name="file1_1" onchange="showQrcodePic1(this)" />
-				<input type="text" id="image1_1" name="image1_1" value="${requestScope.htmlGoodsSMYL.image1_1 }" />
+				<input type="text" id="image1_1" name="image1_1" value="${requestScope.htmlGoodsJYDG.image1_1 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsSMYL.image1_2 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.image1_2 ne null&&requestScope.htmlGoodsJYDG.image1_2 ne '' }">
 				<input type="file" id="file1_2" name="file1_2" onchange="showQrcodePic1(this)" />
-				<input type="text" id="image1_2" name="image1_2" value="${requestScope.htmlGoodsSMYL.image1_2 }" />
+				<input type="text" id="image1_2" name="image1_2" value="${requestScope.htmlGoodsJYDG.image1_2 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsSMYL.image1_3 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.image1_3 ne null&&requestScope.htmlGoodsJYDG.image1_3 ne '' }">
 				<input type="file" id="file1_3" name="file1_3" onchange="showQrcodePic1(this)" />
-				<input type="text" id="image1_3" name="image1_3" value="${requestScope.htmlGoodsSMYL.image1_3 }" />
+				<input type="text" id="image1_3" name="image1_3" value="${requestScope.htmlGoodsJYDG.image1_3 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsSMYL.image1_4 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.image1_4 ne null&&requestScope.htmlGoodsJYDG.image1_4 ne '' }">
 				<input type="file" id="file1_4" name="file1_4" onchange="showQrcodePic1(this)" />
-				<input type="text" id="image1_4" name="image1_4" value="${requestScope.htmlGoodsSMYL.image1_4 }" />
+				<input type="text" id="image1_4" name="image1_4" value="${requestScope.htmlGoodsJYDG.image1_4 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsSMYL.image1_5 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.image1_5 ne null&&requestScope.htmlGoodsJYDG.image1_5 ne '' }">
 				<input type="file" id="file1_5" name="file1_5" onchange="showQrcodePic1(this)" />
-				<input type="text" id="image1_5" name="image1_5" value="${requestScope.htmlGoodsSMYL.image1_5 }" />
+				<input type="text" id="image1_5" name="image1_5" value="${requestScope.htmlGoodsJYDG.image1_5 }" />
 				</c:if>
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
@@ -996,40 +1083,40 @@ function goBack(){
 			<table>
 				<c:if test="${requestScope.htmlGoodsJYDG.image2_1 ne null||requestScope.htmlGoodsJYDG.image2_2 ne null||requestScope.htmlGoodsJYDG.image2_3 ne null||requestScope.htmlGoodsJYDG.image2_4 ne null }">
 				<tr>
-					<c:if test="${requestScope.htmlGoodsJYDG.image2_1 ne null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_1 ne null&&requestScope.htmlGoodsJYDG.image2_1 ne '' }">
 					<td class="file_td" id="file_td2_1">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
 						<img class="item_img" id="img2_1" alt="" src="${requestScope.htmlGoodsJYDG.image2_1 }">
 					</td>
 					</c:if>
-					<c:if test="${requestScope.htmlGoodsJYDG.image2_2 ne null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_2 ne null&&requestScope.htmlGoodsJYDG.image2_2 ne '' }">
 					<td class="file_td" id="file_td2_2">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
 						<img class="item_img" id="img2_2"  alt="" src="${requestScope.htmlGoodsJYDG.image2_2 }">
 					</td>
 					</c:if>
-					<c:if test="${requestScope.htmlGoodsJYDG.image2_3 ne null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_3 ne null&&requestScope.htmlGoodsJYDG.image2_3 ne '' }">
 					<td class="file_td" id="file_td2_3">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
 						<img class="item_img" id="img2_3" alt="" src="${requestScope.htmlGoodsJYDG.image2_3 }">
 					</td>
 					</c:if>
-					<c:if test="${requestScope.htmlGoodsJYDG.image2_4 ne null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_4 ne null&&requestScope.htmlGoodsJYDG.image2_4 ne '' }">
 					<td class="file_td" id="file_td2_4">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
 						<img class="item_img" id="img2_4" alt="" src="${requestScope.htmlGoodsJYDG.image2_4 }">
 					</td>
 					</c:if>
-					<c:if test="${requestScope.htmlGoodsJYDG.image2_5 eq null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_5 eq null&&requestScope.htmlGoodsJYDG.image2_5 ne '' }">
 					<td id="upload_td">
 						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
 					</td>
 					</c:if>
 				</tr>
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsJYDG.image2_5 ne null}">
+				<c:if test="${requestScope.htmlGoodsJYDG.image2_5 ne null&&requestScope.htmlGoodsJYDG.image2_5 ne '' }">
 				<tr>
-					<c:if test="${requestScope.htmlGoodsJYDG.image2_5 ne null }">
+					<c:if test="${requestScope.htmlGoodsJYDG.image2_5 ne null&&requestScope.htmlGoodsJYDG.image2_5 ne '' }">
 					<td class="file_td" id="file_td2_5">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
 						<img class="item_img" id="img2_5" alt="" src="${requestScope.htmlGoodsJYDG.image2_5 }">
@@ -1042,25 +1129,25 @@ function goBack(){
 				</c:if>
 			</table>
 			<div class="uploadFile2_div" id="uploadFile2_div">
-				<c:if test="${requestScope.htmlGoodsSMYL.image2_1 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.image2_1 ne null&&requestScope.htmlGoodsJYDG.image2_1 ne '' }">
 				<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" />
-				<input type="text" id="image2_1" name="image2_1" value="${requestScope.htmlGoodsSMYL.image1_1 }" />
+				<input type="text" id="image2_1" name="image2_1" value="${requestScope.htmlGoodsJYDG.image2_1 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsSMYL.image2_2 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.image2_2 ne null&&requestScope.htmlGoodsJYDG.image2_2 ne '' }">
 				<input type="file" id="file2_2" name="file2_2" onchange="showQrcodePic2(this)" />
-				<input type="text" id="image2_2" name="image2_2" value="${requestScope.htmlGoodsSMYL.image1_2 }" />
+				<input type="text" id="image2_2" name="image2_2" value="${requestScope.htmlGoodsJYDG.image2_2 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsSMYL.image2_3 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.image2_3 ne null&&requestScope.htmlGoodsJYDG.image2_3 ne '' }">
 				<input type="file" id="file2_3" name="file2_3" onchange="showQrcodePic2(this)" />
-				<input type="text" id="image2_3" name="image2_3" value="${requestScope.htmlGoodsSMYL.image2_3 }" />
+				<input type="text" id="image2_3" name="image2_3" value="${requestScope.htmlGoodsJYDG.image2_3 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsSMYL.image2_4 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.image2_4 ne null&&requestScope.htmlGoodsJYDG.image2_4 ne '' }">
 				<input type="file" id="file2_4" name="file2_4" onchange="showQrcodePic2(this)" />
-				<input type="text" id="image2_4" name="image2_4" value="${requestScope.htmlGoodsSMYL.image2_4 }" />
+				<input type="text" id="image2_4" name="image2_4" value="${requestScope.htmlGoodsJYDG.image2_4 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsSMYL.image2_5 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.image2_5 ne null&&requestScope.htmlGoodsJYDG.image2_5 ne '' }">
 				<input type="file" id="file2_5" name="file2_5" onchange="showQrcodePic2(this)" />
-				<input type="text" id="image2_5" name="image2_5" value="${requestScope.htmlGoodsSMYL.image2_5 }" />
+				<input type="text" id="image2_5" name="image2_5" value="${requestScope.htmlGoodsJYDG.image2_5 }" />
 				</c:if>
 			</div>
 			<input type="hidden" id="uuid_hid2"/>
@@ -1568,6 +1655,18 @@ function goBack(){
 			<c:if test="${requestScope.htmlGoodsJYDG.image1_1 ne null }">
 			<img class="item_img" id="img1_1" alt="" src="${requestScope.htmlGoodsJYDG.image1_1 }">
 			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image1_2 ne null }">
+			<img class="item_img" id="img1_2" alt="" src="${requestScope.htmlGoodsJYDG.image1_2 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image1_3 ne null }">
+			<img class="item_img" id="img1_3" alt="" src="${requestScope.htmlGoodsJYDG.image1_3 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image1_4 ne null }">
+			<img class="item_img" id="img1_4" alt="" src="${requestScope.htmlGoodsJYDG.image1_4 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image1_5 ne null }">
+			<img class="item_img" id="img1_5" alt="" src="${requestScope.htmlGoodsJYDG.image1_5 }">
+			</c:if>
 		</div>
 	</div>
 	<div class="embed2_div" id="embed2_div">
@@ -1609,8 +1708,20 @@ function goBack(){
 			</div>
 		</div>
 		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<c:if test="${requestScope.htmlGoodsJYDG.image2_1 ne null }">
+			<c:if test="${requestScope.htmlGoodsJYDG.image2_1 ne null&&requestScope.htmlGoodsJYDG.image2_1 ne '' }">
 			<img class="item_img" id="img2_1" alt="" src="${requestScope.htmlGoodsJYDG.image2_1 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image2_2 ne null }">
+			<img class="item_img" id="img2_2" alt="" src="${requestScope.htmlGoodsJYDG.image2_2 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image2_3 ne null }">
+			<img class="item_img" id="img2_3" alt="" src="${requestScope.htmlGoodsJYDG.image2_3 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image2_4 ne null }">
+			<img class="item_img" id="img2_4" alt="" src="${requestScope.htmlGoodsJYDG.image2_4 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJYDG.image2_5 ne null&&requestScope.htmlGoodsJYDG.image2_5 ne '' }">
+			<img class="item_img" id="img2_5" alt="" src="${requestScope.htmlGoodsJYDG.image2_5 }">
 			</c:if>
 		</div>
 		<div class="space_div"></div>
