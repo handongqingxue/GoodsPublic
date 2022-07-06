@@ -361,7 +361,6 @@ function previewHtmlGoodsJYDG(){
 		,"json");
 	}
 	else{
-		alert(11)
 		$("#preview_div #productName_div").text(dpn);
 		
 		var image1_1_src=disArr1[0];
@@ -570,7 +569,6 @@ function compareHtmlVal(){
 			return flag;
 		}
 	});
-	alert($("#uploadFile4_div input[id^='embed']").length)
 	$("#uploadFile4_div input[id^='embed']").each(function(i){
 		var embedSrc=$(this).val();
 		if(desArr2[i]!=embedSrc){
@@ -717,6 +715,9 @@ function uploadPdf1(){
 	var uuid=createUUID();
 	$("#uuid_hid5").val(uuid);
 	$("#uploadFile5_div").html("<input type=\"file\" id=\"uploadFile5_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePdf1(this)\"/>");
+	$("#uploadFile5_div").append("<input type=\"text\" id=\"pdfUrl"+uuid+"\" name=\"pdfUrl"+uuid+"\" />");
+	$("#uploadFile5_div").append("<input type=\"text\" id=\"pdfName"+uuid+"\" name=\"pdfName"+uuid+"\" />");
+	$("#uploadFile5_div").append("<input type=\"text\" id=\"pdfSize"+uuid+"\" name=\"pdfSize"+uuid+"\" />");
 	document.getElementById("uploadFile5_inp").click();
 }
 
