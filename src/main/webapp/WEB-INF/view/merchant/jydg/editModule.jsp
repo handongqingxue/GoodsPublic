@@ -564,11 +564,13 @@ function compareHtmlVal(){
 	});
 	$("#uploadFile3_div input[id^='embed']").each(function(i){
 		var embedSrc=$(this).val();
+		alert(embedSrc)
 		if(desArr1[i]!=embedSrc){
 			flag=false;
 			return flag;
 		}
 	});
+	alert($("#uploadFile4_div input[id^='embed']").length)
 	$("#uploadFile4_div input[id^='embed']").each(function(i){
 		var embedSrc=$(this).val();
 		if(desArr2[i]!=embedSrc){
@@ -701,6 +703,7 @@ function uploadEmbed1(){
 	var uuid=createUUID();
 	$("#uuid_hid3").val(uuid);
 	$("#uploadFile3_div").html("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>");
+	$("#uploadFile3_div").append("<input type=\"text\" id=\"embed"+uuid+"\" name=\"embed"+uuid+"\" />");
 	document.getElementById("uploadFile3_inp").click();
 }
 
@@ -1139,7 +1142,10 @@ function goBack(){
 		</div>
 		<div>
 			<div class="embedList_div" id="embedList_div">
-				<embed class="item_embed" id="embed2_1" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }">
+				<div class="item_div" id="item_div2_1">
+					<embed class="item_embed" id="embed2_1" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }">
+					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+				</div>
 			</div>
 			<div class="reupload_div" onclick="uploadEmbed2();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">重新上传</div>
 			<div class="uploadFile4_div" id="uploadFile4_div">
