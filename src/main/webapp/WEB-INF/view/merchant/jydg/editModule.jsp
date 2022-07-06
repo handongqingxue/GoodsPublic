@@ -55,6 +55,10 @@ $(function(){
 var dpn;
 var disArr1=[];
 var disArr2=[];
+var desArr1=[];
+var desArr2=[];
+var dpnsArr1=[];
+var dpssArr1=[];
 var dm1Html,dm2Html;
 function initDefaultHtmlVal(){
 	dpn=$("#middle_div #productName").val();
@@ -65,6 +69,20 @@ function initDefaultHtmlVal(){
 	for(var i=0;i<5;i++){
 		disArr2[i]="";
 		disArr2[i]=$("#image2_div #list_div img[id^='img']").eq(i).attr("src");
+	}
+	for(var i=0;i<1;i++){
+		desArr1[i]="";
+		desArr1[i]=$("#embed1_div #list_div embed[id^='embed']").eq(i).attr("src");
+	}
+	for(var i=0;i<5;i++){
+		desArr2[i]="";
+		desArr2[i]=$("#embed2_div #list_div embed[id^='embed']").eq(i).attr("src");
+	}
+	for(var i=0;i<3;i++){
+		dpnsArr1[i]="";
+		dpnsArr1[i]=$("#middle_div #pdf1_div #list_div div[id^='pdfUrl']").eq(i).find("span[class='name_span']").text();
+		dpssArr1[i]="";
+		dpssArr1[i]=$("#middle_div #pdf1_div #list_div div[id^='pdfUrl']").eq(i).find("span[class='size_span']").text();
 	}
 	setTimeout(function(){
 		dm1Html=editor1.html();
@@ -226,11 +244,124 @@ function previewHtmlGoodsJYDG(){
 					$("#preview_div #image1_5_img").attr("src",image1_5);
 				}
 				
+				var image2_1=previewJYDG.image2_1;
+				if(image2_1==null){
+					$("#preview_div #image2_1_img").css("display","none");
+					$("#preview_div #image2_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_1_img").css("display","block");
+					$("#preview_div #image2_1_img").attr("src",image2_1);
+				}
+				
+				var image2_2=previewJYDG.image2_2;
+				if(image2_2==null){
+					$("#preview_div #image2_2_img").css("display","none");
+					$("#preview_div #image2_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_2_img").css("display","block");
+					$("#preview_div #image2_2_img").attr("src",image2_2);
+				}
+				
+				var image2_3=previewJYDG.image2_3;
+				if(image2_3==null){
+					$("#preview_div #image2_3_img").css("display","none");
+					$("#preview_div #image2_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_3_img").css("display","block");
+					$("#preview_div #image2_3_img").attr("src",image2_3);
+				}
+				
+				var image2_4=previewJYDG.image2_4;
+				if(image2_4==null){
+					$("#preview_div #image2_4_img").css("display","none");
+					$("#preview_div #image2_4_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_4_img").css("display","block");
+					$("#preview_div #image2_4_img").attr("src",image2_4);
+				}
+				
+				var image2_5=previewJYDG.image2_5;
+				if(image2_5==null){
+					$("#preview_div #image2_5_img").css("display","none");
+					$("#preview_div #image2_5_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_5_img").css("display","block");
+					$("#preview_div #image2_5_img").attr("src",image2_5);
+				}
+				
+				var embed1_1=previewJYDG.embed1_1;
+				if(embed1_1==null){
+					$("#preview_div #embed1_1_embed").css("display","none");
+					$("#preview_div #embed1_1_embed").attr("src","");
+				}
+				else{
+					$("#preview_div #embed1_1_embed").css("display","block");
+					$("#preview_div #embed1_1_embed").attr("src",embed1_1);
+				}
+				
+				var embed2_1=previewJYDG.embed2_1;
+				if(embed2_1==null){
+					$("#preview_div #embed2_1_embed").css("display","none");
+					$("#preview_div #embed2_1_embed").attr("src","");
+				}
+				else{
+					$("#preview_div #embed2_1_embed").css("display","block");
+					$("#preview_div #embed2_1_embed").attr("src",embed2_1);
+				}
+
+				var pdfUrlDiv1_1=$("#preview_div #list_div #pdfUrl1_1");
+				var pdfName1_1=previewJYDG.pdfName1_1;
+				var pdfSize1_1=previewJYDG.pdfSize1_1;
+				if(pdfName1_1==null){
+					pdfUrlDiv1_1.css("display","none");
+					pdfUrlDiv1_1.find(".name_span").text("");
+					pdfUrlDiv1_1.find(".size_span").text("");
+				}
+				else{
+					pdfUrlDiv1_1.css("display","block");
+					pdfUrlDiv1_1.find(".name_span").text(pdfName1_1);
+					pdfUrlDiv1_1.find(".size_span").text(pdfSize1_1+"kb");
+				}
+
+				var pdfUrlDiv1_2=$("#preview_div #list_div #pdfUrl1_2");
+				var pdfName1_2=previewJYDG.pdfName1_2;
+				var pdfSize1_2=previewJYDG.pdfSize1_2;
+				if(pdfName1_2==null){
+					pdfUrlDiv1_2.css("display","none");
+					pdfUrlDiv1_2.find(".name_span").text("");
+					pdfUrlDiv1_2.find(".size_span").text("");
+				}
+				else{
+					pdfUrlDiv1_2.css("display","block");
+					pdfUrlDiv1_2.find(".name_span").text(pdfName1_2);
+					pdfUrlDiv1_2.find(".size_span").text(pdfSize1_2+"kb");
+				}
+
+				var pdfUrlDiv1_3=$("#preview_div #list_div #pdfUrl1_3");
+				var pdfName1_3=previewJYDG.pdfName1_3;
+				var pdfSize1_3=previewJYDG.pdfSize1_3;
+				if(pdfName1_3==null){
+					pdfUrlDiv1_3.css("display","none");
+					pdfUrlDiv1_3.find(".name_span").text("");
+					pdfUrlDiv1_3.find(".size_span").text("");
+				}
+				else{
+					pdfUrlDiv1_3.css("display","block");
+					pdfUrlDiv1_3.find(".name_span").text(pdfName1_3);
+					pdfUrlDiv1_3.find(".size_span").text(pdfSize1_3+"kb");
+				}
+				
 				initDefaultHtmlVal();
 			}
 		,"json");
 	}
 	else{
+		alert(11)
 		$("#preview_div #productName_div").text(dpn);
 		
 		var image1_1_src=disArr1[0];
@@ -332,6 +463,68 @@ function previewHtmlGoodsJYDG(){
 			$("#preview_div #image2_div #image2_5_img").css("display","block");
 			$("#preview_div #image2_div #image2_5_img").attr("src",image2_5_src);
 		}
+		
+		var embed1_1_src=desArr1[0];
+		if(embed1_1_src==undefined||embed1_1_src==""){
+			$("#preview_div #embed1_1_embed").css("display","none");
+			$("#preview_div #embed1_1_embed").attr("src","");
+		}
+		else{
+			$("#preview_div #embed1_1_embed").css("display","block");
+			$("#preview_div #embed1_1_embed").attr("src",embed1_1_src);
+		}
+		
+		var embed2_1_src=desArr2[0];
+		if(embed2_1_src==undefined||embed2_1_src==""){
+			$("#preview_div #embed2_1_embed").css("display","none");
+			$("#preview_div #embed2_1_embed").attr("src","");
+		}
+		else{
+			$("#preview_div #embed2_1_embed").css("display","block");
+			$("#preview_div #embed2_1_embed").attr("src",embed2_1_src);
+		}
+
+		var pdfUrlDiv1_1=$("#preview_div #list_div #pdfUrl1_1");
+		var pdfName1_1=dpnsArr1[0];
+		var pdfSize1_1=dpssArr1[0];
+		if(pdfName1_1==undefined||pdfName1_1==""){
+			pdfUrlDiv1_1.css("display","none");
+			pdfUrlDiv1_1.find(".name_span").text("");
+			pdfUrlDiv1_1.find(".size_span").text("");
+		}
+		else{
+			pdfUrlDiv1_1.css("display","block");
+			pdfUrlDiv1_1.find(".name_span").text(pdfName1_1);
+			pdfUrlDiv1_1.find(".size_span").text(pdfSize1_1);
+		}
+
+		var pdfUrlDiv1_2=$("#preview_div #list_div #pdfUrl1_2");
+		var pdfName1_2=dpnsArr1[1];
+		var pdfSize1_2=dpssArr1[1];
+		if(pdfName1_2==undefined||pdfName1_2==""){
+			pdfUrlDiv1_2.css("display","none");
+			pdfUrlDiv1_2.find(".name_span").text("");
+			pdfUrlDiv1_2.find(".size_span").text("");
+		}
+		else{
+			pdfUrlDiv1_2.css("display","block");
+			pdfUrlDiv1_2.find(".name_span").text(pdfName1_2);
+			pdfUrlDiv1_2.find(".size_span").text(pdfSize1_2);
+		}
+
+		var pdfUrlDiv1_3=$("#preview_div #list_div #pdfUrl1_3");
+		var pdfName1_3=dpnsArr1[2];
+		var pdfSize1_3=dpssArr1[2];
+		if(pdfName1_3==undefined||pdfName1_3==""){
+			pdfUrlDiv1_3.css("display","none");
+			pdfUrlDiv1_3.find(".name_span").text("");
+			pdfUrlDiv1_3.find(".size_span").text("");
+		}
+		else{
+			pdfUrlDiv1_3.css("display","block");
+			pdfUrlDiv1_3.find(".name_span").text(pdfName1_3);
+			pdfUrlDiv1_3.find(".size_span").text(pdfSize1_3);
+		}
 	}
 	openPreviewBgDiv(1);
 }
@@ -366,6 +559,28 @@ function compareHtmlVal(){
 	$("#uploadFile2_div input[id^='image']").each(function(i){
 		var imgSrc=$(this).val();
 		if(disArr2[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+	$("#uploadFile3_div input[id^='embed']").each(function(i){
+		var embedSrc=$(this).val();
+		if(desArr1[i]!=embedSrc){
+			flag=false;
+			return flag;
+		}
+	});
+	alert($("#uploadFile4_div input[id^='embed']").length)
+	$("#uploadFile4_div input[id^='embed']").each(function(i){
+		var embedSrc=$(this).val();
+		if(desArr2[i]!=embedSrc){
+			flag=false;
+			return flag;
+		}
+	});
+	$("#uploadFile5_div input[id^='pdfName']").each(function(i){
+		var pdfName=$(this).val();
+		if(dpnsArr1[i]!=pdfName){
 			flag=false;
 			return flag;
 		}
@@ -1163,7 +1378,7 @@ function goBack(){
 	<div class="preview_div" id="preview_div">
 		<div class="productName_div" id="productName_div"></div>
 		<div class="embed1_div" id="embed1_div">
-			<embed class="embed1_1_embed" id="embed1_1_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed1_1 }"/>
+			<embed class="embed1_1_embed" id="embed1_1_embed" alt="" src=""/>
 		</div>
 		<div class="jyyybl_div" id="jyyybl_div">
 			<div class="title_div">
@@ -1324,28 +1539,22 @@ function goBack(){
 			<div class="title_div">
 				<span class="text_span">产品说明书下载</span>
 			</div>
-			<div class="list_div">
-				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_1 ne null }">
+			<div class="list_div" id="list_div">
 				<div class="item_pdf" id="pdfUrl1_1">
 					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
-					<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_1 }.pdf</span>
-					<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_1 }kb</span>
+					<span class="name_span"></span>
+					<span class="size_span"></span>
 				</div>
-				</c:if>
-				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_2 ne null }">
 				<div class="item_pdf" id="pdfUrl1_2">
 					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
-					<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_2 }.pdf</span>
-					<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_2 }kb</span>
+					<span class="name_span"></span>
+					<span class="size_span"></span>
 				</div>
-				</c:if>
-				<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_3 ne null }">
 				<div class="item_pdf" id="pdfUrl1_3">
 					<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
-					<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_3 }.pdf</span>
-					<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_3 }kb</span>
+					<span class="name_span"></span>
+					<span class="size_span"></span>
 				</div>
-				</c:if>
 			</div>
 		</div>
 		<div class="memo2_div" id="memo2_div">
@@ -1372,7 +1581,7 @@ function goBack(){
 					<span class="text_span">拓展应用</span>
 				</div>
 			</div>
-			<embed class="embed2_1_embed" id="embed2_1_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }"/>
+			<embed class="embed2_1_embed" id="embed2_1_embed" alt="" src=""/>
 		</div>
 		<div class="image2_div"  id="image2_div">
 			<img class="image2_1_img" id="image2_1_img" alt="" src="">
@@ -1407,7 +1616,7 @@ function goBack(){
 				<a onclick="deleteEmbed1Div();">删除</a>
 			</div>
 		</div>
-		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsJYDG.embed1_1 ne null }">
 			<embed class="item_embed" id="embed1_1" alt="" src="${requestScope.htmlGoodsJYDG.embed1_1 }"/>
 			</c:if>
@@ -1610,25 +1819,25 @@ function goBack(){
 				<a onclick="deletePdf1Div();">删除</a>
 			</div>
 		</div>
-		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_1 ne null }">
 			<div class="item_pdf" id="pdfUrl1_1" onclick="window.open('${requestScope.htmlGoodsJYDG.pdfUrl1_1 }');">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
-				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_1 }.pdf</span>
+				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_1 }</span>
 				<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_1 }kb</span>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_2 ne null }">
 			<div class="item_pdf" id="pdfUrl1_2">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
-				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_2 }.pdf</span>
+				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_2 }</span>
 				<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_2 }kb</span>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_3 ne null }">
 			<div class="item_pdf" id="pdfUrl1_3">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
-				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_3 }.pdf</span>
+				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_3 }</span>
 				<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_3 }kb</span>
 			</div>
 			</c:if>
@@ -1682,7 +1891,7 @@ function goBack(){
 				<a onclick="deleteEmbed2Div();">删除</a>
 			</div>
 		</div>
-		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsJYDG.embed2_1 ne null }">
 			<embed class="item_embed" id="embed2_1" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }"/>
 			</c:if>
