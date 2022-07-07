@@ -313,6 +313,46 @@ function previewHtmlGoodsJYDG(){
 					$("#preview_div #embed2_1_embed").css("display","block");
 					$("#preview_div #embed2_1_embed").attr("src",embed2_1);
 				}
+				
+				var embed2_2=previewJYDG.embed2_2;
+				if(embed2_2==null){
+					$("#preview_div #embed2_2_embed").css("display","none");
+					$("#preview_div #embed2_2_embed").attr("src","");
+				}
+				else{
+					$("#preview_div #embed2_2_embed").css("display","block");
+					$("#preview_div #embed2_2_embed").attr("src",embed2_2);
+				}
+				
+				var embed2_3=previewJYDG.embed2_3;
+				if(embed2_3==null){
+					$("#preview_div #embed2_3_embed").css("display","none");
+					$("#preview_div #embed2_3_embed").attr("src","");
+				}
+				else{
+					$("#preview_div #embed2_3_embed").css("display","block");
+					$("#preview_div #embed2_3_embed").attr("src",embed2_3);
+				}
+				
+				var embed2_4=previewJYDG.embed2_4;
+				if(embed2_4==null){
+					$("#preview_div #embed2_4_embed").css("display","none");
+					$("#preview_div #embed2_4_embed").attr("src","");
+				}
+				else{
+					$("#preview_div #embed2_4_embed").css("display","block");
+					$("#preview_div #embed2_4_embed").attr("src",embed2_4);
+				}
+				
+				var embed2_5=previewJYDG.embed2_5;
+				if(embed2_5==null){
+					$("#preview_div #embed2_5_embed").css("display","none");
+					$("#preview_div #embed2_5_embed").attr("src","");
+				}
+				else{
+					$("#preview_div #embed2_5_embed").css("display","block");
+					$("#preview_div #embed2_5_embed").attr("src",embed2_5);
+				}
 
 				var pdfUrlDiv1_1=$("#preview_div #list_div #pdfUrl1_1");
 				var pdfName1_1=previewJYDG.pdfName1_1;
@@ -482,6 +522,46 @@ function previewHtmlGoodsJYDG(){
 			$("#preview_div #embed2_1_embed").css("display","block");
 			$("#preview_div #embed2_1_embed").attr("src",embed2_1_src);
 		}
+		
+		var embed2_2_src=desArr2[1];
+		if(embed2_2_src==undefined||embed2_2_src==""){
+			$("#preview_div #embed2_2_embed").css("display","none");
+			$("#preview_div #embed2_2_embed").attr("src","");
+		}
+		else{
+			$("#preview_div #embed2_2_embed").css("display","block");
+			$("#preview_div #embed2_2_embed").attr("src",embed2_2_src);
+		}
+		
+		var embed2_3_src=desArr2[2];
+		if(embed2_3_src==undefined||embed2_3_src==""){
+			$("#preview_div #embed2_3_embed").css("display","none");
+			$("#preview_div #embed2_3_embed").attr("src","");
+		}
+		else{
+			$("#preview_div #embed2_3_embed").css("display","block");
+			$("#preview_div #embed2_3_embed").attr("src",embed2_3_src);
+		}
+		
+		var embed2_4_src=desArr2[3];
+		if(embed2_4_src==undefined||embed2_4_src==""){
+			$("#preview_div #embed2_4_embed").css("display","none");
+			$("#preview_div #embed2_4_embed").attr("src","");
+		}
+		else{
+			$("#preview_div #embed2_4_embed").css("display","block");
+			$("#preview_div #embed2_4_embed").attr("src",embed2_4_src);
+		}
+		
+		var embed2_5_src=desArr2[4];
+		if(embed2_5_src==undefined||embed2_5_src==""){
+			$("#preview_div #embed2_5_embed").css("display","none");
+			$("#preview_div #embed2_5_embed").attr("src","");
+		}
+		else{
+			$("#preview_div #embed2_5_embed").css("display","block");
+			$("#preview_div #embed2_5_embed").attr("src",embed2_5_src);
+		}
 
 		var pdfUrlDiv1_1=$("#preview_div #list_div #pdfUrl1_1");
 		var pdfName1_1=dpnsArr1[0];
@@ -564,13 +644,11 @@ function compareHtmlVal(){
 	});
 	$("#uploadFile3_div input[id^='embed']").each(function(i){
 		var embedSrc=$(this).val();
-		alert(embedSrc)
 		if(desArr1[i]!=embedSrc){
 			flag=false;
 			return flag;
 		}
 	});
-	alert($("#uploadFile4_div input[id^='embed']").length)
 	$("#uploadFile4_div input[id^='embed']").each(function(i){
 		var embedSrc=$(this).val();
 		if(desArr2[i]!=embedSrc){
@@ -702,15 +780,16 @@ function changeButStyle(o,flag){
 function uploadEmbed1(){
 	var uuid=createUUID();
 	$("#uuid_hid3").val(uuid);
-	$("#uploadFile3_div").html("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>");
-	$("#uploadFile3_div").append("<input type=\"text\" id=\"embed"+uuid+"\" name=\"embed"+uuid+"\" />");
+	$("#uploadFile3_div").html("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>"
+							  +"<input type=\"text\" id=\"embed"+uuid+"\" name=\"embed"+uuid+"\" />");
 	document.getElementById("uploadFile3_inp").click();
 }
 
 function uploadEmbed2(){
 	var uuid=createUUID();
 	$("#uuid_hid4").val(uuid);
-	$("#uploadFile4_div").html("<input type=\"file\" id=\"uploadFile4_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed2(this)\"/>");
+	$("#uploadFile4_div").append("<input type=\"file\" id=\"uploadFile4_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed2(this)\"/>");
+	$("#uploadFile4_div").append("<input type=\"text\" id=\"embed"+uuid+"\" name=\"embed"+uuid+"\" />");
 	document.getElementById("uploadFile4_inp").click();
 }
 
@@ -746,6 +825,23 @@ function uploadImage2(){
 	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
 	$("#uploadFile2_div").append("<input type=\"text\" id=\"image"+uuid+"\" name=\"image"+uuid+"\" />");
 	document.getElementById("uploadFile2_inp").click();
+}
+
+function deleteEmbed2(o){
+	var curItem=$(o).parent();
+	var uuid=curItem.attr("id").substring(8);
+	$("#embed2_div #list_div embed[id='embed"+uuid+"']").remove();
+	curItem.remove();
+	$("#uploadFile4_div input[type='file'][name='file"+uuid+"']").remove();
+	
+	var embedListDiv=$("#embed2Mod_div #embedList_div");
+	var itemArr1=embedListDiv.find(".item_div");
+	embedListDiv.empty();
+	for(var i=0;i<itemArr1.length;i++){
+		embedListDiv.append(itemArr1[i]);
+	}
+	
+	resetDivPosition();
 }
 
 function deleteImage1(o){
@@ -1142,16 +1238,58 @@ function goBack(){
 		</div>
 		<div>
 			<div class="embedList_div" id="embedList_div">
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_1 ne null }">
 				<div class="item_div" id="item_div2_1">
 					<embed class="item_embed" id="embed2_1" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }">
 					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
 				</div>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_2 ne null }">
+				<div class="item_div" id="item_div2_2">
+					<embed class="item_embed" id="embed2_2" alt="" src="${requestScope.htmlGoodsJYDG.embed2_2 }">
+					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+				</div>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_3 ne null }">
+				<div class="item_div" id="item_div2_3">
+					<embed class="item_embed" id="embed2_3" alt="" src="${requestScope.htmlGoodsJYDG.embed2_3 }">
+					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+				</div>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_4 ne null }">
+				<div class="item_div" id="item_div2_4">
+					<embed class="item_embed" id="embed2_4" alt="" src="${requestScope.htmlGoodsJYDG.embed2_4 }">
+					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+				</div>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_5 ne null }">
+				<div class="item_div" id="item_div2_5">
+					<embed class="item_embed" id="embed2_5" alt="" src="${requestScope.htmlGoodsJYDG.embed2_5 }">
+					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+				</div>
+				</c:if>
 			</div>
 			<div class="reupload_div" onclick="uploadEmbed2();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">重新上传</div>
 			<div class="uploadFile4_div" id="uploadFile4_div">
-				<c:if test="${requestScope.htmlGoodsJYDG.embed1_1 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_1 ne null }">
 				<input type="file" id="file4_1" name="file4_1" onchange="showQrcodeEmbed2(this)" />
 				<input type="text" id="embed2_1" name="embed2_1" value="${requestScope.htmlGoodsJYDG.embed2_1 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_2 ne null }">
+				<input type="file" id="file4_2" name="file4_2" onchange="showQrcodeEmbed2(this)" />
+				<input type="text" id="embed2_2" name="embed2_2" value="${requestScope.htmlGoodsJYDG.embed2_2 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_3 ne null }">
+				<input type="file" id="file4_3" name="file4_3" onchange="showQrcodeEmbed2(this)" />
+				<input type="text" id="embed2_3" name="embed2_3" value="${requestScope.htmlGoodsJYDG.embed2_3 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_4 ne null }">
+				<input type="file" id="file4_4" name="file4_4" onchange="showQrcodeEmbed2(this)" />
+				<input type="text" id="embed2_4" name="embed2_4" value="${requestScope.htmlGoodsJYDG.embed2_4 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_5 ne null }">
+				<input type="file" id="file4_5" name="file4_5" onchange="showQrcodeEmbed2(this)" />
+				<input type="text" id="embed2_5" name="embed2_5" value="${requestScope.htmlGoodsJYDG.embed2_5 }" />
 				</c:if>
 			</div>
 			<input type="hidden" id="uuid_hid4"/>
@@ -1589,6 +1727,10 @@ function goBack(){
 				</div>
 			</div>
 			<embed class="embed2_1_embed" id="embed2_1_embed" alt="" src=""/>
+			<embed class="embed2_2_embed" id="embed2_2_embed" alt="" src=""/>
+			<embed class="embed2_3_embed" id="embed2_3_embed" alt="" src=""/>
+			<embed class="embed2_4_embed" id="embed2_4_embed" alt="" src=""/>
+			<embed class="embed2_5_embed" id="embed2_5_embed" alt="" src=""/>
 		</div>
 		<div class="image2_div"  id="image2_div">
 			<img class="image2_1_img" id="image2_1_img" alt="" src="">

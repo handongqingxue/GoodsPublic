@@ -185,22 +185,22 @@ http://localhost:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jydg&goods
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_1 ne null }">
 			<div class="item_pdf" id="pdf1_1">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
-				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_1 }.pdf</span>
-				<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_1 }kb</span>
+				<div class="name_div">${requestScope.htmlGoodsJYDG.pdfName1_1 }</div>
+				<div class="size_div">${requestScope.htmlGoodsJYDG.pdfSize1_1 }kb</div>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_2 ne null }">
 			<div class="item_pdf" id="pdf1_2">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
-				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_2 }.pdf</span>
-				<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_2 }kb</span>
+				<div class="name_div">${requestScope.htmlGoodsJYDG.pdfName1_2 }</div>
+				<div class="size_div">${requestScope.htmlGoodsJYDG.pdfSize1_2 }kb</div>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_3 ne null }">
 			<div class="item_pdf" id="pdf1_3">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
-				<span class="name_span">${requestScope.htmlGoodsJYDG.pdfName1_3 }.pdf</span>
-				<span class="size_span">${requestScope.htmlGoodsJYDG.pdfSize1_3 }kb</span>
+				<div class="name_div">${requestScope.htmlGoodsJYDG.pdfName1_3 }</div>
+				<div class="size_div">${requestScope.htmlGoodsJYDG.pdfSize1_3 }kb</div>
 			</div>
 			</c:if>
 		</div>
@@ -240,7 +240,29 @@ http://localhost:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jydg&goods
 			</div>
 		</div>
 		<c:if test="${requestScope.htmlGoodsJYDG.embed2_1 ne null }">
-			<embed class="embed2_1_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }">
+			<div class="content_div">
+				<embed class="embed2_1_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }">
+			</div>
+		</c:if>
+		<c:if test="${requestScope.htmlGoodsJYDG.embed2_2 ne null }">
+			<div class="content_div">
+				<embed class="embed2_2_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_2 }">
+			</div>
+		</c:if>
+		<c:if test="${requestScope.htmlGoodsJYDG.embed2_3 ne null }">
+			<div class="content_div">
+				<embed class="embed2_3_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_3 }">
+			</div>
+		</c:if>
+		<c:if test="${requestScope.htmlGoodsJYDG.embed2_4 ne null }">
+			<div class="content_div">
+				<embed class="embed2_4_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_4 }">
+			</div>
+		</c:if>
+		<c:if test="${requestScope.htmlGoodsJYDG.embed2_5 ne null }">
+			<div class="content_div">
+				<embed class="embed2_5_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_5 }">
+			</div>
 		</c:if>
 	</div>
 	<div class="image2_div"  id="image2_div">
