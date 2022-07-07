@@ -830,9 +830,22 @@ function uploadImage2(){
 function deleteEmbed2(o){
 	var curItem=$(o).parent();
 	var uuid=curItem.attr("id").substring(8);
-	$("#embed2_div #list_div embed[id='embed"+uuid+"']").remove();
+	$("#embed2_div #list_div embed[id='embed"+uuid+"']").remove();//移除的视频标签不一定是两种格式下的哪种，都移除保险些
+	$("#embed2_div #list_div iframe[id='embed"+uuid+"']").remove();
 	curItem.remove();
-	$("#uploadFile4_div input[type='file'][name='file"+uuid+"']").remove();
+	if(uuid=="2_1")
+		$("#uploadFile4_div input[type='file'][name='file4_1']").remove();
+	else if(uuid=="2_2")
+		$("#uploadFile4_div input[type='file'][name='file4_2']").remove();
+	else if(uuid=="2_3")
+		$("#uploadFile4_div input[type='file'][name='file4_3']").remove();
+	else if(uuid=="2_4")
+		$("#uploadFile4_div input[type='file'][name='file4_4']").remove();
+	else if(uuid=="2_5")
+		$("#uploadFile4_div input[type='file'][name='file4_5']").remove();
+	else
+		$("#uploadFile4_div input[type='file'][name='file"+uuid+"']").remove();
+	$("#uploadFile4_div input[type='text'][name='embed"+uuid+"']").remove();
 	
 	var embedListDiv=$("#embed2Mod_div #embedList_div");
 	var itemArr1=embedListDiv.find(".item_div");
@@ -1269,7 +1282,7 @@ function goBack(){
 				</div>
 				</c:if>
 			</div>
-			<div class="reupload_div" onclick="uploadEmbed2();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">重新上传</div>
+			<div class="upload_div" onclick="uploadEmbed2();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">上传</div>
 			<div class="uploadFile4_div" id="uploadFile4_div">
 				<c:if test="${requestScope.htmlGoodsJYDG.embed2_1 ne null }">
 				<input type="file" id="file4_1" name="file4_1" onchange="showQrcodeEmbed2(this)" />

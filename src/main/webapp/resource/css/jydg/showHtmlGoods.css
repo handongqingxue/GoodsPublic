@@ -129,30 +129,31 @@ body{
 	border-left: #AD2E1B solid 5px;
 }
 .pdf1_div .list_div .item_pdf {
-  width: 100%;
-  height: 100px;
-  margin: 5px 0 25px 0;
-  border: #eee solid 1px;
-  border-radius: 10px;
+  	width: 100%;
+	height: 100px;
+	margin: 5px 0 25px 0;
+	border: #eee solid 1px;
+	cursor:pointer;
+	border-radius: 10px;
 }
 .pdf1_div .list_div .item_pdf .file_img {
-  width: 60px;
-  height: 80px;
-  margin-top: 10px;
-  margin-left: 10px;
+	width: 60px;
+	height: 80px;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 .pdf1_div .list_div .item_pdf .name_div {
-  width: 200px;
-  margin-top: -67px;
-  margin-left: 85px;
-  font-size: 14px;
+    width: 200px;
+    margin-top: -67px;
+    margin-left: 85px;
+    font-size: 14px;
 }
 .pdf1_div .list_div .item_pdf .size_div {
-  width: 200px;
-  margin-top: 17px;
-  margin-left: 85px;
-  color: #9B9B9B;
-  font-size: 12px;
+    width: 200px;
+    margin-top: 17px;
+    margin-left: 85px;
+    color: #9B9B9B;
+    font-size: 12px;
 }
 
 .image1_div,
