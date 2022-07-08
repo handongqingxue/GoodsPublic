@@ -7,6 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <title>商品</title>
 <%@include file="../js.jsp"%>
+<script type="text/javascript">
+var path='<%=basePath %>';
+</script>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/jydg/showHtmlGoods.css" />
 </head>
 <body>
@@ -19,7 +22,7 @@ http://localhost:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jydg&goods
 	</div>
 	<div class="embed1_div" id="embed1_div">
 		<c:if test="${requestScope.htmlGoodsJYDG.embed1_1 ne null }">
-			<embed class="embed1_1_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed1_1 }">
+			<embed class="embed1_1_embed" height=500 alt="" src="${requestScope.htmlGoodsJYDG.embed1_1 }">
 		</c:if>
 	</div>
 	<div class="jyyybl_div" id="jyyybl_div">
@@ -183,21 +186,21 @@ http://localhost:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jydg&goods
 		</div>
 		<div class="list_div">
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_1 ne null }">
-			<div class="item_pdf" id="pdf1_1" onclick="window.open('${requestScope.htmlGoodsJYDG.pdfUrl1_1 }');">
+			<div class="item_pdf" id="pdf1_1" onclick="window.open('${requestScope.htmlGoodsJYDG.pdfUrl1_1 }')">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
 				<div class="name_div">${requestScope.htmlGoodsJYDG.pdfName1_1 }</div>
 				<div class="size_div">${requestScope.htmlGoodsJYDG.pdfSize1_1 }kb</div>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_2 ne null }">
-			<div class="item_pdf" id="pdf1_2" onclick="window.open('${requestScope.htmlGoodsJYDG.pdfUrl1_1 }');">
+			<div class="item_pdf" id="pdf1_2" onclick="window.open('${requestScope.htmlGoodsJYDG.pdfUrl1_2 }');">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
 				<div class="name_div">${requestScope.htmlGoodsJYDG.pdfName1_2 }</div>
 				<div class="size_div">${requestScope.htmlGoodsJYDG.pdfSize1_2 }kb</div>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.pdfUrl1_3 ne null }">
-			<div class="item_pdf" id="pdf1_3" onclick="window.open('${requestScope.htmlGoodsJYDG.pdfUrl1_1 }');">
+			<div class="item_pdf" id="pdf1_3" onclick="window.open('${requestScope.htmlGoodsJYDG.pdfUrl1_3 }');">
 				<img class="file_img" alt="" src="<%=basePath %>/resource/images/011.png">
 				<div class="name_div">${requestScope.htmlGoodsJYDG.pdfName1_3 }</div>
 				<div class="size_div">${requestScope.htmlGoodsJYDG.pdfSize1_3 }kb</div>
