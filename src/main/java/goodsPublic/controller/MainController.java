@@ -2278,16 +2278,16 @@ public class MainController {
 							htmlGoodsJYDG.setEmbed2_1("/GoodsPublic/upload/embed/jydg/20220628152315.mp4");
 							break;
 						case 12:
-							htmlGoodsJYDG.setEmbed2_2("/GoodsPublic/upload/embed/jydg/20220628152315.mp4");
+							htmlGoodsJYDG.setEmbed2_2("/GoodsPublic/upload/embed/jydg/20220707171501.mp4");
 							break;
 						case 13:
-							htmlGoodsJYDG.setEmbed2_3("/GoodsPublic/upload/embed/jydg/20220628152315.mp4");
+							htmlGoodsJYDG.setEmbed2_3("/GoodsPublic/upload/embed/jydg/20220707171502.mp4");
 							break;
 						case 14:
-							htmlGoodsJYDG.setEmbed2_4("/GoodsPublic/upload/embed/jydg/20220628152315.mp4");
+							htmlGoodsJYDG.setEmbed2_4("/GoodsPublic/upload/embed/jydg/20220707171503.mp4");
 							break;
 						case 15:
-							htmlGoodsJYDG.setEmbed2_5("/GoodsPublic/upload/embed/jydg/20220628152315.mp4");
+							htmlGoodsJYDG.setEmbed2_5("/GoodsPublic/upload/embed/jydg/20220707171504.mp4");
 							break;
 						case 16:
 							htmlGoodsJYDG.setPdfUrl1_1("/GoodsPublic/upload/pdf/jydg/202206291433.pdf");

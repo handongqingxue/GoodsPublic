@@ -40,13 +40,7 @@ body{
 	margin-right: 20px;
 	cursor: pointer;
 }
-.embed1Mod_div .embedShow_div{
-	width: 550px;
-	height:300px;
-	margin:20px auto 0;
-	border: #eee solid 1px;
-	overflow-y: auto;
-}
+.embed1Mod_div .embedShow_div,
 .embed2Mod_div .embedList_div{
 	width: 550px;
 	height: 300px;

@@ -9,6 +9,27 @@
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
+var embedWHPercent=9/16;
+$(function(){
+	resetDivSize("embed1,embed2");
+});
+
+function resetDivSize(nameStr){
+	var bodyWidth=$("body").width();
+	var nameArr=nameStr.split(",");
+	for (var i = 0; i < nameArr.length; i++) {
+		if(nameArr[i]=="embed1"){
+			var embed1=$("#main_div #embed1_div embed");
+			var embed1Height=bodyWidth*0.95/embedWHPercent;
+			embed1.attr("height",embed1Height);
+		}
+		else if(nameArr[i]=="embed2"){
+			var embed2=$("#main_div #embed2_div .content_div embed");
+			var embed2Height=bodyWidth/embedWHPercent;
+			embed2.attr("height",embed2Height);
+		}
+	}
+}
 </script>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/jydg/showHtmlGoods.css" />
 </head>
@@ -22,7 +43,7 @@ http://localhost:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jydg&goods
 	</div>
 	<div class="embed1_div" id="embed1_div">
 		<c:if test="${requestScope.htmlGoodsJYDG.embed1_1 ne null }">
-			<embed class="embed1_1_embed" height=500 alt="" src="${requestScope.htmlGoodsJYDG.embed1_1 }">
+			<embed class="embed1_1_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed1_1 }">
 		</c:if>
 	</div>
 	<div class="jyyybl_div" id="jyyybl_div">

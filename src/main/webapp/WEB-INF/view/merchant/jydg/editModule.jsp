@@ -22,6 +22,7 @@
 var path='<%=basePath %>';
 var editor1,editor2;
 var addDelImgTimeout2;
+var embedWHPercent=9/16;
 KindEditor.ready(function(K) {
 	editor1 = K.create('textarea[name="memo1"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
@@ -40,10 +41,7 @@ KindEditor.ready(function(K) {
 
 var bodyWidth;
 $(function(){
-	bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
-	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
-	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
-
+	resetDivSize("embed1,embed2");
     //这里必须延迟1s，等图片加载完再重新设定右边div位置
     setTimeout(function(){
     	resetDivPosition();
@@ -90,9 +88,52 @@ function initDefaultHtmlVal(){
 	},"1000");
 }
 
+function resetDivSize(nameStr){
+	var nameArr=nameStr.split(",");
+	for (var i = 0; i < nameArr.length; i++) {
+		if(nameArr[i]=="embed1"){
+			var embed1Mod=$("#embed1Mod_div #embedList_div embed[id^='embed']");
+			var embed1ModHeight=embed1Mod.parent().width()/embedWHPercent;
+			embed1Mod.attr("height",embed1ModHeight);
+			
+			var embed1=$("#embed1_div #list_div embed[id^='embed']");
+			var embed1Height=embed1.width()/embedWHPercent;
+			embed1.attr("height",embed1Height);
+			
+			var iframe1Mod=$("#embed1Mod_div #embedList_div iframe[id^='embed']");
+			var iframe1ModHeight=iframe1Mod.parent().width()/embedWHPercent;
+			iframe1Mod.attr("height",iframe1ModHeight);
+			
+			var iframe1=$("#embed1_div #list_div iframe[id^='embed']");
+			var iframe1Height=iframe1.width()/embedWHPercent;
+			iframe1.attr("height",iframe1Height);
+		}
+		else if(nameArr[i]=="embed2"){
+			var embed2Mod=$("#embed2Mod_div #embedList_div embed[id^='embed']");
+			var embed2ModHeight=embed2Mod.parent().parent().width()/embedWHPercent;
+			embed2Mod.attr("height",embed2ModHeight);
+			
+			var embed2=$("#embed2_div #list_div embed[id^='embed']");
+			var embed2Height=embed2.width()/embedWHPercent;
+			embed2.attr("height",embed2Height);
+			
+			var iframe2Mod=$("#embed2Mod_div #embedList_div iframe[id^='embed']");
+			var iframe2ModHeight=iframe2Mod.parent().parent().width()/embedWHPercent;
+			iframe2Mod.attr("height",iframe2ModHeight);
+			
+			var iframe2=$("#embed2_div #list_div iframe[id^='embed']");
+			var iframe2Height=iframe2.width()/embedWHPercent;
+			iframe2.attr("height",iframe2Height);
+		}
+	}
+}
+
 function resetDivPosition(){
+	bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
+	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
 	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight))+"px");
+	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 }
 
 function deleteEmbed1Div(){
@@ -939,6 +980,7 @@ function showQrcodeEmbed1(obj){
         imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
 
     }
+	resetDivSize("embed1");
 }
 
 function showQrcodeEmbed2(obj){
@@ -956,12 +998,13 @@ function showQrcodeEmbed2(obj){
 		embedTag="embed";
 	else
 		embedTag="iframe";
+	
 	embedListDiv.append("<div class=\"item_div\" id=\"item_div"+uuid+"\">"
 			+"<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\"\>"
 		+"</div>"+fileHtml);
 	
 	addDelImgTimeout2=setTimeout(function(){
-		embedListDiv.find("#item_div"+uuid).append("<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteEmbed2(this);\">");
+		embedListDiv.find("#item_div"+uuid).find("#embed"+uuid).before("<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteEmbed2(this);\">");
 		clearTimeout(addDelImgTimeout2);
 	},"1000");
 
@@ -993,6 +1036,7 @@ function showQrcodeEmbed2(obj){
         imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
 
     }
+	resetDivSize("embed2");
 }
 
 function showQrcodePdf1(obj){
@@ -1253,32 +1297,32 @@ function goBack(){
 			<div class="embedList_div" id="embedList_div">
 				<c:if test="${requestScope.htmlGoodsJYDG.embed2_1 ne null }">
 				<div class="item_div" id="item_div2_1">
-					<embed class="item_embed" id="embed2_1" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }">
 					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+					<embed class="item_embed" id="embed2_1" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }">
 				</div>
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsJYDG.embed2_2 ne null }">
 				<div class="item_div" id="item_div2_2">
-					<embed class="item_embed" id="embed2_2" alt="" src="${requestScope.htmlGoodsJYDG.embed2_2 }">
 					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+					<embed class="item_embed" id="embed2_2" alt="" src="${requestScope.htmlGoodsJYDG.embed2_2 }">
 				</div>
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsJYDG.embed2_3 ne null }">
 				<div class="item_div" id="item_div2_3">
-					<embed class="item_embed" id="embed2_3" alt="" src="${requestScope.htmlGoodsJYDG.embed2_3 }">
 					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+					<embed class="item_embed" id="embed2_3" alt="" src="${requestScope.htmlGoodsJYDG.embed2_3 }">
 				</div>
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsJYDG.embed2_4 ne null }">
 				<div class="item_div" id="item_div2_4">
-					<embed class="item_embed" id="embed2_4" alt="" src="${requestScope.htmlGoodsJYDG.embed2_4 }">
 					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+					<embed class="item_embed" id="embed2_4" alt="" src="${requestScope.htmlGoodsJYDG.embed2_4 }">
 				</div>
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsJYDG.embed2_5 ne null }">
 				<div class="item_div" id="item_div2_5">
-					<embed class="item_embed" id="embed2_5" alt="" src="${requestScope.htmlGoodsJYDG.embed2_5 }">
 					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
+					<embed class="item_embed" id="embed2_5" alt="" src="${requestScope.htmlGoodsJYDG.embed2_5 }">
 				</div>
 				</c:if>
 			</div>
@@ -2082,7 +2126,7 @@ function goBack(){
 			<c:if test="${requestScope.htmlGoodsJYDG.image2_1 ne null&&requestScope.htmlGoodsJYDG.image2_1 ne '' }">
 			<img class="item_img" id="img2_1" alt="" src="${requestScope.htmlGoodsJYDG.image2_1 }">
 			</c:if>
-			<c:if test="${requestScope.htmlGoodsJYDG.image2_2 ne null }">
+			<c:if test="${requestScope.htmlGoodsJYDG.image2_2 ne null&&requestScope.htmlGoodsJYDG.image2_2 ne '' }">
 			<img class="item_img" id="img2_2" alt="" src="${requestScope.htmlGoodsJYDG.image2_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.image2_3 ne null }">

@@ -10,6 +10,27 @@
 <script type="text/javascript" src="<%=basePath %>resource/js/pdf/html2canvas.min.js"></script>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/jydg/browseHtmlGoods.css" />
 <script type="text/javascript">
+var embedWHPercent=9/16;
+$(function(){
+	resetDivSize("embed1,embed2");
+});
+
+function resetDivSize(nameStr){
+	var nameArr=nameStr.split(",");
+	for (var i = 0; i < nameArr.length; i++) {
+		if(nameArr[i]=="embed1"){
+			var embed1=$("#left_div #embed1_div embed");
+			var embed1Height=embed1.parent().parent().width()*0.95/embedWHPercent;
+			embed1.attr("height",embed1Height);
+		}
+		else if(nameArr[i]=="embed2"){
+			var embed2=$("#left_div #embed2_div .content_div embed[id^='embed']");
+			var embed2Height=embed2.parent().width()/embedWHPercent;
+			embed2.attr("height",embed2Height);
+		}
+	}
+}
+
 function editContent(goodsNumber,accountNumber){
 	location.href="${pageContext.request.contextPath}/merchant/main/goEditModule?trade=jydg&goodsNumber="+goodsNumber+"&accountNumber="+accountNumber;
 }

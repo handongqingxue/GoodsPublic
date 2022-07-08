@@ -41,29 +41,35 @@ body{
 	cursor: pointer;
 }
 .embed1Mod_div .embedList_div,
-.embed2Mod_div .embedList_div,
+.embed2Mod_div .embedList_div{
+	width: 550px;
+	height: 300px;
+	margin:20px auto 0;
+	border: #eee solid 1px;
+	overflow-y: auto;
+}
 .pdf1Mod_div .pdfList_div{
 	width: 550px;
-	margin:0 auto;
-	margin-top: 20px;
+	margin:20px auto 0;
 	border: #eee solid 1px;
 }
 .embed2Mod_div .embedList_div .item_div{
 	width: 100%;
-	height: 300px;
 	margin: 5px 0 25px 0;
 	border: #eee solid 1px;
-	border-radius:15px; 
+	border-radius:15px;
 }
 .embed2Mod_div .embedList_div .delete_img{
-	margin-top: -285px;
-	margin-left: -270px;
+	width: 40px;
+	height: 36px;
+	margin-right: 10px;
+	float: right;
 	cursor:pointer;
 }
 .embed1Mod_div .embedList_div .item_embed,
 .embed2Mod_div .embedList_div .item_embed{
 	width: 100%;
-	height: 300px;
+	margin-top: -20px;
 }
 .embed1Mod_div .reupload_div,
 .embed2Mod_div .upload_div,
@@ -462,15 +468,12 @@ body{
 	border-radius:5px;
 	display:none;
 }
+.embed2_div .list_div{
+	text-align: center;
+}
 .embed1_div .list_div .item_embed,.embed2_div .list_div .item_embed{
 	width: 600px;
-	height: 300px;
-	margin: 5px 0 25px 0;
-}
-.embed1_div .list_div .item_embed{
-	width: 600px;
-	height: 300px;
-	margin-top: 25px;
+	margin: 25px 0;
 }
 
 .jyyybl_div,.memo1_div,.memo2_div{
