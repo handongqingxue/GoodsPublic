@@ -168,11 +168,14 @@ body{
 	margin-top: 25px;
 }
 .embed2_div{
-	width: 95%;
+	width: 100%;
 	margin: auto;
 }
 .embed2_div .content_div{
 	width: 100%;
 	margin: 30px auto 0;
 	text-align: center;
+}
+.embed2_1_embed,.embed2_2_embed,.embed2_3_embed,.embed2_4_embed,.embed2_5_embed{
+	width: 95%;
 }
