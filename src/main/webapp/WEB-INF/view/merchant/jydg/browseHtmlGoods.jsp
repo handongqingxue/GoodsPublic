@@ -10,21 +10,23 @@
 <script type="text/javascript" src="<%=basePath %>resource/js/pdf/html2canvas.min.js"></script>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/jydg/browseHtmlGoods.css" />
 <script type="text/javascript">
+//https://blog.csdn.net/psyuhen/article/details/119783980
 var embedWHPercent=9/16;
 $(function(){
 	resetDivSize("embed1,embed2");
+	
 });
 
 function resetDivSize(nameStr){
 	var nameArr=nameStr.split(",");
 	for (var i = 0; i < nameArr.length; i++) {
 		if(nameArr[i]=="embed1"){
-			var embed1=$("#left_div #embed1_div embed");
+			var embed1=$("#left_div #embed1_div video");
 			var embed1Height=embed1.parent().parent().width()*0.95/embedWHPercent;
 			embed1.attr("height",embed1Height);
 		}
 		else if(nameArr[i]=="embed2"){
-			var embed2=$("#left_div #embed2_div .content_div embed[id^='embed']");
+			var embed2=$("#left_div #embed2_div .content_div video[id^='embed']");
 			var embed2Height=embed2.parent().width()/embedWHPercent;
 			embed2.attr("height",embed2Height);
 		}
@@ -84,7 +86,9 @@ function downloadQrocdeImg(){
 		</div>
 		<div class="embed1_div" id="embed1_div">
 			<c:if test="${requestScope.htmlGoodsJYDG.embed1_1 ne null }">
-				<embed alt="" src="${requestScope.htmlGoodsJYDG.embed1_1 }">
+			<video controls="true" controlslist="nodownload">
+			  <source src="${requestScope.htmlGoodsJYDG.embed1_1 }" type="video/mp4" />
+			</video>
 			</c:if>
 		</div>
 		<div class="jyyybl_div" id="jyyybl_div">
@@ -310,27 +314,37 @@ function downloadQrocdeImg(){
 			</div>
 			<c:if test="${requestScope.htmlGoodsJYDG.embed2_1 ne null }">
 			<div class="content_div">
-				<embed class="embed2_1_embed" id="embed2_1_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }"/>
+				<video class="embed2_1_embed" id="embed2_1_embed" controls="true" controlslist="nodownload">
+				  <source src="${requestScope.htmlGoodsJYDG.embed2_1 }" type="video/mp4" />
+				</video>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.embed2_2 ne null }">
 			<div class="content_div">
-				<embed class="embed2_2_embed" id="embed2_2_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_2 }"/>
+				<video class="embed2_2_embed" id="embed2_2_embed" controls="true" controlslist="nodownload">
+				  <source src="${requestScope.htmlGoodsJYDG.embed2_2 }" type="video/mp4" />
+				</video>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.embed2_3 ne null }">
 			<div class="content_div">
-				<embed class="embed2_3_embed" id="embed2_3_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_3 }"/>
+				<video class="embed2_3_embed" id="embed2_3_embed" controls="true" controlslist="nodownload">
+				  <source src="${requestScope.htmlGoodsJYDG.embed2_3 }" type="video/mp4" />
+				</video>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.embed2_4 ne null }">
 			<div class="content_div">
-				<embed class="embed2_4_embed" id="embed2_4_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_4 }"/>
+				<video class="embed2_4_embed" id="embed2_4_embed" controls="true" controlslist="nodownload">
+				  <source src="${requestScope.htmlGoodsJYDG.embed2_4 }" type="video/mp4" />
+				</video>
 			</div>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.embed2_5 ne null }">
 			<div class="content_div">
-				<embed class="embed2_5_embed" id="embed2_5_embed" alt="" src="${requestScope.htmlGoodsJYDG.embed2_5 }"/>
+				<video class="embed2_5_embed" id="embed2_5_embed" controls="true" controlslist="nodownload">
+				  <source src="${requestScope.htmlGoodsJYDG.embed2_5 }" type="video/mp4" />
+				</video>
 			</div>
 			</c:if>
 		</div>

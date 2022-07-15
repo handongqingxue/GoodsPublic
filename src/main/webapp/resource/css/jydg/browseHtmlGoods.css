@@ -112,9 +112,8 @@ body{
 	text-align: center;
 	background-color: #AD2E1B;
 }
-.embed1_div embed{
+.embed1_div video{
 	width: 95%;
-	margin: 25px auto;
 }
 
 .jyyybl_div,.memo1_div,.memo2_div{
@@ -270,7 +269,7 @@ body{
 	margin: 30px auto 0;
 	text-align: center;
 }
-.embed2_div embed{
+.embed2_div video{
 	width: 95%;
 }
 
