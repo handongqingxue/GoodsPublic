@@ -13,7 +13,12 @@ var path='<%=basePath %>';
 var embedWHPercent=9/16;
 $(function(){
 	resetDivSize("embed1,embed2");
+	setUnTouch("img");
 });
+
+function setUnTouch(tag){
+	$(tag).attr("ontouchstart","return false");
+}
 
 function resetDivSize(nameStr){
 	var bodyWidth=$("body").width();

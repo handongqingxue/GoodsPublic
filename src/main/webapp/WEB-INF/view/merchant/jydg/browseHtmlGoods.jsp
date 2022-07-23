@@ -14,7 +14,6 @@
 var embedWHPercent=9/16;
 $(function(){
 	resetDivSize("embed1,embed2");
-	
 });
 
 function resetDivSize(nameStr){
@@ -290,7 +289,7 @@ function downloadQrocdeImg(){
 		</div>
 		<div class="image1_div" id="image1_div">
 			<c:if test="${requestScope.htmlGoodsJYDG.image1_1 ne null }">
-				<img class="image1_1_img" alt="" src="${requestScope.htmlGoodsJYDG.image1_1 }">
+				<img class="image1_1_img" alt="" src="${requestScope.htmlGoodsJYDG.image1_1 }" >
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJYDG.image1_2 ne null }">
 				<img class="image1_2_img" alt="" src="${requestScope.htmlGoodsJYDG.image1_2 }">
