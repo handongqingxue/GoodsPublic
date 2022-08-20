@@ -718,7 +718,7 @@ function checkIfPaid(){
 			</div>
 			<div class="reupload_div" onclick="uploadEmbed1();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">重新上传</div>
 			<div class="uploadFile3_div" id="uploadFile3_div">
-				<input type="file" id="file3_1" name="file" onchange="showQrcodeEmbed1(this)" />
+				<input type="file" id="file3_1" name="file3_1" onchange="showQrcodeEmbed1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid3"/>
 		</div>
@@ -743,24 +743,28 @@ function checkIfPaid(){
 				</div>
 				<div class="item_div" id="item_div2_2">
 					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
-					<embed class="item_embed" id="embed2_2" alt="" src="/GoodsPublic/upload/embed/jydg/20220628152315.mp4">
+					<embed class="item_embed" id="embed2_2" alt="" src="/GoodsPublic/upload/embed/jydg/20220707171501.mp4">
 				</div>
 				<div class="item_div" id="item_div2_3">
 					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
-					<embed class="item_embed" id="embed2_3" alt="" src="/GoodsPublic/upload/embed/jydg/20220628152315.mp4">
+					<embed class="item_embed" id="embed2_3" alt="" src="/GoodsPublic/upload/embed/jydg/20220707171502.mp4">
 				</div>
 				<div class="item_div" id="item_div2_4">
 					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
-					<embed class="item_embed" id="embed2_4" alt="" src="/GoodsPublic/upload/embed/jydg/20220628152315.mp4">
+					<embed class="item_embed" id="embed2_4" alt="" src="/GoodsPublic/upload/embed/jydg/20220707171503.mp4">
 				</div>
 				<div class="item_div" id="item_div2_5">
 					<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteEmbed2(this);">
-					<embed class="item_embed" id="embed2_5" alt="" src="/GoodsPublic/upload/embed/jydg/20220628152315.mp4">
+					<embed class="item_embed" id="embed2_5" alt="" src="/GoodsPublic/upload/embed/jydg/20220707171504.mp4">
 				</div>
 			</div>
 			<div class="upload_div" onclick="uploadEmbed2();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">上传</div>
 			<div class="uploadFile4_div" id="uploadFile4_div">
-				<input type="file" id="file4_1" name="file" onchange="showQrcodeEmbed2(this)" />
+				<input type="file" id="file4_1" name="file4_1" onchange="showQrcodeEmbed2(this)" />
+				<input type="file" id="file4_2" name="file4_2" onchange="showQrcodeEmbed2(this)" />
+				<input type="file" id="file4_3" name="file4_3" onchange="showQrcodeEmbed2(this)" />
+				<input type="file" id="file4_4" name="file4_4" onchange="showQrcodeEmbed2(this)" />
+				<input type="file" id="file4_5" name="file4_5" onchange="showQrcodeEmbed2(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid4"/>
 		</div>

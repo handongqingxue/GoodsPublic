@@ -193,6 +193,10 @@ function renameFile(){
 		$(this).attr("name","file4_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
+	$("#uploadFile4_div input[type='text']").each(function(i){
+		$(this).attr("name","embed2_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
 	$("#uploadFile5_div input[type='file']").each(function(i){
 		$(this).attr("name","file5_"+(i+1));
 		//console.log($(this).attr("name"));
@@ -1328,23 +1332,23 @@ function goBack(){
 			</div>
 			<div class="upload_div" onclick="uploadEmbed2();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">上传</div>
 			<div class="uploadFile4_div" id="uploadFile4_div">
-				<c:if test="${requestScope.htmlGoodsJYDG.embed2_1 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_1 ne null&&requestScope.htmlGoodsJYDG.embed2_1 ne '' }">
 				<input type="file" id="file4_1" name="file4_1" onchange="showQrcodeEmbed2(this)" />
 				<input type="text" id="embed2_1" name="embed2_1" value="${requestScope.htmlGoodsJYDG.embed2_1 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsJYDG.embed2_2 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_2 ne null&&requestScope.htmlGoodsJYDG.embed2_2 ne '' }">
 				<input type="file" id="file4_2" name="file4_2" onchange="showQrcodeEmbed2(this)" />
 				<input type="text" id="embed2_2" name="embed2_2" value="${requestScope.htmlGoodsJYDG.embed2_2 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsJYDG.embed2_3 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_3 ne null&&requestScope.htmlGoodsJYDG.embed2_3 ne '' }">
 				<input type="file" id="file4_3" name="file4_3" onchange="showQrcodeEmbed2(this)" />
 				<input type="text" id="embed2_3" name="embed2_3" value="${requestScope.htmlGoodsJYDG.embed2_3 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsJYDG.embed2_4 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_4 ne null&&requestScope.htmlGoodsJYDG.embed2_4 ne '' }">
 				<input type="file" id="file4_4" name="file4_4" onchange="showQrcodeEmbed2(this)" />
 				<input type="text" id="embed2_4" name="embed2_4" value="${requestScope.htmlGoodsJYDG.embed2_4 }" />
 				</c:if>
-				<c:if test="${requestScope.htmlGoodsJYDG.embed2_5 ne null }">
+				<c:if test="${requestScope.htmlGoodsJYDG.embed2_5 ne null&&requestScope.htmlGoodsJYDG.embed2_5 ne '' }">
 				<input type="file" id="file4_5" name="file4_5" onchange="showQrcodeEmbed2(this)" />
 				<input type="text" id="embed2_5" name="embed2_5" value="${requestScope.htmlGoodsJYDG.embed2_5 }" />
 				</c:if>
@@ -2098,19 +2102,19 @@ function goBack(){
 			</div>
 		</div>
 		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<c:if test="${requestScope.htmlGoodsJYDG.embed2_1 ne null }">
+			<c:if test="${requestScope.htmlGoodsJYDG.embed2_1 ne null&&requestScope.htmlGoodsJYDG.embed2_1 ne '' }">
 			<embed class="item_embed" id="embed2_1" alt="" src="${requestScope.htmlGoodsJYDG.embed2_1 }"/>
 			</c:if>
-			<c:if test="${requestScope.htmlGoodsJYDG.embed2_2 ne null }">
+			<c:if test="${requestScope.htmlGoodsJYDG.embed2_2 ne null&&requestScope.htmlGoodsJYDG.embed2_2 ne '' }">
 			<embed class="item_embed" id="embed2_2" alt="" src="${requestScope.htmlGoodsJYDG.embed2_2 }"/>
 			</c:if>
-			<c:if test="${requestScope.htmlGoodsJYDG.embed2_3 ne null }">
+			<c:if test="${requestScope.htmlGoodsJYDG.embed2_3 ne null&&requestScope.htmlGoodsJYDG.embed2_3 ne '' }">
 			<embed class="item_embed" id="embed2_3" alt="" src="${requestScope.htmlGoodsJYDG.embed2_3 }"/>
 			</c:if>
-			<c:if test="${requestScope.htmlGoodsJYDG.embed2_4 ne null }">
+			<c:if test="${requestScope.htmlGoodsJYDG.embed2_4 ne null&&requestScope.htmlGoodsJYDG.embed2_4 ne '' }">
 			<embed class="item_embed" id="embed2_4" alt="" src="${requestScope.htmlGoodsJYDG.embed2_4 }"/>
 			</c:if>
-			<c:if test="${requestScope.htmlGoodsJYDG.embed2_5 ne null }">
+			<c:if test="${requestScope.htmlGoodsJYDG.embed2_5 ne null&&requestScope.htmlGoodsJYDG.embed2_5 ne '' }">
 			<embed class="item_embed" id="embed2_5" alt="" src="${requestScope.htmlGoodsJYDG.embed2_5 }"/>
 			</c:if>
 		</div>
