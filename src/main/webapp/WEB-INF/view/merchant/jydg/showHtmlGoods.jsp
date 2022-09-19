@@ -7,15 +7,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <title>商品</title>
 <%@include file="../js.jsp"%>
+<style type="text/css">
+img{
+   pointer-events:none;
+}
+</style>
 <script type="text/javascript">
+//https://www.jb51.net/html5/772143.html 禁止长按图片下载
 //http://localhost:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jydg&goodsNumber=20220630141816&accountId=59
 var path='<%=basePath %>';
 var embedWHPercent=9/16;
 $(function(){
 	resetDivSize("embed1,embed2");
-	setUnTouch("img");
+	//setUnTouch("img");
 });
 
+//这个方法虽然禁止下载图片，但点击图片无法拖动网页，暂时不用
 function setUnTouch(tag){
 	$(tag).attr("ontouchstart","return false");
 }

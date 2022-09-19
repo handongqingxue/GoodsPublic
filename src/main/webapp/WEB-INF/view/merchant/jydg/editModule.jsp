@@ -193,6 +193,7 @@ function renameFile(){
 		$(this).attr("name","file4_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
+	//这里记录下上次视频存放的路径，要是在数据库里的字段位置发生变化了便于更新。若不记录路径，后台类里获取不到相应字段里的视频路径，无法更新数据库里相应字段下的视频路径，还可能出现字段错位视频被覆盖情况
 	$("#uploadFile4_div input[type='text']").each(function(i){
 		$(this).attr("name","embed2_"+(i+1));
 		//console.log($(this).attr("name"));
